@@ -1,0 +1,10 @@
+{
+  "label": "How They Work",
+  "position": 2,
+  "link": {
+    "type": "generated-index"
+  },
+  "customProps": {
+    "description": "Technical concepts"
+  }
+}

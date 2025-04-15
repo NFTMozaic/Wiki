@@ -1,0 +1,10 @@
+{
+  "label": "High Level Overview",
+  "position": 1,
+  "link": {
+    "type": "generated-index"
+  },
+  "customProps": {
+    "description": "What roles do the NFTs play in the Polkadot ecosystem"
+  }
+}

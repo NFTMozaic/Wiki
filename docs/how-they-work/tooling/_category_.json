@@ -1,0 +1,10 @@
+{
+  "label": "Tooling",
+  "position": 1,
+  "link": {
+    "type": "generated-index"
+  },
+  "customProps": {
+    "description": "Developer tools available in the ecosystem"
+  }
+}

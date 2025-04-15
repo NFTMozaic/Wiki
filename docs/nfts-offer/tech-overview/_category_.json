@@ -1,0 +1,10 @@
+{
+  "label": "Tech Overview",
+  "position": 2,
+  "link": {
+    "type": "generated-index"
+  },
+  "customProps": {
+    "description": "This section offers an overview of the role and benefit of pallets, the Substrate beating heart of each Parachain"
+  }
+}
