@@ -9,6 +9,6 @@ There are several options available to developer wishing to creata and manage NF
 
 Here is an examople of how the Unique SDK can be used to accomplish this task.
 
-This example is provided as workshop material for the Consensus 2025 Hong Kong EasyA Polkadot Hackathon.
+This example is provided as the workshop material for the Consensus 2025 Hong Kong EasyA Polkadot Hackathon.
 
 [Creating Asset Hub NFTs Using The Unique SDK](https://github.com/NFTMozaic/polkadot-nfts-template)
