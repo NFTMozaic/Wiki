@@ -7,32 +7,30 @@ sidebar_position: 2
 
 ## Context
 
-Polkadot’s NFT ecosystem offers advanced capabilities with success stories like Mythical and TapNation. However, other efforts remain fragmented. As ecosystem initiatives align and Polkadot’s Cloud and Hub vision evolves, the value proposition will evolve too. For now, the focus is on leveraging existing, well-aligned technologies and proven solutions to bootstrap growth on AssetHub and other parachains.
+Polkadot offers many options for building solutions that utilize NFTs. Main value comes from:
 
-## Polkadot’s NFT Value Proposition
-
-- **Scalable Infrastructure**: Ideal for companies building custom parachains with low fees and high performance (e.g., Mythical).
-- **Web2 Integration**: Easy onboarding for Web2 companies via SDKs, enabling seamless blockchain adoption (e.g., TapNation).
-- **EVM Compatibility**: Ethereum-based dApps can expand effortlessly using Moonbeam’s EVM support and Unique SDKs with advanced EVM+Substrate approach.
+- **Scalable Infrastructure**: Polkadot makes it easy and quick to build custom chains that can have very high performance metrics while offering low transaction fees.
+- **Web2 Integration**: Easy onboarding for Web2 companies via SDKs, enabling seamless blockchain adoption.
+- **EVM Compatibility**: Ethereum-based dApps can expand effortlessly using AssetHub's PVM, Moonbeam’s EVM support, or Unique Network's EVM+Substrate approach..
 - **Cross-Chain Interoperability**: NFT XCM enables seamless NFT transfers across parachains, fostering a unified ecosystem.
 - **Developer-Friendly Tools**: Full toolset for easy dApp onboarding.
 
-## Polkadot’s NFT Value Proposition (Detailed)
+## Polkadot’s NFT Value Proposition
 
 ### For Startups & Parachain Builders
 
-- **Scalability & Low Fees**: Polkadot’s parallel processing ensures high performance with predictable costs, perfect for large-scale NFT projects like Mythical.
+- **Scalability & Low Fees**: Polkadot’s parallel processing ensures high performance with predictable costs, perfect for large-scale NFT projects.
 - **Customizable Infrastructure**: Parachains can tailor NFT functionality to meet specific business needs without compromising security.
 
 ### For Web2 Companies Entering Web3
 
 - **Seamless Onboarding**: SDKs from Unique Network and Apillon simplify NFT integration, reducing development time.
-- **Real-World Adoption**: TapNation showcases how millions of mobile users can easily engage with Polkadot-based NFTs.
+- **Real-World Adoption**: Millions of end users interact with Polkadot NFTs. See Examples section to learn how.
 
 ### For Ethereum-Based dApps
 
-- **Hybrid Compatibility**: Moonbeam enables easy deployment of ERC-721/1155 contracts, while Unique offers advanced NFT 2.0 features with hybrid EVM+Substrate support.
-- **Expanded Reach**: Bridge Ethereum communities into Polkadot for broader liquidity and user engagement.
+- **Hybrid Compatibility**: Plain EVM (Moonbeam), PVM (AssetHub) or Hybrid EVM+Substrate (Unique Network) offer Solidity Developers unmatched options.
+- **Expanded Reach**: Expand Ethereum communities into Polkadot for broader liquidity and user engagement with fully decentralized bridges.
 
 ### For the Entire Ecosystem
 
