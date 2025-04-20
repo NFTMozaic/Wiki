@@ -5,17 +5,10 @@ sidebar_label: NFT Capabilities
 sidebar_position: 3 
 ---
 
-## Motivation
-
-Before developing client materials on Polkadot's NFT capabilities, it was essential to align with Polkadot's evolving vision, including the Polkadot Cloud and Hub Model. This document offers a high-level overview of NFT technologies and profiles of NFT parachains in the ecosystem. A separate, detailed research document on NFT parachains, including Asset Hub, is available [here](#). As we engage in ecosystem conversations and business development initiatives, we will integrate this research with feedback to create client-facing collateral.
 
 ## Executive Summary
 
-Polkadot’s NFT ecosystem spans a spectrum of technologies, from basic native pallets (Uniques, NFTs) to advanced “NFTs 2.0” (Unique Network), EVM-based solutions (Moonbeam), and its native Rust-based Ink! Smart contracts. Polkadot’s shared security, parallel processing, and emerging “Hub + Cloud” vision position Asset Hub as a potential anchor for simpler issuance, complemented by specialized chains for advanced features. While wallet interfaces, cross-chain indexing, and developer support require further refinement, the ecosystem is poised for broader mainstream adoption—as demonstrated by successful real-world applications and significant NFT minting volumes (including Mythical’s multi-million NFT milestone in AAA gaming and TAP Nation's mobile game company with 50 million users per game, onboarding to Polkadot).
-
-## 1. Introduction
-
-Polkadot enables multiple specialized parachains and system chains for NFTs, featuring everything from basic on-chain minting (Uniques) to advanced NFT 2.0 (Unique Network) and EVM-based development (Moonbeam). As Polkadot transitions toward a Hub and Cloud framework, the NFT landscape must unify user experience, cross-chain transfers, and accessible tooling.
+Polkadot’s NFT ecosystem spans a spectrum of technologies, from basic native pallets to advanced “NFTs 2.0” pallets, EVM/Solidity smart contracts, and its native Rust-based Ink! Smart contracts. These technologies are available on multiple parachains, where dApps can be built. Variety of tooling options is available for each of them. 
 
 This document covers:
 
@@ -24,13 +17,13 @@ This document covers:
 - Leading chains/projects (Asset Hub, Moonbeam, Mythical, and Unique Network).
 - Key challenges and outlook as Polkadot matures.
 
-## 2. Polkadot NFT Pallets & Core Technologies
+## 1. Polkadot NFT Pallets & Core Technologies
 
-### 2.1 Pallets Overview
+### 1.1 Pallets Overview
 
-Substrate-based pallets offer native NFT logic—mint, transfer, burn, metadata—without relying on external smart contracts. This ensures direct chain-level security and performance, aligning with Polkadot’s shared security model.
+Substrate-based pallets offer native NFT logic—mint, transfer, burn, metadata—without relying on external smart contracts. This ensures direct chain-level security and performance, aligning with Polkadot’s shared security model. It is a significantly more efficient way to create and manage Non Fungible Assets then Smart Contracts.
 
-### 2.2 Main Pallet Variants
+### 1.2 Main Pallet Variants
 
 #### Uniques Pallet
 
@@ -57,7 +50,7 @@ Substrate-based pallets offer native NFT logic—mint, transfer, burn, metadata�
   - Built-in on-chain marketplace.
   - Bridge with Ethereum.
 
-### 2.3 Usage & Statistics
+### 1.3 Usage & Statistics
 
 Pallet usage across Polkadot and Kusama shows varied adoption:
 
@@ -69,21 +62,21 @@ Pallet usage across Polkadot and Kusama shows varied adoption:
 
 Uniques leads in total collections, while NFTs handles massive token volumes—over 11 million on Polkadot. Unique’s advanced runtime serves fewer but feature-rich collections.
 
-## 3. NFT Tooling & SDKs
+## 2. NFT Tooling & SDKs
 
-### 3.1 Pallet vs. EVM vs. Hybrid
+### 2.1 Pallet vs. EVM vs. Hybrid
 
 - **Substrate Pallets (Uniques, NFTs)**: Efficient, chain-level integration.
 - **EVM (Moonbeam)**: Familiar for Ethereum devs (ERC-721/1155).
 - **Hybrid (Unique Network)**: Merges advanced Substrate logic with optional EVM-based development. Easy dApps development with EVM and full Substrate interoperability.
 
-### 3.2 Indexers
+### 2.2 Indexers
 
 - **KodaDot Indexer**: Open-source, tracks pallet-level NFTs across Polkadot.
 - **Unique Network Indexer**: Specialized for dynamic NFT data.
 - **Subscan**: Block explorer indexer with API.
 
-### 3.3 Wallet & User Interface Layers
+### 2.3 Wallet & User Interface Layers
 
 - **Browser Extensions**: Polkadot.js extension, SubWallet, Talisman, as signers.
 - **Wallet Interfaces**: Potential for aggregated NFT displays across parachains, but current solutions are chain-specific.
@@ -108,15 +101,15 @@ Uniques leads in total collections, while NFTs handles massive token volumes—o
   - No single multi-chain overview.
   - Indexing/metadata parsing gaps hinder full NFT tracking.
 
-## 4. Leading Projects & Approaches
+## 3. Leading Projects & Approaches
 
-### 4.1 Asset Hub
+### 3.1 Asset Hub
 
 - DOT-based.
 - Could become a prime anchor in Polkadot’s future “Hub” approach for straightforward mint and transfer dApps (vast majority).
 - **KodaDot**: The only live dApp on AssetHub, a marketplace leveraging Asset Hub’s minimal logic, open-source indexer plans for cross-chain integration.
 
-### 4.2 Moonbeam
+### 3.2 Moonbeam
 
 - **EVM-Based**: Deploy ERC-721/1155 smart contracts via familiar Ethereum tooling.
 - **Use Cases**:  
@@ -124,7 +117,7 @@ Uniques leads in total collections, while NFTs handles massive token volumes—o
   - Moonbeam has almost 27 NFT-based projects in their ecosystem across arts and gaming.
 - **Cross-Chain Prospects**: Potential bridging of advanced Substrate NFT features once NFT XCM matures.
 
-### 4.3 Unique Network
+### 3.3 Unique Network
 
 - **NFT 2.0**: Dynamic, nested, composable tokens, sponsor-based transaction fees.
 - **Use Cases**:  
@@ -133,13 +126,13 @@ Uniques leads in total collections, while NFTs handles massive token volumes—o
   - Conor Daly’s Fan Pass, Sovereign Nature Initiative (DOTphins), DED MINE Arcade (300k NFTs minted).
 - **NFT XCM**: Pioneered bridging with Asset Hub; synergy for cross-chain NFT usage.
 
-### 4.4 Mythical
+### 3.4 Mythical
 
 - **Focus**: AAA gaming and large IP collaborations (FIFA Rivals).
 - **Value Add**: Minted millions of NFTs using Uniques Pallet, proving Polkadot can handle high-volume gaming NFTs at scale.
 - **Strength**: High-profile brand partnerships, robust funding—underscoring Polkadot’s capacity to onboard large user bases.
 
-## 5. Challenges & Outlook
+## 4. Challenges & Outlook
 
 - **Lack of Trading Activity**  
   Despite ongoing creator interest and numerous art initiatives, active NFT trading and liquidity for NFTs in Polkadot’s ecosystem remain low, hindering broader market appeal and user engagement. Examples include Beatport and Wolf of Wall Street Marketplaces, DigitalArt4Climate, various creators on art marketplaces.
@@ -152,6 +145,6 @@ Uniques leads in total collections, while NFTs handles massive token volumes—o
 - **Fragmented NFT Visibility**  
   Users jump among chain-specific dApps; no universal aggregator for on-chain NFTs. NFTMozaic seeks improved wallet interfaces and dApp asset pages to unify user experiences.
 
-## 6. Conclusion
+## 5. Conclusion
 
 The Polkadot NFT ecosystem offers a wide range of solutions—from minimal on-chain pallets (Asset Hub) to advanced “NFT 2.0” networks (Unique) and EVM expansions (Moonbeam). Major gaming IP partners like Mythical have already minted millions of NFTs, demonstrating Polkadot’s scalability for mainstream adoption. However, universal wallet interfaces, cross-chain indexing, and user-friendly bridging remain the key gaps. As Polkadot’s “Hub + Cloud” continues to unfold—and solutions like NFT XCM mature—projects like Asset Hub, Unique Network, and Moonbeam can evolve into an integrated ecosystem that empowers developers, enterprises, and end-users to seamlessly harness the full potential of next-generation NFTs.
