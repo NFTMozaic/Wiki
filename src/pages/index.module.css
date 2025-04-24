@@ -1,23 +1,55 @@
-/**
- * CSS files with the .module.css suffix will be treated as CSS modules
- * and scoped locally.
- */
-
-.heroBanner {
-  padding: 4rem 0;
-  text-align: center;
-  position: relative;
-  overflow: hidden;
+.mainContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  min-height: calc(100vh - var(--ifm-navbar-height));
 }
 
-@media screen and (max-width: 996px) {
-  .heroBanner {
-    padding: 2rem;
+.logoContainer {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 2rem;
+}
+
+.logo {
+  max-width: 25%;
+  height: auto;
+}
+
+.textContainer {
+  width: 100%;
+  max-width: 80%;
+  margin: 0 auto;
+}
+
+.description {
+  text-align: justify;
+  hyphens: auto;
+  word-break: normal;
+  overflow-wrap: break-word;
+}
+
+/* Ensure no more than ~10 words per line by setting a min font size */
+@media (max-width: 996px) {
+  .description {
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+  
+  .logo {
+    max-width: 50%;
   }
 }
 
-.buttons {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+@media (min-width: 997px) {
+  .description {
+    font-size: 1.2rem;
+    line-height: 1.8;
+    max-width: 80%;
+    margin: 0 auto;
+  }
 }
+

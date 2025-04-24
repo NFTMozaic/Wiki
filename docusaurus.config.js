@@ -41,6 +41,9 @@ const config = {
 			'classic',
 			/** @type {import('@docusaurus/preset-classic').Options} */
 			({
+				theme: {
+					customCss: ['./src/css/custom.css'],
+				},
 				docs: {
 					sidebarPath: './sidebars.js',
 				},
@@ -62,9 +65,6 @@ const config = {
 	themeConfig:
 		/** @type {import('@docusaurus/preset-classic').ThemeConfig} */
 		({
-			stylesheets: [
-				'/css/custom.css',
-			],
 			// Replace with your project's social card
 			image: 'img/docusaurus-social-card.jpg',
 			navbar: {

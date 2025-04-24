@@ -1,0 +1,252 @@
+/**
+ * Any CSS placed here will be applied override the site-wide styles.
+ */
+
+/**
+ * Imports
+ * ----------------------------------------------------------------------------
+ */
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&family=Montserrat:wght@400;700;900&display=swap');
+
+/**
+ * Base Variables (Light Mode)
+ * ----------------------------------------------------------------------------
+ * Docusaurus uses CSS variables for styling. You can override them here.
+ * Variables starting with --ifm- are official Docusaurus variables.
+ * We recommend defining custom variables for your specific colors.
+ */
+:root {
+  /* Custom Color Variables */
+  --my-color-polkadot-pink: #FF2670;
+  --my-color-white: #FFFFFF;
+  --my-color-unity-purple: #6A0DAD;
+  --my-color-mozaic-blue: #004DFF;
+  --my-color-blue-night: #0B0229; /* Defined here, used in dark mode */
+
+  /* Docusaurus Color Overrides */
+  --ifm-color-primary: var(--my-color-unity-purple); /* Main theme color */
+  --ifm-color-primary-dark: #5e0ca1; /* Slightly darker purple */
+  --ifm-color-primary-darker: #570b96; /* Darker purple */
+  --ifm-color-primary-darkest: #47097c; /* Darkest purple */
+  --ifm-color-primary-light: #761ec9; /* Slightly lighter purple */
+  --ifm-color-primary-lighter: #8029d4; /* Lighter purple */
+  --ifm-color-primary-lightest: #9a54e0; /* Lightest purple */
+
+  --ifm-color-secondary: var(--my-color-mozaic-blue); /* Optional secondary color */
+  /* Add shades for secondary if needed, similar to primary */
+
+  --ifm-background-color: var(--my-color-white); /* Light mode background */
+  --ifm-font-color-base: #1c1e21; /* Default text color for light mode */
+
+  /* Docusaurus Font Overrides */
+  --ifm-font-family-base: 'Lato', sans-serif;
+  --ifm-font-family-heading: 'Montserrat', sans-serif;
+  --ifm-font-weight-base: 400; /* Lato Regular */
+  --ifm-font-weight-bold: 700; /* Lato Bold / Montserrat Bold */
+
+  /* Other overrides */
+  --ifm-code-font-size: 95%;
+  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
+  --bn-color-base: #0B132B;
+  --bn-color-surface: #1C2541;
+  --bn-color-emphasis-200: #2A3858; /* Corresponds to original emphasis-200 for TOC border */
+  --bn-color-emphasis-400: #3A506B; /* Example for scrollbar track */
+  --bn-color-emphasis-600: #5C6F8C; /* Example for scrollbar thumb */
+  --bn-color-emphasis-700: #7A9CC4; /* Example for scrollbar thumb hover */
+  --bn-color-text-primary: #E0F2FF;
+  --bn-color-text-secondary: #A0B5D3;
+  --bn-color-overlay-light: rgba(224, 242, 255, 0.06); /* Using lightest blue tint */
+  --bn-color-overlay-code: rgba(224, 242, 255, 0.1);  /* Slightly more opaque for code */
+}
+
+
+
+/**
+ * Dark Mode Variables
+ * ----------------------------------------------------------------------------
+ * Overrides for when the user selects dark mode.
+ */
+/* Apply Blue Night Theme */
+html[data-theme='dark'] {
+    --ifm-color-scheme: dark;
+
+    /* Backgrounds */
+    --ifm-background-color: var(--bn-color-base);           /* Darkest Blue Night */
+    --ifm-background-surface-color: var(--bn-color-surface); /* Slightly Lighter Blue */
+
+    /* Text Content */
+    --ifm-color-content: var(--bn-color-text-primary);      /* Very Light Blue/White */
+    --ifm-color-content-secondary: var(--bn-color-text-secondary); /* Light Blue/Gray */
+
+    /* Emphasis Colors (Mapping gray scale to blue shades) */
+    /* Note: This assumes --ifm-color-gray-* map dark -> light (1000 -> 0) */
+    /* You might need to define a full blue scale if these are heavily used */
+    --ifm-color-emphasis-0: var(--bn-color-base);          /* Darkest */
+    --ifm-color-emphasis-100: #151E35;                     /* Slightly lighter than base */
+    --ifm-color-emphasis-200: var(--bn-color-emphasis-200);/* #2A3858 */
+    --ifm-color-emphasis-300: #324369;
+    --ifm-color-emphasis-400: var(--bn-color-emphasis-400);/* #3A506B */
+    --ifm-color-emphasis-500: #4F6A8A;
+    --ifm-color-emphasis-600: var(--bn-color-emphasis-600);/* #5C6F8C */
+    --ifm-color-emphasis-700: var(--bn-color-emphasis-700);/* #7A9CC4 */
+    --ifm-color-emphasis-800: #91B5E1;
+    --ifm-color-emphasis-900: #ADCFFF;
+    --ifm-color-emphasis-1000: var(--bn-color-text-primary);/* Lightest */
+
+    /* UI Elements */
+    --ifm-hover-overlay: var(--bn-color-overlay-light);     /* Subtle light blue overlay */
+    --ifm-code-background: var(--bn-color-overlay-code);    /* Slightly more opaque overlay */
+    --ifm-table-stripe-background: var(--bn-color-overlay-light); /* Subtle light blue stripe */
+    --ifm-toc-border-color: var(--ifm-color-emphasis-200);  /* Using the mapped blue shade */
+
+    /* Scrollbar */
+    --ifm-scrollbar-track-background-color: var(--ifm-color-emphasis-400); /* Mid-dark blue */
+    --ifm-scrollbar-thumb-background-color: var(--ifm-color-emphasis-600); /* Lighter blue */
+    --ifm-scrollbar-thumb-hover-background-color: var(--ifm-color-emphasis-700); /* Even lighter blue */
+
+    /* Breadcrumb Separator - Adjust filter if needed, this gray might look okay */
+    --ifm-breadcrumb-separator-filter: invert(75%) sepia(15%) saturate(500%) hue-rotate(180deg) brightness(95%) contrast(90%); /* Example: Tinted towards blue */
+    /* Or keep original if it looks acceptable: */
+    /* --ifm-breadcrumb-separator-filter: invert(64%) sepia(11%) saturate(0%) hue-rotate(149deg) brightness(99%) contrast(95%); */
+
+    /* Contrast Colors (Converted to HEX) */
+    --ifm-color-primary-contrast-background: #102445;   /* Was rgb(16, 36, 69) */
+    --ifm-color-primary-contrast-foreground: #EBF2FC;   /* Was rgb(235, 242, 252) */
+    --ifm-color-secondary-contrast-background: #2A3858; /* Was rgb(42, 56, 88) - Adjusted blue-gray */
+    --ifm-color-secondary-contrast-foreground: #FDFDFE; /* Was rgb(253, 253, 254) */
+    --ifm-color-success-contrast-background: #003100;   /* Was rgb(0, 49, 0) */
+    --ifm-color-success-contrast-foreground: #E6F6E6;   /* Was rgb(230, 246, 230) */
+    --ifm-color-info-contrast-background: #193C47;      /* Was rgb(25, 60, 71) */
+    --ifm-color-info-contrast-foreground: #EEF9FD;      /* Was rgb(238, 249, 253) */
+    --ifm-color-warning-contrast-background: #4D3800;   /* Was rgb(77, 56, 0) */
+    --ifm-color-warning-contrast-foreground: #FFF8E6;   /* Was rgb(255, 248, 230) */
+    --ifm-color-danger-contrast-background: #4B1113;    /* Was rgb(75, 17, 19) */
+    --ifm-color-danger-contrast-foreground: #FFEBEB;    /* Was rgb(255, 235, 236) */
+}
+
+/* Ensure body text uses the correct variable in dark mode */
+html[data-theme='dark'] body {
+  color: var(--ifm-color-content);
+}
+
+/* You might also want to ensure links inherit correctly or have a specific dark mode color */
+html[data-theme='dark'] a {
+  /* Example: Make links a slightly brighter blue in dark mode */
+  color: #61dafb;
+  /* Or ensure they inherit the body color if not specifically styled */
+  /* color: inherit;  Or choose a specific link color */
+}
+
+/* Optional: Target specific text containers if 'body' isn't enough */
+/* html[data-theme='dark'] main,
+html[data-theme='dark'] article,
+html[data-theme='dark'] p {
+  color: var(--ifm-color-content);
+} */
+
+
+/**
+ * Typography Rules
+ * ----------------------------------------------------------------------------
+ * Apply specific font weights and styles.
+ */
+
+/* Headings - Use Montserrat */
+h1, .markdown h1 { /* Target top-level headings */
+  font-family: var(--ifm-font-family-heading);
+  font-weight: 900; /* Montserrat Black */
+}
+
+h2, .markdown h2,
+h3, .markdown h3,
+h4, .markdown h4,
+h5, .markdown h5,
+h6, .markdown h6 { /* Target other headings */
+  font-family: var(--ifm-font-family-heading);
+  font-weight: 700; /* Montserrat Bold */
+}
+
+/* Body Text - Use Lato */
+body {
+  font-family: var(--ifm-font-family-base);
+  font-weight: 400; /* Lato Regular */
+}
+
+/* Ensure bold text uses Lato Bold */
+strong, b {
+  font-weight: 700; /* Lato Bold */
+}
+
+/* You might want specific elements to use Lato Black (900) */
+/* Example:
+.some-custom-class-requiring-black-lato {
+  font-family: var(--ifm-font-family-base);
+  font-weight: 900;
+}
+*/
+
+/* You can also use your custom colors directly */
+.my-pink-text {
+  color: var(--my-color-polkadot-pink);
+}
+
+.my-blue-highlight {
+  background-color: var(--my-color-mozaic-blue);
+  color: var(--my-color-white); /* Ensure text is readable */
+  padding: 0.2em 0.4em;
+  border-radius: 3px;
+}
+
+/* Style the container for the splash page content */
+.splashContainer {
+  text-align: center; /* Center inline/inline-block children */
+  padding-top: 4rem; /* Add some padding */
+  padding-bottom: 4rem;
+}
+
+/* Style the logo */
+.splashLogo {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 2rem;
+  width: 250px !important;
+  max-width: 25% !important; /* Apply to max-width too */
+  height: auto !important;   /* Apply to height for consistency */
+}
+
+/* Style the descriptive text */
+.splashText {
+  max-width: 720px; /* Limit width for readability */
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 1.1rem; /* Slightly larger text */
+  line-height: 1.6;
+  /* Use theme colors for text */
+  color: var(--bn-color-text-secondary);
+}
+
+/* Ensure text color is correct in dark mode if needed */
+/* (Usually inherits correctly, but added for safety) */
+html[data-theme='dark'] .splashText {
+  color: var(--bn-color-text-secondary);
+}
+
+/* Adjust hero padding if necessary (Docusaurus default) */
+/* You might need to adjust this depending on your base theme */
+.hero {
+  padding: 4rem 0; /* Default is often 4rem, adjust if needed */
+}
+
+/* Optional: Adjust primary hero background if needed */
+/* .hero--primary {
+  --ifm-hero-background-color: ...;
+  --ifm-hero-text-color: ...;
+} */
+
+/* Ensure dark mode hero background uses your blue */
+html[data-theme='dark'] .hero--primary {
+   background-color: var(--ifm-background-color); /* Use darkest blue from your theme */
+   /* Text color is handled by splashText or default variables */
+}
+
