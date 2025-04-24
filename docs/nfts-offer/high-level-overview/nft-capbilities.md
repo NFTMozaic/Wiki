@@ -70,18 +70,12 @@ Substrate-based pallets offer native NFT logic—mint, transfer, burn and metada
 
 ### 1.3 Usage & Statistics
 
+-
 
-Pallet usage across Polkadot and Kusama shows varied adoption:
+The report in the link below provides an insight into the current distribution of assets, the usage statistics and the contribution details pertaining to the develper activity. This table is live and is updated monthly to reflect changes in the ecosystem.
 
+[NFT Pallets in the Polkadot Ecosystem](https://docs.google.com/spreadsheets/d/1BhlmF9BUw0z6B5qBAqC3j_NMZ0dbhenvgFNFIo4oPhQ/edit?usp=sharing)
 
-| Pallet         | Polkadot Coll. | Kusama Coll. | Polkadot NFTs | Kusama NFTs |
-|----------------|----------------|--------------|---------------|-------------|
-| Uniques        | 18,782         | 5,696        | 134,570       | 135,020     |
-| NFTs           | 3,208          | 291          | 11,229,910    | 9,387       |
-| Unique Network | 871            | 655          | 601,588       | 124,166     |
-
-
-Uniques leads in total collections, while NFTs handles massive token volumes—over 11 million on Polkadot. Unique’s advanced runtime serves fewer but feature-rich collections.
 
 
 ## 2. NFT Tooling & SDKs
