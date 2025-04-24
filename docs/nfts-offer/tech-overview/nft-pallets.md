@@ -1,9 +1,16 @@
 ---
-id: pallets
-title: Pallets
-sidebar_label: Pallets
-sidebar_position: 4
+id: nft-pallets
+title: NFT Pallets
+sidebar_position: 1
 ---
+
+# NFT Pallets in the Polkadot Ecosystem
+
+:::tip [Definition]
+
+Pallets are modules in Substrate development environment that provide runtime logic for building and customizing blockchains
+
+:::
 
 ## Overview
 

@@ -1,21 +1,18 @@
 ---
-id: nft-creation-tools
+id: documentation
 title: Creating NFTs In The Polkadot Ecosystem - Reference Documentation and Tools Available
-sidebar_label: NFT Creation Tools
+sidebar_label: Documentation
 sidebar_position: 1
 ---
 
-This document attempts to provide links to the documentation relevant to NFT creation and management at the developer level for each parachain that has an implementation of NFTs as part of their technology.
+This section provides links to the documentation relevant to NFTs for each rollup (parachain) that has an implementation of NFTs as part of their technology.
 
 ## **Asset Hub - Polkadot and Kusama**
 
 ---
 
-### General Information for Developers
 
-- [https://wiki.polkadot.network/docs/learn-nft](https://wiki.polkadot.network/docs/learn-nft)
-
-### NFTs Pallet (NFT 2.0)
+### NFTs Pallet
 
 - [https://wiki.polkadot.network/docs/learn-nft-pallets#nfts-pallet](https://wiki.polkadot.network/docs/learn-nft-pallets#nfts-pallet)
 
@@ -71,15 +68,17 @@ This document attempts to provide links to the documentation relevant to NFT cre
 
 ---
 
-Moonbeam combines the best of both worlds: the familiar and easy-to-use tooling of Ethereum and the scalable, interoperable architecture of Polkadot.
+Moonbeam provides the familiar and easy-to-use tooling of Ethereum.
+
+### Deploying an ERC-721 Contract Example
+
+- [https://docs.moonbeam.network/tutorials/eth-api/thirdweb/](https://docs.moonbeam.network/tutorials/eth-api/thirdweb/)
 
 ### Minting a Cross-Chain NFT with Axelar SDK
 
 - [https://docs.moonbeam.network/tutorials/interoperability/using-axelar-sdk/](https://docs.moonbeam.network/tutorials/interoperability/using-axelar-sdk/)
 
-### Deploying an ERC-721 Contract Example
 
-- [https://docs.moonbeam.network/tutorials/eth-api/thirdweb/](https://docs.moonbeam.network/tutorials/eth-api/thirdweb/)
 
 ## **Astar**
 

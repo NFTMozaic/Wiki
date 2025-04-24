@@ -28,7 +28,7 @@ NFT Manager has native onchain marketplace support
 |  | Uniques | NFTs | Unique Network |
 | --- | --- | --- | --- |
 | Embedded market functions | 🟢 | 🟢 | 🟥 |
-| Custom Smart Contract market(s) | 🟥 | 🟥 | 🟢 |
+| Custom Smart Contract market(s) | 🟥 | 🟢  | 🟢 |
 
 Note: For source data used for this overview see NFT Pallets in Polkadot
 
