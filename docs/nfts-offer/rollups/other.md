@@ -1,7 +1,7 @@
 ---
 id: Other
 title: Ohter Profiles
-sidebar_label: Ohter
+sidebar_label: Other
 sidebar_position: 4
 ---
 
