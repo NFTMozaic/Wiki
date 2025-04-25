@@ -1,0 +1,40 @@
+.alphabetNav {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 2rem;
+  border-top: 1px solid var(--ifm-color-emphasis-300);
+  border-bottom: 1px solid var(--ifm-color-emphasis-300);
+  padding: 1rem 0;
+}
+
+.letterLink {
+  display: inline-block;
+  width: 2rem;
+  height: 2rem;
+  line-height: 2rem;
+  text-align: center;
+  margin: 0.25rem;
+  border-radius: 50%;
+  font-weight: bold;
+  transition: all 0.2s ease;
+}
+
+.letterLink:hover {
+  background-color: var(--ifm-color-primary);
+  color: white;
+  text-decoration: none;
+}
+
+.letterSection {
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--ifm-color-emphasis-200);
+}
+
+.docsList {
+  padding-left: 1.5rem;
+}
+
+.docsList li {
+  margin-bottom: 0.5rem;
+}
