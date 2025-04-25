@@ -5,6 +5,8 @@ sidebar_label: Documentation
 sidebar_position: 1
 ---
 
+_A reference list of available resources in the ecosystem._
+
 This section provides links to the documentation relevant to NFTs for each rollup (parachain) that has an implementation of NFTs as part of their technology.
 
 ## **Asset Hub - Polkadot and Kusama**

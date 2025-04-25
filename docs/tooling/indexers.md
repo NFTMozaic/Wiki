@@ -5,6 +5,8 @@ sidebar_label: NFT Indexers
 sidebar_position: 4 
 ---
 
+_An overview of the indexers available in Polkadot._
+
 # NFT Indexers in Polkadot Ecosystem
 
 

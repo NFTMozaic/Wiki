@@ -250,3 +250,10 @@ html[data-theme='dark'] .hero--primary {
    /* Text color is handled by splashText or default variables */
 }
 
+/* Apply Unity Purple to h1 headings */
+h1, .markdown h1 {
+  font-family: var(--ifm-font-family-heading);
+  font-weight: 900; /* Montserrat Black */
+  color: var(--my-color-unity-purple); /* Add this line to apply the Unity purple color */
+}
+

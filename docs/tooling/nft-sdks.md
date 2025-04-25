@@ -5,6 +5,8 @@ sidebar_label: NFT SDKs
 sidebar_position: 2
 ---
 
+_An overview of the rollup NFT capable SDKs._
+
 # NFT SDKs in Polkadot Ecosystem
 
 Polkadot.JS is the primary API tool for interacting with Polkadot. It provides direct access to blockchain functionality, making it essential for low-level integrations and complex dApp architectures. However, working with raw extrinsics and runtime upgrades requires deep Polkadot knowledge and significant development effort.
