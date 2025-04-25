@@ -1,29 +1,56 @@
 import React from 'react';
 import DocItem from '@theme-original/DocItem';
-import { useLocation } from '@docusaurus/router';
+import './debug'; // Import the debug script
 
-// Global cache to store document titles
+// Initialize the title storage
+const storeTitleInLocalStorage = (docId, docTitle) => {
+  try {
+    // Get existing titles from localStorage
+    const storedTitles = localStorage.getItem('docTitles');
+    let titleMap = storedTitles ? JSON.parse(storedTitles) : {};
+
+    // Add or update the title
+    titleMap[docId] = docTitle;
+
+    // Save back to localStorage
+    localStorage.setItem('docTitles', JSON.stringify(titleMap));
+    console.log(`Stored title in localStorage for ${docId}: ${docTitle}`);
+  } catch (e) {
+    console.error('Error storing title in localStorage:', e);
+  }
+};
+
+// Also keep a memory cache for the current session
 if (typeof window !== 'undefined' && !window.documentTitles) {
-  window.documentTitles = {};
+  // Try to initialize from localStorage if available
+  try {
+    const storedTitles = localStorage.getItem('docTitles');
+    window.documentTitles = storedTitles ? JSON.parse(storedTitles) : {};
+  } catch (e) {
+    window.documentTitles = {};
+  }
 }
 
 export default function DocItemWrapper(props) {
-  const location = useLocation();
-  
-  // Store the document title in our global cache
-  // This captures the actual title from the rendered document
+  // Store the document title in our cache and localStorage
   React.useEffect(() => {
     if (props.content.metadata && props.content.metadata.title) {
       const docId = props.content.metadata.id;
       const docTitle = props.content.metadata.title;
-      
+
       if (typeof window !== 'undefined') {
+        // Update memory cache
         window.documentTitles[docId] = docTitle;
-        console.log(`Stored title for ${docId}: ${docTitle}`);
+
+        // Update localStorage
+        storeTitleInLocalStorage(docId, docTitle);
+
+        // Log for debugging
+        console.log(`DocItem: Document ID "${docId}" has title "${docTitle}"`);
       }
     }
   }, [props.content.metadata]);
-  
+
   return (
     <>
       <DocItem {...props} />
