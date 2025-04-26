@@ -8,8 +8,6 @@ export default function AlphabeticalIndexPage() {
   const [indexedDocs, setIndexedDocs] = useState({});
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [debugInfo, setDebugInfo] = useState({});
-  const [loadAttempted, setLoadAttempted] = useState(false);
   const allDocsData = useAllDocsData();
   const [prePopulatedTitles, setPrePopulatedTitles] = useState({});
   const { siteConfig } = useDocusaurusContext();
@@ -19,60 +17,15 @@ export default function AlphabeticalIndexPage() {
   useEffect(() => {
     async function loadPrePopulatedTitles() {
       try {
-        // Try to fetch the JSON file directly
         const url = `${baseUrl}doc-titles.json`;
-        console.log(`Attempting to fetch pre-populated titles from: ${url}`);
-
         const response = await fetch(url);
-        console.log('Fetch response status:', response.status);
 
         if (response.ok) {
-          const text = await response.text(); // Get raw text first for debugging
-          console.log('Response text length:', text.length);
-          console.log('Response text preview:', text.slice(0, 100) + '...');
-
-          try {
-            const data = JSON.parse(text);
-            console.log('Successfully parsed JSON data');
-            console.log(`Loaded ${Object.keys(data).length} pre-populated titles`);
-
-            // Log a few entries for debugging
-            const entries = Object.entries(data).slice(0, 5);
-            console.log('Sample entries:', entries);
-
-            setPrePopulatedTitles(data);
-            setDebugInfo(prev => ({
-              ...prev,
-              prePopulatedTitlesCount: Object.keys(data).length,
-              prePopulatedTitlesSample: entries,
-              fetchSuccess: true
-            }));
-          } catch (parseError) {
-            console.error('Error parsing JSON:', parseError);
-            setDebugInfo(prev => ({
-              ...prev,
-              jsonParseError: parseError.message,
-              responseTextPreview: text.slice(0, 100) + '...',
-              fetchSuccess: false
-            }));
-          }
-        } else {
-          console.error(`Failed to load pre-populated titles. Status: ${response.status}`);
-          setDebugInfo(prev => ({
-            ...prev,
-            fetchError: `HTTP ${response.status}`,
-            fetchSuccess: false
-          }));
+          const data = await response.json();
+          setPrePopulatedTitles(data);
         }
       } catch (err) {
-        console.error('Error loading pre-populated titles:', err);
-        setDebugInfo(prev => ({
-          ...prev,
-          fetchException: err.message,
-          fetchSuccess: false
-        }));
-      } finally {
-        setLoadAttempted(true);
+        console.warn('Could not load pre-populated titles:', err);
       }
     }
 
@@ -80,13 +33,7 @@ export default function AlphabeticalIndexPage() {
   }, [baseUrl]);
 
   useEffect(() => {
-    if (!loadAttempted) {
-      return; // Wait until we've attempted to load the pre-populated titles
-    }
-
     try {
-      console.log("Processing docs data with pre-populated titles:", prePopulatedTitles);
-
       const docsArray = [];
 
       // Get stored titles from localStorage
@@ -99,14 +46,6 @@ export default function AlphabeticalIndexPage() {
           console.error("Error retrieving stored titles:", e);
         }
       }
-
-      // Track title sources for debugging
-      const titleSources = {
-        localStorage: 0,
-        memoryCache: 0,
-        prePopulated: 0,
-        fallback: 0
-      };
 
       // Extract all docs from all versions
       Object.values(allDocsData).forEach(pluginData => {
@@ -123,28 +62,20 @@ export default function AlphabeticalIndexPage() {
 
             // Try to get the title in priority order
             let docTitle = null;
-            let titleSource = null;
 
             // 1. localStorage (user has visited the page)
             if (storedTitles[doc.id]) {
               docTitle = storedTitles[doc.id];
-              titleSource = 'localStorage';
-              titleSources.localStorage++;
             }
 
             // 2. Memory cache (current session)
             if (!docTitle && typeof window !== 'undefined' && window.documentTitles && window.documentTitles[doc.id]) {
               docTitle = window.documentTitles[doc.id];
-              titleSource = 'memoryCache';
-              titleSources.memoryCache++;
             }
 
             // 3. Pre-populated titles (from build script)
             if (!docTitle && prePopulatedTitles[doc.id]) {
               docTitle = prePopulatedTitles[doc.id];
-              titleSource = 'prePopulated';
-              titleSources.prePopulated++;
-              console.log(`Using pre-populated title for ${doc.id}: ${docTitle}`);
             }
 
             // 4. Fallback to path-based title
@@ -156,27 +87,17 @@ export default function AlphabeticalIndexPage() {
                 .split('-')
                 .map(word => word.charAt(0).toUpperCase() + word.slice(1))
                 .join(' ');
-              titleSource = 'fallback';
-              titleSources.fallback++;
             }
 
             docsArray.push({
               id: doc.id,
               title: docTitle,
               permalink: doc.path,
-              sortTitle: docTitle.replace(/^(The|A|An)\s+/i, '').toLowerCase(),
-              titleSource: titleSource
+              sortTitle: docTitle.replace(/^(The|A|An)\s+/i, '').toLowerCase()
             });
           });
         }
       });
-
-      // Update debug info with title sources
-      setDebugInfo(prev => ({
-        ...prev,
-        titleSources: titleSources,
-        processedDocsCount: docsArray.length
-      }));
 
       // Sort alphabetically
       docsArray.sort((a, b) => a.sortTitle.localeCompare(b.sortTitle));
@@ -197,11 +118,10 @@ export default function AlphabeticalIndexPage() {
     } catch (err) {
       console.error('Error processing docs:', err);
       setError(err);
-      setDebugInfo(prev => ({ ...prev, processingError: err.message }));
     } finally {
       setIsLoading(false);
     }
-  }, [allDocsData, prePopulatedTitles, loadAttempted]);
+  }, [allDocsData, prePopulatedTitles]);
 
   const alphabet = Object.keys(indexedDocs).sort();
 
@@ -253,9 +173,6 @@ export default function AlphabeticalIndexPage() {
                         <li key={doc.id}>
                           <Link to={doc.permalink}>
                             {doc.title}
-                            <span style={{ fontSize: '0.8em', color: '#666', marginLeft: '0.5rem' }}>
-                              ({doc.titleSource})
-                            </span>
                           </Link>
                         </li>
                       ))}
@@ -264,12 +181,6 @@ export default function AlphabeticalIndexPage() {
                 ))}
               </>
             )}
-
-            {/* Always show debug information */}
-            <div style={{ margin: '2rem 0', padding: '1rem', background: '#f5f5f5', borderRadius: '4px' }}>
-              <h3>Debug Information</h3>
-              <pre style={{ overflow: 'auto' }}>{JSON.stringify(debugInfo, null, 2)}</pre>
-            </div>
           </div>
         </div>
       </div>

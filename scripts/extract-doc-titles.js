@@ -96,13 +96,10 @@ function generatePossibleDocIds(filePath) {
 // Main function
 function main() {
   console.log('Extracting document titles...');
-  console.log(`Docs directory: ${docsDir}`);
-  console.log(`Output file: ${outputFile}`);
 
   // Create the output directory if it doesn't exist
   const outputDir = path.dirname(outputFile);
   if (!fs.existsSync(outputDir)) {
-    console.log(`Creating output directory: ${outputDir}`);
     fs.mkdirSync(outputDir, { recursive: true });
   }
 
@@ -121,28 +118,12 @@ function main() {
       possibleIds.forEach(docId => {
         titleMap[docId] = title;
       });
-      console.log(`Extracted title for ${possibleIds[0]}: ${title}`);
-      console.log(`  Possible IDs: ${possibleIds.join(', ')}`);
     }
   });
 
   // Write to output file
   fs.writeFileSync(outputFile, JSON.stringify(titleMap, null, 2));
   console.log(`Extracted ${Object.keys(titleMap).length} title mappings to ${outputFile}`);
-
-  // Verify the file was written
-  if (fs.existsSync(outputFile)) {
-    const stats = fs.statSync(outputFile);
-    console.log(`Output file size: ${stats.size} bytes`);
-
-    // Also create a debug version with a sample of the data
-    const debugFile = path.join(path.dirname(outputFile), 'doc-titles-debug.json');
-    const sampleEntries = Object.entries(titleMap).slice(0, 20);
-    fs.writeFileSync(debugFile, JSON.stringify(Object.fromEntries(sampleEntries), null, 2));
-    console.log(`Created debug file with sample entries: ${debugFile}`);
-  } else {
-    console.error(`Failed to write output file: ${outputFile}`);
-  }
 }
 
 main();

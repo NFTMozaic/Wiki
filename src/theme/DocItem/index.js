@@ -1,6 +1,5 @@
 import React from 'react';
 import DocItem from '@theme-original/DocItem';
-import './debug'; // Import the debug script
 
 // Initialize the title storage
 const storeTitleInLocalStorage = (docId, docTitle) => {
@@ -14,7 +13,6 @@ const storeTitleInLocalStorage = (docId, docTitle) => {
 
     // Save back to localStorage
     localStorage.setItem('docTitles', JSON.stringify(titleMap));
-    console.log(`Stored title in localStorage for ${docId}: ${docTitle}`);
   } catch (e) {
     console.error('Error storing title in localStorage:', e);
   }
@@ -44,9 +42,6 @@ export default function DocItemWrapper(props) {
 
         // Update localStorage
         storeTitleInLocalStorage(docId, docTitle);
-
-        // Log for debugging
-        console.log(`DocItem: Document ID "${docId}" has title "${docTitle}"`);
       }
     }
   }, [props.content.metadata]);
