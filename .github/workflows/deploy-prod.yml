@@ -27,17 +27,17 @@ jobs:
           docker build -t uniquenetwork/nftmozaic-wiki:latest .
           docker push uniquenetwork/nftmozaic-wiki:latest
 
-  # deploy:
-  #   name: Deploy to GitHub Pages
-  #   needs: build
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - name: Deploy via SSH
-  #       uses: appleboy/ssh-action@v1
-  #       with:
-  #         host: ${{ secrets.NFTMOZAIC_SERVER_IP }}
-  #         username: ${{ secrets.NFTMOZAIC_SSH_USERNAME }}
-  #         key: ${{ secrets.NFTMOZAIC_SSH_PRIVATE_KEY }}
-  #         script: |
-  #           docker pull uniquenetwork/nftmozaic-wiki
-  #           docker-compose -f docker-compose.yml up -d --force-recreate
+  deploy:
+    name: Deploy to Prod
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy via SSH
+        uses: appleboy/ssh-action@v1
+        with:
+          host: ${{ secrets.NFTMOZAIC_SERVER_IP }}
+          username: ${{ secrets.NFTMOZAIC_SSH_USERNAME }}
+          key: ${{ secrets.NFTMOZAIC_SSH_PRIVATE_KEY }}
+          script: |
+            docker pull uniquenetwork/nftmozaic-wiki:latest
+            docker compose -f wiki/docker-compose.yml up -d --force-recreate
