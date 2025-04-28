@@ -1,130 +1,121 @@
 // @ts-check
-// `@type` JSDoc annotations allow editor autocompletion and type checking
-// (when paired with `@ts-check`).
-// There are various equivalent ways to declare your Docusaurus config.
-// See: https://docusaurus.io/docs/api/docusaurus-config
-
 import { themes as prismThemes } from 'prism-react-renderer';
-
-// This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-	title: 'NFTMozaic',
-	tagline: 'The Polkadot NFT Alliance',
-	favicon: 'img/favicon.ico',
+  title: 'NFTMozaic',
+  tagline: 'The Polkadot NFT Alliance',
+  favicon: 'img/favicon.ico',
+  url: 'https://nftmozaic.com',
+  baseUrl: '/Wiki/',
+  organizationName: 'nftmozaic',
+  projectName: 'nftmozaic-wiki',
+  onBrokenLinks: 'throw',
+  onBrokenMarkdownLinks: 'warn',
+  i18n: {
+    defaultLocale: 'en',
+    locales: ['en'],
+  },
 
-	// Set the production url of your site here
-	url: 'https://nftmozaic.com',
-	// Set the /<baseUrl>/ pathname under which your site is served
-	// For GitHub pages deployment, it is often '/<projectName>/'
-	baseUrl: '/Wiki/',
+  // Remove the themes array since the classic preset already includes the search theme
+  // themes: ['@docusaurus/theme-search-algolia'],
 
-	// GitHub pages deployment config.
-	// If you aren't using GitHub pages, you don't need these.
-	organizationName: 'nftmozaic', // Usually your GitHub org/user name.
-	projectName: 'nftmozaic-wiki', // Usually your repo name.
+  presets: [
+    [
+      'classic', // This is fine, Docusaurus resolves this to the full package name
+      /** @type {import('@docusaurus/preset-classic').Options} */
+      ({
+        docs: {
+          sidebarPath: './sidebars.js',
+        },
+        blog: {
+          showReadingTime: true,
+          feedOptions: {
+            type: ['rss', 'atom'],
+            xslt: true,
+          },
+          onInlineTags: 'warn',
+          onInlineAuthors: 'warn',
+          onUntruncatedBlogPosts: 'warn',
+        },
+        theme: {
+          customCss: ['./src/css/custom.css'], // Keep the array format as in your original config
+        },
+      }),
+    ],
+  ],
 
-	onBrokenLinks: 'throw',
-	onBrokenMarkdownLinks: 'warn',
+  themeConfig:
+    /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
+    ({
+      image: 'img/docusaurus-social-card.jpg',
 
-	// Even if you don't use internationalization, you can use this field to set
-	// useful metadata like html lang. For example, if your site is Chinese, you
-	// may want to replace "en" with "zh-Hans".
-	i18n: {
-		defaultLocale: 'en',
-		locales: ['en'],
-	},
+      // Algolia search configuration
+      algolia: {
+        appId: 'YT2ZF58QIR',
+        apiKey: '7463832288dddc7107b953156b20d8fb',
+        indexName: 'nftmozaic-wiki',
+        contextualSearch: true,
+        searchPagePath: 'search',
+      },
 
-	presets: [
-		[
-			'classic',
-			/** @type {import('@docusaurus/preset-classic').Options} */
-			({
-				theme: {
-					customCss: ['./src/css/custom.css'],
-				},
-				docs: {
-					sidebarPath: './sidebars.js',
-				},
-				blog: {
-					showReadingTime: true,
-					feedOptions: {
-						type: ['rss', 'atom'],
-						xslt: true,
-					},
-					// Useful options to enforce blogging best practices
-					onInlineTags: 'warn',
-					onInlineAuthors: 'warn',
-					onUntruncatedBlogPosts: 'warn',
-				},
-			}),
-		],
-	],
-	themeConfig:
-		/** @type {import('@docusaurus/preset-classic').ThemeConfig} */
-		({
-			// Replace with your project's social card
-			image: 'img/docusaurus-social-card.jpg',
-			navbar: {
-				title: 'NFTMozaic',
-				logo: {
-					alt: 'NFTMozaidc Logo',
-					src: 'img/logo.svg',
-				},
-				items: [
-					{
-						type: 'docSidebar',
-						sidebarId: 'tutorialSidebar',
-						position: 'left',
-						label: 'Polkadot NFTs',
-					},
-					{
-						to: '/alphabetical-index',
-						label: 'Index',
-						position: 'right',
-					},
-					//{ to: '/blog', label: 'Blog', position: 'left' },
-					// {
-					//   href: 'https://github.com/facebook/docusaurus',
-					//   label: 'GitHub',
-					//   position: 'right',
-					// },
-				],
-			},
-			footer: {
-				style: 'dark',
-				links: [
-					{
-						title: 'Community',
-						items: [
-							{
-								label: 'X',
-								href: 'https://x.com/nftmozaic',
-							},
-						],
-					},
-					{
-						title: 'More',
-						items: [
-							{
-								label: 'Blog',
-								href: 'https://nftmozaic.com/blog',
-							},
-							{
-								label: 'GitHub',
-								href: 'https://github.com/nftmozaic',
-							},
-						],
-					},
-				],
-				copyright: `Copyright © ${new Date().getFullYear()} NFTMozaic. Built with Docusaurus.`,
-			},
-			prism: {
-				theme: prismThemes.github,
-				darkTheme: prismThemes.dracula,
-			},
-		}),
+      navbar: {
+        title: 'NFTMozaic',
+        logo: {
+          alt: 'NFTMozaidc Logo',
+          src: 'img/logo.svg',
+        },
+        items: [
+          {
+            type: 'docSidebar',
+            sidebarId: 'tutorialSidebar',
+            position: 'left',
+            label: 'Polkadot NFTs',
+          },
+          {
+            to: '/alphabetical-index',
+            label: 'Index',
+            position: 'right',
+          },
+          {
+            type: 'search',
+            position: 'right',
+          },
+        ],
+      },
+      footer: {
+        style: 'dark',
+        links: [
+          {
+            title: 'Community',
+            items: [
+              {
+                label: 'X',
+                href: 'https://x.com/nftmozaic',
+              },
+            ],
+          },
+          {
+            title: 'More',
+            items: [
+              {
+                label: 'Blog',
+                href: 'https://nftmozaic.com/blog',
+              },
+              {
+                label: 'GitHub',
+                href: 'https://github.com/nftmozaic',
+              },
+            ],
+          },
+        ],
+        copyright: `Copyright © ${new Date().getFullYear()} NFTMozaic. Built with Docusaurus.`,
+      },
+      prism: {
+        theme: prismThemes.github,
+        darkTheme: prismThemes.dracula,
+      },
+    }),
 };
 
 export default config;
