@@ -1,0 +1,14 @@
+version: "3.8"
+
+networks:
+  nftmozaic-network:
+  default:
+    driver: bridge
+
+services:
+  wiki:
+    image: uniquenetwork/nftmozaic-wiki:latest
+    container_name: wiki
+    restart: unless-stopped
+    ports:
+      - "3000:80"

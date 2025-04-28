@@ -1,0 +1,43 @@
+name: Deploy Docusaurus to GitHub Pages
+
+on:
+  #  push:
+  #    branches:
+  #      - main
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Build Docusaurus
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKER_HUB_USERNAME }}
+          password: ${{ secrets.DOCKER_HUB_TOKEN }}
+
+      - name: Build and Push Docker Image
+        run: |
+          docker build -t uniquenetwork/nftmozaic-wiki:latest .
+          docker push uniquenetwork/nftmozaic-wiki:latest
+
+  # deploy:
+  #   name: Deploy to GitHub Pages
+  #   needs: build
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Deploy via SSH
+  #       uses: appleboy/ssh-action@v1
+  #       with:
+  #         host: ${{ secrets.NFTMOZAIC_SERVER_IP }}
+  #         username: ${{ secrets.NFTMOZAIC_SSH_USERNAME }}
+  #         key: ${{ secrets.NFTMOZAIC_SSH_PRIVATE_KEY }}
+  #         script: |
+  #           docker pull uniquenetwork/nftmozaic-wiki
+  #           docker-compose -f docker-compose.yml up -d --force-recreate
