@@ -1,6 +1,6 @@
 ---
 id: indexers
-title: NFT Indexers In The Polkadot Ecosystem
+title: NFT Indexers in the Polkadot ecosystem
 sidebar_label: NFT Indexers
 sidebar_position: 4 
 ---

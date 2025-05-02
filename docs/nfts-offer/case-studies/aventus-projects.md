@@ -1,7 +1,7 @@
 ---
 id: aventus-network
-title: Aventus Network Projects
-sidebar_label: Aventus Network Projects
+title: Aventus Network projects
+sidebar_label: Aventus Network projects
 sidebar_position: 4
 ---
 

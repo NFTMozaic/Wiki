@@ -1,6 +1,6 @@
 ---
 id: documentation
-title: Creating NFTs In The Polkadot Ecosystem - Reference Documentation and Tools Available
+title: Creating NFTs in the Polkadot Ecosystem - reference documentation and tools available
 sidebar_label: Documentation
 sidebar_position: 1
 ---

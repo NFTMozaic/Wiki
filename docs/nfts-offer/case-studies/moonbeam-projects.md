@@ -1,7 +1,7 @@
 ---
 id: moonbeam-projects
-title: Moonbeam Projects
-sidebar_label: Moonbeam Projects
+title: Moonbeam projects
+sidebar_label: Moonbeam projects
 sidebar_position: 2
 ---
 

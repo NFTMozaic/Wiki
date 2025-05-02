@@ -4,7 +4,7 @@ title: NFT Pallets
 sidebar_position: 1
 ---
 
-# NFT Pallets in the Polkadot Ecosystem
+# NFT Pallets in the Polkadot ecosystem
 
 :::tip [Definition]
 

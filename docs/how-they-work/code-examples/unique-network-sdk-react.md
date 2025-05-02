@@ -1,6 +1,6 @@
 ---
 id: unique-network-sdk-react
-title: Create A Unique Network NFT dApp Using Unique SDK, EVM Contracts and React
+title: Create a Unique Network NFT dApp using Unique SDK, EVM contracts and React
 sidebar_label: An NFT dApp
 sidebar_position: 1 
 ---

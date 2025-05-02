@@ -1,7 +1,7 @@
 ---
 id: unique-network-projects
-title: Unique Network Ecosystem Projects
-sidebar_label: Unique Network Projects
+title: Unique Network ecosystem projects
+sidebar_label: Unique Network projects
 sidebar_position: 3
 ---
 

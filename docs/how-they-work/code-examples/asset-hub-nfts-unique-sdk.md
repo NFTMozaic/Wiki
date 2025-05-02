@@ -1,6 +1,6 @@
 ---
 id: asset-hub-nfts-unique-sdk
-title: Create Asset Hub NFTs Using Unique SDK
+title: Create Asset Hub NFTs using Unique SDK
 sidebar_label: Asset Hub NFTs
 sidebar_position: 2 
 ---

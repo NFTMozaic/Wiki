@@ -1,7 +1,7 @@
 ---
 id: NFT-Capabilities
 title: NFT Capabilities in the Polkadot Ecosystem
-sidebar_label: NFT Capabilities
+sidebar_label: NFT capabilities
 sidebar_position: 3
 ---
 
