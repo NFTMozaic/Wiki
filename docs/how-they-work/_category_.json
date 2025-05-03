@@ -4,5 +4,7 @@
   "link": {
     "title": "How they work",
     "type": "generated-index"
-  }
+  },
+  "collapsible": true,
+  "collapsed": false
 }
