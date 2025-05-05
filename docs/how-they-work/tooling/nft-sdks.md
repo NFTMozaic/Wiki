@@ -11,7 +11,8 @@ _An overview of the Rollup NFT capable SDKs._
 
 Polkadot provides APIs for direct access to pallets, or SDKs that wrap internals into a more convenient and specialized way to develop and maintain dApps. 
 Polkadot offers the [Polkadot API (PAPI)](https://papi.how/) that provides a  direct way to develop dApps and mint NFTs. In a similar approach [Dedot](https://github.com/dedotdev/dedot) provides a lightweight SDK that attempts to optimise code bulk and speed. 
-A summary of capabilities of PAPI and Dedot is available [here] (https://docs.google.com/document/d/1vnx35lNV87IrM6KOEd-L7HjCfWZ8QS0O2Evwy-uTkEA/edit?usp=sharing)
+A summary of capabilities of PAPI and Dedot is available in the [PAPI vs Dedot APIs for NFT dApps] (https://docs.google.com/document/d/1vnx35lNV87IrM6KOEd-L7HjCfWZ8QS0O2Evwy-uTkEA/edit?usp=sharing) report.
+
 [Unique Network's SDK](https://docs.unique.network/build/sdk/v2/quick-start.html) allows fast and easy development with their approach applied to both Asset Hub and their native pallets unifying the NFT experience across chains. Apillon also provides a way to deploy contracts and mint NFTs but via a Web3 drag-and-drop interface on Moonbeam, Astar, Asset Hub and Unique Network. As a general purpose SDK, the [Apillon API](https://wiki.apillon.io/build/1-apillon-api.html) provides all the elements necessary to access the underlying processes making it a viable albeit somwhat different approach.
 
 
