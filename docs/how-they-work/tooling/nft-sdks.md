@@ -9,8 +9,10 @@ _An overview of the Rollup NFT capable SDKs._
 
 # NFT SDKs in Polkadot Ecosystem
 
-Although Polkadot does not provide an NFT-specific SDK their legacy SDK, the [Polkadot\{.js\}](https://polkadot.js.org/docs/api/) 
-has been utilised to this effect. Recently, however, focus has shifted toward their API, the [Polkadot API (PAPI)](https://papi.how/) that provides a more convenient way to develop dApps and mint NFTs. In a similar approach [Dedot](https://github.com/dedotdev/dedot) provides a lightweight SDK that attempts to optimise code bulk and speed. [Unique Network's SDK](https://docs.unique.network/build/sdk/v2/quick-start.html) allows fast and easy development with their approach applied to both Asset Hub and their native pallets unifying the NFT experience across chains. Apillon also provides a way to deploy contracts and mint NFTs but via a Web3 drag-and-drop interface on Moonbeam, Astar, Asset Hub and Unique Network. Although it is not an SDK per se, the [Apillon API](https://wiki.apillon.io/build/1-apillon-api.html) provides all the elements necessary to access the underlying processes making it a viable albeit somwhat different approach.
+Polkadot provides APIs for direct access to pallets, or SDKs that wrap internals into a more convenient and specialized way to develop and maintain dApps. 
+Polkadot offers the [Polkadot API (PAPI)](https://papi.how/) that provides a  direct way to develop dApps and mint NFTs. In a similar approach [Dedot](https://github.com/dedotdev/dedot) provides a lightweight SDK that attempts to optimise code bulk and speed. 
+A summary of capabilities of PAPI and Dedot is available [here] (https://docs.google.com/document/d/1vnx35lNV87IrM6KOEd-L7HjCfWZ8QS0O2Evwy-uTkEA/edit?usp=sharing)
+[Unique Network's SDK](https://docs.unique.network/build/sdk/v2/quick-start.html) allows fast and easy development with their approach applied to both Asset Hub and their native pallets unifying the NFT experience across chains. Apillon also provides a way to deploy contracts and mint NFTs but via a Web3 drag-and-drop interface on Moonbeam, Astar, Asset Hub and Unique Network. As a general purpose SDK, the [Apillon API](https://wiki.apillon.io/build/1-apillon-api.html) provides all the elements necessary to access the underlying processes making it a viable albeit somwhat different approach.
 
 
 ## NFT SDK
@@ -65,12 +67,4 @@ The SDK facilitates seamless integration of Unique Network's capabilities into t
 - PAPI provides an updated, more streamlined approach to building dApps and minting NFTs than it's predecessor.
 - Dedot offers a similar experience but puts emphasis on code size and performance optimisation.
 - Apillon SDK provides a very convenient approach as it follows the user-friendly web building process.
-- Unique Network SDK is optimised for fast NFT dApp development for both the native chain and the Asset Hub.
-- An open call to the community for a greenfield NFT SDK should be made, but any new solution is likely to be expensive.
-
-## Plans
-
-Publish the call for proposals for the NFT SDK and plan further actions based on the response.
-
-Proposed Specification for an ideal “to be”  SDK.
-
+- Unique Network SDK is optimised for fast NFT dApp development for both the native chain and AssetHub, and can be extended to any other Rollup (parachain).
