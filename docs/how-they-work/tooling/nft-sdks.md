@@ -61,12 +61,12 @@ The SDK facilitates seamless integration of Unique Network's capabilities into t
 
 ## Conclusions
 
-Polkadot\{.js\} remains as a legacy platform. A complex development environment, challenging to work with but very universal. 
-PAPI provides an updated, more streamlined approach to building dApps and minting NFTs than it's predecessor.
-Dedot offers a similar experience but puts emphasis on code size and performance optimisation.
-Apillon SDK provides a very convenient approach as it follows the user-friendly web building process.
-Unique Network SDK is optimised for fast NFT dApp development for both the native chain and the Asset Hub.
-An open call to the community for a greenfield NFT SDK should be made, but any new solution is likely to be expensive.
+- Polkadot\{.js\} remains as a legacy platform. A complex development environment, challenging to work with but very universal. 
+- PAPI provides an updated, more streamlined approach to building dApps and minting NFTs than it's predecessor.
+- Dedot offers a similar experience but puts emphasis on code size and performance optimisation.
+- Apillon SDK provides a very convenient approach as it follows the user-friendly web building process.
+- Unique Network SDK is optimised for fast NFT dApp development for both the native chain and the Asset Hub.
+- An open call to the community for a greenfield NFT SDK should be made, but any new solution is likely to be expensive.
 
 ## Plans
 
