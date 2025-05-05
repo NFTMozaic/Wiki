@@ -1,9 +1,10 @@
 ---
 id: unique-network
-title: Unique Network Profile
 sidebar_label: Unique Network
 sidebar_position: 3
 ---
+
+# <img src="/img/unique-l.png" className="unique-h1" />
 
 ## 1. Introduction & Positioning
 

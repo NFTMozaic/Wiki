@@ -5,6 +5,9 @@ sidebar_label: Moonbeam
 sidebar_position: 2
 ---
 
+# <img src="/img/moonbeam-l.png" className="moonbeam-h1" />
+
+
 ## 1. Overview & Mission
 
 Moonbeam is an Ethereum-compatible parachain on Polkadot. Its primary mission is to serve as a bridge for Ethereum developers and projects, enabling them to deploy their existing Solidity-based smart contracts in a Substrate environment. By integrating EVM support, Web3 RPCs, and Cross-Chain Messaging (XCM), Moonbeam positions itself as the go-to option for multi-chain DApp deployment, including NFT projects looking to expand into the Polkadot ecosystem.

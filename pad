@@ -1,0 +1,14 @@
+
+html[data-theme='light'] .rarible-h1 {
+  content: url('/img/rarible-l.png');
+  vertical-align: middle;
+  margin-right: 10px;
+  height: 96px;
+}
+
+html[data-theme='dark'] .rarible-h1 {
+  content: url('/img/rarible-d.png');
+  vertical-align: middle;
+  margin-right: 10px;
+  height: 96px;
+}

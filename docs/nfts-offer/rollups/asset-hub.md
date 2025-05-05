@@ -5,6 +5,9 @@ sidebar_label: Asset Hub
 sidebar_position: 1
 ---
 
+# <img src="/img/polkadot.png" className="polkadot-h1" /> Asset Hub
+
+
 ## 1. Introduction & Positioning
 
 Asset Hub is an official Polkadot system chain offering baseline capabilities for on-chain asset management, for both fungible and non-fungible tokens (NFTs). Initially launched with a minimal pallet for minting and transfers, Asset Hub’s significance is growing as Polkadot advances toward a unified “Cloud + Hub” framework. This evolution sees Polkadot delivering crucial functionalities (governance, staking, stablecoins, EVM integration) under a “Polkadot Hub” banner, with Asset Hub emerging as a foundational chain for NFTs and fungible assets—distinct yet complementary to the specialized parachains that expand Polkadot’s feature set.

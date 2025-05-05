@@ -257,3 +257,54 @@ h1, .markdown h1 {
   color: var(--my-color-unity-purple); /* Add this line to apply the Unity purple color */
 }
 
+/* Applied in Moonbeam pages (logo banner) */
+html[data-theme='light'] .moonbeam-h1 {
+  content: url('/img/moonbeam-l.png');
+  vertical-align: middle;
+  margin-right: 10px;
+  height: 48px;
+}
+
+html[data-theme='dark'] .moonbeam-h1 {
+  content: url('/img/moonbeam-d.png');
+  vertical-align: middle;
+  margin-right: 10px;
+  height: 48px;
+}
+
+.polkadot-h1 {
+  content: url('/img/polkadot.png');
+  vertical-align: middle;
+  margin-right: 10px;
+  height: 48px;
+}
+
+html[data-theme='light'] .unique-h1 {
+  content: url('/img/unique-l.png');
+  vertical-align: middle;
+  margin-right: 10px;
+  height: 96px;
+}
+
+html[data-theme='dark'] .unique-h1 {
+  content: url('/img/unique-d.png');
+  vertical-align: middle;
+  margin-right: 10px;
+  height: 96px;
+}
+
+
+html[data-theme='light'] .rarible-h1 {
+  content: url('/img/rarible-l.png');
+  vertical-align: middle;
+  margin-right: 10px;
+  height: 64px; 
+}
+
+html[data-theme='dark'] .rarible-h1 {
+  content: url('/img/rarible-d.png');
+  vertical-align: middle;
+  margin-right: 10px;
+  height: 64px;
+}
+

@@ -5,7 +5,7 @@ sidebar_label: Moonbeam projects
 sidebar_position: 2
 ---
 
-## Rarible X Moonbeam - Illuminate Creativity Initiative
+## <img src="/img/rarible-l.png" className="rarible-h1" /> X   <img src="/img/moonbeam-l.png" className="moonbeam-h1" /> <br /> Illuminate Creativity Initiative
 
 ### Objective
 
