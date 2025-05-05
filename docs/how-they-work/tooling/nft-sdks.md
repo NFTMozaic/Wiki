@@ -49,15 +49,6 @@ Dedot is a light client Javascript API for Polkadot and Polkadot-SDK based chain
 
 The SDK facilitates seamless integration of Unique Network's capabilities into the Web3 application, bypassing the need for direct low-level API interaction. It enables you to effortlessly mint collections and tokens, manage account balances, and more. Developers do not need to maintain runtime changes - the remote procedure server is always up-to-date. The quick-start is [here](https://docs.unique.network/build/sdk/v2/quick-start.html).
 
-## Existing NFT SDKs List
-
-|  | Polksdot{.js} | PAPI | Dedot | Apillon | Unique Network |
-| --- | --- | --- | --- | --- | --- |
-| Docs |[Polkadot{.js}](https://polkadot.js.org/docs/)|[PAPI](https://papi.how/getting-started)|[Dedot](https://docs.dedot.dev/)| [Unique Network SDK](https://sdk-docs.apillon.io/) | [Documentation](https://docs.unique.network/build/sdk/getting-started.html) |
-| GitHub |[Public](https://github.com/polkadot-js/docs)|[Public](https://github.com/polkadot-api/polkadot-api)|[Public](https://github.com/dedotdev/dedot)| [Public](https://github.com/Apillon/sdk) | Private |
-| Indexes NFT pallet |basic (Subscan)|basic (Subscan)|basic (Subscan)| UniqueNetwork Pallet Can be extended | UniqueNetwork Pallet Pallet NFTs (MVP) Pallet Uniques (MVP) |
-| Platforms | Web/JS | Web/JS | Web/JS | Web/JS | Web/JS |
-
 ## Conclusions
 
 Polkadot{.js} remains as a legacy platform. A complex development environment, challenging to work with but very universal. 

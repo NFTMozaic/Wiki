@@ -1,0 +1,10 @@
+
+## Existing NFT SDKs List
+
+|  | Polksdot{.js} | PAPI | Dedot | Apillon | Unique Network |
+| --- | --- | --- | --- | --- | --- |
+| Docs |[Polkadot{.js}](https://polkadot.js.org/docs/)|[PAPI](https://papi.how/getting-started)|[Dedot](https://docs.dedot.dev/)| [Unique Network SDK](https://sdk-docs.apillon.io/) | [Documentation](https://docs.unique.network/build/sdk/getting-started.html) |
+| GitHub |[Public](https://github.com/polkadot-js/docs)|[Public](https://github.com/polkadot-api/polkadot-api)|[Public](https://github.com/dedotdev/dedot)| [Public](https://github.com/Apillon/sdk) | Private |
+| Indexes NFT pallet |basic (Subscan)|basic (Subscan)|basic (Subscan)| UniqueNetwork Pallet Can be extended | UniqueNetwork Pallet Pallet NFTs (MVP) Pallet Uniques (MVP) |
+| Platforms | Web/JS | Web/JS | Web/JS | Web/JS | Web/JS |
+
