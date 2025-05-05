@@ -70,8 +70,6 @@ Substrate-based pallets offer native NFT logic—mint, transfer, burn and metada
 
 ### 1.3 Usage & Statistics
 
--
-
 The report in the link below provides an insight into the current distribution of assets, the usage statistics and the contribution details pertaining to the develper activity. This table is live and is updated monthly to reflect changes in the ecosystem.
 
 [NFT Pallets in the Polkadot Ecosystem](https://docs.google.com/spreadsheets/d/1BhlmF9BUw0z6B5qBAqC3j_NMZ0dbhenvgFNFIo4oPhQ/edit?usp=sharing)
