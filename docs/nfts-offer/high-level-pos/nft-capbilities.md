@@ -95,7 +95,7 @@ The report in the link below provides an insight into the current distribution o
 - **Subscan**: Block explorer indexer with API.
 
 
-### 2.3 Wallet & User Interface Layers
+### 2.3 Wallet & user interface layers
 
 
 - **Browser Extensions**: Polkadot.js extension, SubWallet, Talisman, as signers.

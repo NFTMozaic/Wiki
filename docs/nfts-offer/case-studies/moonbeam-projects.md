@@ -35,13 +35,13 @@ The Illuminate Creativity Open Call, a collaboration between Rarible, Moonbeam, 
 
 Launched on October 8, 2021, Moonbeans is a fully functional NFT marketplace that started on the Moonriver network. The platform aims to foster a vibrant NFT ecosystem by offering minimal fees for artists, traders, and project developers.
 
-### Key Features
+### Key features
 
 - **Profit-Sharing Model:** BEANS token holders receive passive rewards from every transaction, distributed as USDC.
 - **Diverse NFT Collections:** Hosts collections like Beanies, Damned Pirates Society, and RivrMaids.
 - **Integration with SubQuery:** Enhances user experience through efficient blockchain data indexing and querying.
 
-### Impact on Moonbeam Ecosystem
+### Impact on Moonbeam ecosystem
 
 - Provides a user-friendly marketplace with a profit-sharing model.
 - Attracts artists, collectors, and investors.
@@ -53,13 +53,13 @@ Launched on October 8, 2021, Moonbeans is a fully functional NFT marketplace tha
 
 Treasureland is a multi-chain NFT marketplace that has integrated with both Moonbeam and Moonriver networks. The platform connects NFT creators, users, and consumers in a decentralized manner, supporting the creation, issuance, auction, and socialization of NFTs.
 
-### Key Features
+### Key features
 
 - **Comprehensive NFT Services:** Provides minting, issuance, auctions, and social features.
 - **Decentralized Platform:** Ensures creators maintain control over their assets and transactions.
 - **Community Engagement:** Encourages interaction and collaboration among NFT enthusiasts.
 
-### Impact on Moonbeam Ecosystem
+### Impact on Moonbeam ecosystem
 
 - Enhances the network's NFT capabilities.
 - Provides users with a versatile NFT marketplace.

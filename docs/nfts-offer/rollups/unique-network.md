@@ -6,29 +6,29 @@ sidebar_position: 3
 
 # <img src="/img/unique-l.png" className="unique-h1" />
 
-## 1. Introduction & Positioning
+## 1. Introduction & positioning
 
 Unique Network is a specialized Polkadot parachain offering advanced “NFT 2.0” capabilities—including dynamic, nested, and composable NFTs—coupled with a hybrid environment that blends EVM and Substrate. Positioned as a front-runner for innovative NFT solutions, Unique Network streamlines creation, management, and cross-chain functionality via sophisticated developer tools and an in-house NFT SDK. This approach allows dApps to harness both advanced Substrate logic and EVM compatibility, which aligns with Polkadot’s emerging “Cloud + Hub” framework.
 
-## 2. NFT Focus & Technology
+## 2. NFT focus & technology
 
-### Advanced NFT 2.0 Features
+### Advanced NFT 2.0 features
 
 - **Dynamic Metadata**: On-chain attributes can evolve based on triggers (in-game progress, external data, user interactions).
 - **Nested & Composable Tokens**: NFTs can own or combine other NFTs, enabling complex asset relationships (e.g., bundled items, evolving digital artworks).
 - **Sponsor-Based Fees**: Collections or token creators can sponsor transaction costs, simplifying user onboarding.
 
-### EVM + Substrate Integration
+### EVM + Substrate integration
 
 - **Hybrid Environment**: Developers can deploy Solidity contracts while leveraging Substrate-specific NFT logic for advanced features.
 - **Flexible Dev Stack**: The Unique NFT SDK accelerates development, masking Substrate complexities and providing REST API endpoints for broader language support.
 
-### Cross-Chain NFT XCM
+### Cross-chain NFT XCM
 
 - **Interoperability**: Unique Network spearheaded an NFT XCM pilot connecting its chain with Polkadot’s Asset Hub, enabling real cross-chain NFT transfers.
 - **Future Synergy**: Once Polkadot’s NFT XCM matures, NFTs may seamlessly transit to other parachains or system chains (e.g., Asset Hub, Moonbeam), expanding Polkadot’s multi-chain NFT ecosystem.
 
-### CodeCraft & Real-World MVPs
+### CodeCraft & real-world MVPs
 
 - **Incubator-Like Approach**: Real-world dApps focusing on user experience and actual market traction and CodeCraft grants fund MVPs.
 - **Examples**:
@@ -36,15 +36,15 @@ Unique Network is a specialized Polkadot parachain offering advanced “NFT 2.0�
   - Conor Daly Insider Pass, Sovereign Nature Initiative, and more highlight Unique’s capacity to power large-scale or brand-driven NFT campaigns.
   - Kooupon Kraft (loyalty NFT MVP) reached 400 users in a month.
 
-## 3. Current Capabilities & Limitations
+## 3. Current capabilities & limitations
 
-### Native NFT 2.0 Strengths
+### Native NFT 2.0 strengths
 
 - **On-Chain Gas Sponsoring**: Eases user onboarding, removing friction from transaction costs.
 - **Deep Customization**: Permits granular metadata, multi-file support, advanced roles for item owners/issuers, etc.
 - **Well-Developed SDK & Indexer**: Facilitates quick integration for non-Substrate devs, ensures smooth analytics and dynamic NFT data updates.
 
-### Reliance on Polkadot XCM Evolution
+### Reliance on Polkadot XCM evolution
 
 - NFT XCM production environment: While the Unique NFT SDK simplifies development, advanced features (dynamic or nested) while NFT XCM is in development - it’s not fully accessible to all parachains.
 

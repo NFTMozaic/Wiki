@@ -1,6 +1,6 @@
 ---
 id: documentation
-title: Creating NFTs in the Polkadot Ecosystem - reference documentation and tools available
+title: Creating NFTs in the Polkadot ecosystem - reference documentation and tools available
 sidebar_label: Documentation
 sidebar_position: 1
 ---
@@ -18,7 +18,7 @@ This section provides links to the documentation relevant to NFTs for each rollu
 
 - [https://wiki.polkadot.network/docs/learn-nft-pallets#nfts-pallet](https://wiki.polkadot.network/docs/learn-nft-pallets#nfts-pallet)
 
-### NFTs Pallet GitHub Repo
+### NFTs Pallet GitHub repo
 
 - [https://github.com/paritytech/polkadot-sdk/tree/master/substrate/frame/nfts#readme](https://github.com/paritytech/polkadot-sdk/tree/master/substrate/frame/nfts#readme)
 
@@ -26,7 +26,7 @@ This section provides links to the documentation relevant to NFTs for each rollu
 
 - [https://wiki.polkadot.network/docs/learn-nft-pallets#uniques-pallet](https://wiki.polkadot.network/docs/learn-nft-pallets#uniques-pallet)
 
-### Uniques Pallet GitHub Repo
+### Uniques Pallet GitHub repo
 
 - [https://github.com/paritytech/polkadot-sdk/tree/master/substrate/frame/uniques](https://github.com/paritytech/polkadot-sdk/tree/master/substrate/frame/uniques)
 
@@ -34,11 +34,11 @@ This section provides links to the documentation relevant to NFTs for each rollu
 
 ---
 
-### General Information
+### General information
 
 - [https://docs.unique.network/about](https://docs.unique.network/about)
 
-### Substrate Native Advanced NFTs (NFT 2.0)
+### Substrate native advanced NFTs (NFT 2.0)
 
 - [https://docs.unique.network/build/sdk/v2/quick-start.html](https://docs.unique.network/build/sdk/v2/quick-start.html)
 
@@ -46,23 +46,23 @@ This section provides links to the documentation relevant to NFTs for each rollu
 
 - [https://docs.unique.network/build/evm/](https://docs.unique.network/build/evm/)
 
-### Tutorials/Cookbook
+### Tutorials/cookbook
 
 - [https://docs.unique.network/tutorials](https://docs.unique.network/tutorials)
 
-### YouTube Workshops and Tutorials
+### YouTube workshops and tutorials
 
 - [https://www.youtube.com/watch?v=StfRap-dvks&list=PLFSU2-RmX858vLu9a5bukOTpJ1dYzsE4o](https://www.youtube.com/watch?v=StfRap-dvks&list=PLFSU2-RmX858vLu9a5bukOTpJ1dYzsE4o)
 
-### Reference Documentation
+### Reference documentation
 
 - [https://docs.unique.network/reference](https://docs.unique.network/reference)
 
-### NFT Marketplace
+### NFT marketplace
 
 - [https://unqnft.io/market?filterState=](https://unqnft.io/market?filterState=)
 
-### Indexer/Block Explorer
+### Indexer/block explorer
 
 - [https://uniquescan.io/unique/](https://uniquescan.io/unique/)
 
@@ -72,11 +72,11 @@ This section provides links to the documentation relevant to NFTs for each rollu
 
 Moonbeam provides the familiar and easy-to-use tooling of Ethereum.
 
-### Deploying an ERC-721 Contract Example
+### Deploying an ERC-721 contract example
 
 - [https://docs.moonbeam.network/tutorials/eth-api/thirdweb/](https://docs.moonbeam.network/tutorials/eth-api/thirdweb/)
 
-### Minting a Cross-Chain NFT with Axelar SDK
+### Minting a cross-chain NFT with Axelar SDK
 
 - [https://docs.moonbeam.network/tutorials/interoperability/using-axelar-sdk/](https://docs.moonbeam.network/tutorials/interoperability/using-axelar-sdk/)
 
@@ -88,15 +88,15 @@ Moonbeam provides the familiar and easy-to-use tooling of Ethereum.
 
 Supports NFTs on both Substrate and EVM NFT collections but is predominantly EVM centered.
 
-### General Information
+### General information
 
 - [https://astar.network/blog/An-introduction-to-NFTs-on-Astar-38359](https://astar.network/blog/An-introduction-to-NFTs-on-Astar-38359)
 
-### Generating PSP34 NFTs via ink! Contracts
+### Generating PSP34 NFTs via ink! contracts
 
 - [https://docs.astar.network/docs/tutorials/from-zero-to-ink-hero/nft/](https://docs.astar.network/docs/tutorials/from-zero-to-ink-hero/nft/)
 
-### EVM NFT Management Example
+### EVM NFT management example
 
 - [https://docs.astar.network/docs/build/EVM/astarbase/#example-use-case-discount-price-on-an-nft](https://docs.astar.network/docs/build/EVM/astarbase/#example-use-case-discount-price-on-an-nft)
 
@@ -135,7 +135,7 @@ The Nodle Network is a decentralized wireless network, composed of Nodle Edge No
 
 Bit.Country specializes in providing Metaverse as a Service (MaaS) to all networks. The first decentralized application (dApp) offers users the tools to create and customize a metaverse, run and reward a community through immersive quests, and mint and trade NFTs. Users can enjoy metaverse gaming, learning and networking.
 
-### Minting And NFT Generators
+### Minting And NFT generators
 
 - [https://metaversenw.gitbook.io/user-manual/nfts/what-is-an-nft](https://metaversenw.gitbook.io/user-manual/nfts/what-is-an-nft)
 
@@ -147,6 +147,6 @@ Bit.Country specializes in providing Metaverse as a Service (MaaS) to all networ
 
 Mythical offers a platform for game developers with comprehensive documentation and onboarding guides, to ensure anyone can get up and running in time. The primary integration path is REST APIs, but SDKs are also available upon request.
 
-### Developer Tools and Documentation Links
+### Developer tools and documentation links
 
 - [The Mythical Platform API](https://docs.mythicalgames.com/mythical-platform-api)

@@ -12,13 +12,13 @@ sidebar_position: 4
 VereNFT is an enterprise-grade, white-label NFT platform provider designed to assist businesses in entering the Web3 space. The platform offers customizable solutions, enabling companies to develop their own NFT strategies and marketplaces. VereNFT is powered by the Aventus Network, ensuring scalability, security, and interoperability.  
 [http://www.verenft.io/](http://www.verenft.io/) (site not reachable)
 
-### Key Features
+### Key features
 
 - **Customization:** VereNFT provides tailored NFT platforms that align with specific business needs, allowing for personalized branding and user experiences.
 - **Compliance and Payment Integration:** The platform supports Know Your Customer (KYC) protocols and integrates both cryptocurrency and fiat payment gateways, ensuring regulatory compliance and broadening payment options for users.
 - **Promotional Services:** VereNFT offers promotional tools to help businesses effectively market their NFT offerings, enhancing visibility and engagement.
 
-### Impact on the Aventus Ecosystem
+### Impact on the Aventus ecosystem
 
 - By enabling businesses to seamlessly integrate NFTs into their operations, VereNFT expands the utility and reach of the Aventus Network. Its customizable and compliant solutions attract a diverse range of enterprises, thereby enriching the Aventus ecosystem.
 
@@ -29,7 +29,7 @@ VereNFT is an enterprise-grade, white-label NFT platform provider designed to as
 To commemorate the 10-year anniversary of "The Wolf of Wall Street" film, Aventus partnered with the film's rights holders to launch "The Wolf of Wall Street Experience." This initiative involved a series of NFT drops offering exclusive content and experiences for fans and Web3 enthusiasts.  
 [https://www.wolfofwallstreet.io/nfts/?artist=The+Wolf+of+Wall+Street+NFT+Experience](https://www.wolfofwallstreet.io/nfts/?artist=The+Wolf+of+Wall+Street+NFT+Experience)
 
-### Key Features
+### Key features
 
 - **Exclusive Content:** NFTs included never-before-seen footage from the film's production, providing fans with unique insights into its creation.
 - **Unlockable Experiences:** Certain NFTs granted holders access to special events, such as an invite-only celebration marking the film's anniversary.
@@ -41,7 +41,7 @@ To commemorate the 10-year anniversary of "The Wolf of Wall Street" film, Aventu
 Beatport, a leading electronic music platform, collaborated with Aventus to launch Beatport.io, a digital collectible marketplace aimed at bringing electronic music culture into the Web3 space.  
 [https://www.app.beatport.io/browse/](https://www.app.beatport.io/browse/)
 
-### Key Features
+### Key features
 
 - **Artist and Label Engagement:** The platform enables artists and record labels to create and sell unique digital assets, fostering deeper connections with fans.
 - **Exclusive Access:** NFTs offer fans early access to unreleased tracks, discounted tickets, and entry to VIP events, enhancing the fan experience.

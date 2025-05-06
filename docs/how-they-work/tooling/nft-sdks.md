@@ -7,7 +7,7 @@ sidebar_position: 2
 
 _An overview of the Rollup NFT capable SDKs._
 
-# NFT SDKs in Polkadot Ecosystem
+# NFT SDKs in Polkadot ecosystem
 
 Polkadot provides APIs for direct access to pallets, or SDKs that wrap internals into a more convenient and specialized way to develop and maintain dApps. 
 Polkadot offers the [Polkadot API (PAPI)](https://papi.how/) that provides a  direct way to develop dApps and mint NFTs. In a similar approach [Dedot](https://github.com/dedotdev/dedot) provides a lightweight SDK that attempts to optimise code bulk and speed. 
@@ -67,7 +67,7 @@ These measurements are based on an example [NFT minting application](https://git
 
 The SDK facilitates seamless integration of Unique Network's capabilities into the Web3 application, bypassing the need for direct low-level API interaction. It enables you to effortlessly mint collections and tokens, manage account balances, and more. Developers do not need to maintain runtime changes - the remote procedure server is always up-to-date. The quick-start is [here](https://docs.unique.network/build/sdk/v2/quick-start.html).
 
-## Existing NFT SDKs List
+## Existing NFT SDKs list
 
 |  | Polksdot\{.js\} | PAPI | Dedot | Apillon | Unique Network |
 | --- | --- | --- | --- | --- | --- |

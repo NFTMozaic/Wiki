@@ -1,20 +1,20 @@
 ---
 id: indexers
-title: NFT Indexers in the Polkadot ecosystem
+title: NFT indexers in the Polkadot ecosystem
 sidebar_label: NFT Indexers
 sidebar_position: 4 
 ---
 
 _An overview of the indexers available in Polkadot._
 
-# NFT Indexers in Polkadot Ecosystem
+# NFT indexers in Polkadot ecosystem
 
 
-## What Is An Indexer?
+## What is an indexer?
 
 An NFT indexer is a tool that reads, processes, and organizes blockchain data, making NFT metadata, ownership, and transaction history easily accessible for applications without directly scanning the blockchain.
 
-### Applications That Depend on NFT Indexing
+### Applications that depend on NFT indexing
 
 - **dApps & Marketplaces** – Need fast and structured access to NFT data for seamless user experiences.
 - **Wallet Interfaces & Block Explorers** – Require standardized metadata retrieval to display NFTs properly.
@@ -30,21 +30,21 @@ An NFT indexer is a tool that reads, processes, and organizes blockchain data, m
 | NFT Pallet  | Pallet NFTs, Pallet Uniques (partially), Unique Network | Pallet NFTs                      | Unique Network (can be extended) |
 | Type        | SaaS                             | SaaS, Self-hosted                | SaaS, Self-hosted        |
 
-## NFT Indexers Challenges
+## NFT indexers challenges
 
-### Chain and Pallet-Specific Indexing Gaps
+### Chain and Pallet-specific indexing gaps
 
 Each Polkadot parachain has its own NFT standards, storage methods, and event structures, making it impossible to apply a single indexing approach across the ecosystem. Without modular solutions, maintaining consistent cross-chain NFT visibility becomes increasingly complex.
 
-### Inconsistent Metadata Formats
+### Inconsistent metadata formats
 
 NFT metadata is stored in various formats such as IPFS, JSON, Substrate storage, and Base64. This inconsistency leads to broken or incomplete NFT displays, requiring dApps to implement custom logic for each chain.
 
-### Lack of Developer-Friendly SDKs & Documentation
+### Lack of developer-friendly SDKs & documentation
 
 Most existing indexers lack well-documented SDKs and plug-and-play integrations, forcing developers to build custom solutions from scratch.
 
-## Proposed Roadmap
+## Proposed roadmap
 
 Complete critical upgrades/development to:
 
