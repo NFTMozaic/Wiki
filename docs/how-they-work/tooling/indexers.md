@@ -29,6 +29,7 @@ An NFT indexer is a tool that reads, processes, and organizes blockchain data, m
 | Interface   | REST                             | REST, GraphQL, [TypeScript client](https://github.com/kodadot/uniquery)                     | REST, [SDK](https://www.npmjs.com/package/@unique-nft/sdk)                 |
 | NFT Pallet  | Pallet NFTs, Pallet Uniques (partially), Unique Network | Pallet NFTs                      | Unique Network (can be extended) |
 | Type        | SaaS                             | SaaS, Self-hosted                | SaaS, Self-hosted        |
+| Examples    | - | [sample code](https://wiki.nftmozaic.com/docs/how-they-work/kodadot-indexer-integration) | - |
 
 ## NFT indexers challenges
 
