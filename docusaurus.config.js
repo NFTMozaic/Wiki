@@ -71,6 +71,7 @@ const config = {
         logo: {
           alt: 'NFTMozaidc Logo',
           src: 'img/logo.svg',
+          href: 'https://nftmozaic.com/',
         },
         items: [
           {
