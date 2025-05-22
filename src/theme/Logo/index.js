@@ -8,7 +8,6 @@ export default function LogoWrapper(props) {
       logo={{
         ...props.logo,
         href: 'https://nftmozaic.com/',
-        target: '_blank',
         alt: 'NFTMozaic Logo',
       }}
     />
