@@ -65,7 +65,7 @@ const config = {
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
       // Replace with your project's social card
-      image: 'img/nftmozai-social-card.jpg',
+      image: 'img/nftmozaic-social-card.jpg',
       navbar: {
         title: 'NFTMozaic',
         logo: {
