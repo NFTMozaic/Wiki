@@ -69,10 +69,9 @@ const config = {
       navbar: {
         title: 'NFTMozaic',
         logo: {
-          alt: 'NFTMozaidc Logo',
+          alt: 'NFTMozaic Logo',
           src: 'img/logo.svg',
           href: 'https://nftmozaic.com/',
-          target: '_blank',
         },
         items: [
           {
