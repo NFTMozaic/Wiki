@@ -1,6 +1,6 @@
 ---
 id: nft-pallets
-title: NFT Pallets
+title: NFT Pallets Overview
 sidebar_position: 1
 ---
 
