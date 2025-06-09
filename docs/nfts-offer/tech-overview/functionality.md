@@ -1,8 +1,20 @@
 ---
-sidebar_position: 3 
+sidebar_position: 2 
 ---
 
-# Functionality
+# Functionality comparison
+
+
+This page provides a side-by-side comparison of the available NFT pallets in the Polkadot ecosystem.
+
+
+<h2 style={{ color: '#6a0dad' }}>Live data</h2>
+
+<p style={{ color: '#6a0dad' }}>
+The table linked below shows how assets are currently distributed, how they're being used, and who is contributing to development. It’s updated monthly to reflect changes in the ecosystem.
+</p>
+
+**[NFT Pallets in the Polkadot Ecosystem](https://docs.google.com/spreadsheets/d/1BhlmF9BUw0z6B5qBAqC3j_NMZ0dbhenvgFNFIo4oPhQ/edit?usp=sharing)**
 
 ## Asset Metadata
 
@@ -17,7 +29,6 @@ sidebar_position: 3
 | Token data modification updatable permissions | 🟥 | 🟥 | 🟢 |
 | Token pre-signed attributes | 🟥 | 🟢 | 🟥 |
 
-Note: For source data used for this overview see NFT Pallets in Polkadot
 <!-- Slide number: 7 -->
 ## Marketplace
 
@@ -30,8 +41,6 @@ NFT Manager has native onchain marketplace support
 | Embedded market functions | 🟢 | 🟢 | 🟥 |
 | Custom Smart Contract market(s) | 🟥 | 🟢  | 🟢 |
 
-Note: For source data used for this overview see NFT Pallets in Polkadot
-
 ## EVM support
 
 Native support for EVM and Ethereum by pallets
@@ -40,5 +49,3 @@ Native support for EVM and Ethereum by pallets
 | --- | --- | --- | --- |
 | EVM support (ERC721 interface) | 🟥 | 🟥 | 🟢 |
 | EVM support (custom pallet features) | 🟥 | 🟥 | 🟢 |
-
-Note: For source data used for this overview see NFT Pallets in Polkadot
