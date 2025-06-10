@@ -5,6 +5,10 @@
   "/how-they-work/code-examples/kodadot-indexer-integration": "KodaDot Indexer Usage Examples",
   "how-they-work/code-examples/unique-network-sdk-react": "Create a Unique Network NFT dApp using Unique SDK, EVM contracts and React",
   "/how-they-work/code-examples/unique-network-sdk-react": "Create a Unique Network NFT dApp using Unique SDK, EVM contracts and React",
+  "how-they-work/pallets/uniquenetwork": "Unique Network",
+  "/how-they-work/pallets/uniquenetwork": "Unique Network",
+  "how-they-work/pallets/uniques": "Uniques Pallet",
+  "/how-they-work/pallets/uniques": "Uniques Pallet",
   "how-they-work/tooling/documentation": "Creating NFTs in the Polkadot ecosystem - reference documentation and tools available",
   "/how-they-work/tooling/documentation": "Creating NFTs in the Polkadot ecosystem - reference documentation and tools available",
   "how-they-work/tooling/indexers": "NFT indexers in the Polkadot ecosystem",
@@ -31,10 +35,10 @@
   "/nfts-offer/rollups/other": "Other",
   "nfts-offer/rollups/unique-network": "Unique Network",
   "/nfts-offer/rollups/unique-network": "Unique Network",
-  "nfts-offer/tech-overview/data": "Data",
-  "/nfts-offer/tech-overview/data": "Data",
-  "nfts-offer/tech-overview/functionality": "Functionality",
-  "/nfts-offer/tech-overview/functionality": "Functionality",
-  "nfts-offer/tech-overview/nft-pallets": "NFT Pallets Overview",
-  "/nfts-offer/tech-overview/nft-pallets": "NFT Pallets Overview"
+  "nfts-offer/tech-overview/functionality": "Functionality comparison",
+  "/nfts-offer/tech-overview/functionality": "Functionality comparison",
+  "nfts-offer/tech-overview/nft-pallets": "Overview",
+  "/nfts-offer/tech-overview/nft-pallets": "Overview",
+  "nfts-offer/tech-overview/official": "The “official” pallet",
+  "/nfts-offer/tech-overview/official": "The “official” pallet"
 }
