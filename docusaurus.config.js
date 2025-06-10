@@ -71,18 +71,26 @@ const config = {
         logo: {
           alt: 'NFTMozaic Logo',
           src: 'img/logo.svg',
-          href: 'https://nftmozaic.com/',
+          href: '/',
         },
         items: [
+
+          // {
+          //   to: '/alphabetical-index',
+          //   label: 'Document Index',
+          //   position: 'right',
+          // },
+
           {
             type: 'docSidebar',
             sidebarId: 'tutorialSidebar',
             position: 'left',
-            label: 'Polkadot NFTs',
+            label: 'Wiki',
           },
+
           {
-            to: '/alphabetical-index',
-            label: 'Document Index',
+            to: 'https://nftmozaic.com/',
+            label: 'Website ↗',
             position: 'left',
           },
           //{ to: '/blog', label: 'Blog', position: 'left' },

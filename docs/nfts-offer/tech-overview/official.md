@@ -5,7 +5,7 @@ sidebar_position: 3
 # The “official” pallet
 
 There is no single “official” NFT pallet in the Polkadot ecosystem. 
-The list below outlines the current recommended options for the new aApps coming to use NFTs across the Polkadot ecosystem.
+The list below outlines the current recommended options for the new dApps coming to use NFTs across the Polkadot ecosystem.
 
 | Pallet            | Chain | Recommendation                                  |
 |-----------------------|----|-----------------------------------------------------|
