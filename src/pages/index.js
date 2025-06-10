@@ -27,6 +27,25 @@ export default function Home() {
           <p className={styles.description}>
             NFTMozaic is an alliance within the Polkadot ecosystem dedicated to advancing NFT growth, adoption, and interoperability. It connects parachains, projects, and partners to foster collaboration, drive technical innovation, and support real-world applications to position Polkadot as a leader in next-gen NFTs.
           </p>
+
+        <div className={styles.cardGrid}>
+          <a href="/docs/category/polkadot-nfts/" className={styles.card}>
+            <h3>NFTs on Polkadot</h3>
+            <p>
+             Understand NFT architecture and capabilities: NFT pallets, rollups, live data, and more.
+            </p>
+            <p className={styles.cardLink}>Explore →</p>
+          </a>
+          <a href="/docs/category/how-they-work" className={styles.card}>
+            <h3>Implementation Details</h3>
+            <p>
+              Deep dives into technical structure. Explore tooling, tutorials and code examples.
+            </p>
+            <p className={styles.cardLink}>View Articles →</p>
+          </a>
+        </div>
+
+
         </div>
       </main>
     </Layout>
