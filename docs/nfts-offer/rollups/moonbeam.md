@@ -18,6 +18,8 @@ Moonbeam is an Ethereum-compatible parachain on Polkadot. Its primary mission is
 
 - Moonbeam’s EVM support means developers can use standard Ethereum NFT tools (e.g., ERC-721, ERC-1155) with minimal modifications.
 - DApps can leverage existing code libraries, frameworks, and dev tooling (Remix, Truffle, Hardhat) to quickly spin up NFT projects.
+- [Deploying an ERC-721 contract example](https://docs.moonbeam.network/tutorials/eth-api/thirdweb/)
+- [Minting a cross-chain NFT with Axelar SDK](https://docs.moonbeam.network/tutorials/interoperability/using-axelar-sdk/)
 
 ### Substrate base + Polkadot integration
 

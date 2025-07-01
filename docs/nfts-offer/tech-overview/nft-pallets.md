@@ -40,6 +40,7 @@ The table linked below shows how assets are currently distributed, how they're b
 - Delegation capability for updating on-chain metadata to a third-party user.
 - Built-in on-chain marketplace.
 - Used by AssetHub and Mythos, ideal for dApps.
+- [GitHub repo](https://github.com/paritytech/polkadot-sdk/tree/master/substrate/frame/nfts#readme)
 
 ### Uniques Pallet
 
@@ -49,6 +50,7 @@ The table linked below shows how assets are currently distributed, how they're b
 - Flexible permission system for storing on-chain metadata.
 - Built-in on-chain marketplace.
 - Simplest to deploy in a parachain, used by most parachains (>10).
+- [GitHub repo](https://github.com/paritytech/polkadot-sdk/tree/master/substrate/frame/uniques)
 
 ### Unique Network Pallet
 
@@ -60,6 +62,8 @@ The table linked below shows how assets are currently distributed, how they're b
 - Easy dApps development with EVM and full Substrate interoperability.
 - Highly developed dev tools (SDK).
 - Substantially lower cost.
+- [Quick start](https://docs.unique.network/build/sdk/v2/quick-start.html)
+- [Tutorials](https://docs.unique.network/tutorials)
 
 ### Other Pallets
 
@@ -67,6 +71,7 @@ The table linked below shows how assets are currently distributed, how they're b
   - No concept of collections (classes).
   - Built-in on-chain marketplace.
   - Bridge with Ethereum.
+  
 - **ORML NFT**: An easily embeddable NFT engine for basic native NFT implementations, supplied with the ORML toolkit.
   - Small codebase.
   - Part of ORML (a powerful toolkit that simplifies XCM and other functionalities).
