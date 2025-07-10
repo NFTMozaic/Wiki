@@ -307,4 +307,10 @@ html[data-theme='dark'] .rarible-h1 {
   margin-right: 10px;
   height: 64px;
 }
-
+/* Fix anchor scroll offset to account for fixed navbar */
+:target::before {
+  content: "";
+  display: block;
+  height: 80px; /* Заменить на точную высоту твоей шапки, если отличается */
+  margin-top: -80px;
+}
