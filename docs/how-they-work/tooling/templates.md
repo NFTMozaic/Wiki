@@ -1,24 +1,27 @@
 ---
 id: templates
-title: Dapp templates
-sidebar_label: Dapp templates
+title: dApp templates
+sidebar_label: dApp templates
 sidebar_position: 5
 ---
 
-# Dapp Templates
+# dApp templates
 
 Building apps on Polkadot is relatively easy, but getting started can be challenging. Setting up the development environment requires configuring multiple tools including indexers, compilers, and wallet connectors, which can be time-consuming for newcomers. Templates help you get up and running quickly by providing pre-configured environments and tools. This saves hours of setup time and is perfect for developers who learn by doing.
 
 Below are templates for both PVM (Solidity) and native Substrate implementations.
 
 ## Template Comparison
+<div style={{ fontSize: "0.85rem" }}>
 
 | Template | Framework | Blockchain Integration | Indexer | Wallet Support | Best For |
-|----------|-----------|----------------------|-----------|----------------|----------|
-| create-nft-app (PVM) | Next.js | Wagmi + Foundry | Blockscout | Multiple (Reown AppKit) | NFT-focused dApps (Solidity) |
-| create-nft-app (PAPI) | Next.js | PAPI + smoldot | KodaDot stick | Multiple (Talisman connect) | NFT-focused dApps (NFTs pallet) |
-| create-polkadot-dapp (PVM) | React | Ethers.js | - | MetaMask | General dApps (Solidity) |
-| create-polkadot-dapp (PAPI) | React | ReactiveDOT + PAPI | - | Multiple (DOTConnect) | General dApps (Substrate pallets) |
+|----------|-----------|-------------------------|---------|----------------|----------|
+| [create-nft-app (PVM)](#pvm-solidity) | Next.js | Wagmi + Foundry | Blockscout | Multiple (Reown AppKit) | NFT-focused dApps (Solidity) |
+| [create-nft-app (PAPI)](#papi-nfts-pallet) | Next.js | PAPI + smoldot | KodaDot stick | Multiple (Talisman connect) | NFT-focused dApps (NFTs pallet) |
+| [create-polkadot-dapp (PVM)](#create-polkadot-dapp-pvm-solidity) | React | Ethers.js | - | MetaMask | General dApps (Solidity) |
+| [create-polkadot-dapp (PAPI)](#create-polkadot-dapp-papi-substrate) | React | ReactiveDOT + PAPI | - | Multiple (DOTConnect) | General dApps (Substrate pallets) |
+
+</div>
 
 ## create-nft-app
 
@@ -28,10 +31,11 @@ NFT-specific templates by `NFTMozaic`. These templates solve the complexity of N
 - Indexer integration for querying large amounts of data from both native NFTs and ERC-721 contracts
 - Integration with widely used wallets
 
+Install:
 - [GitHub](https://github.com/paritytech/create-polkadot-dapp)
 - [npm](https://www.npmjs.com/package/create-nft-app)
 
-#### PVM (Solidity)
+#### PVM (Solidity) <a id="pvm-solidity"></a>
 
 A full-stack NFT dApp template built with Next.js, Wagmi, and Foundry for Polkadot. This template provides a complete solution for creating, minting, and viewing NFTs on PolkaVM using Ethereum-compatible tooling.
 
@@ -40,7 +44,7 @@ A full-stack NFT dApp template built with Next.js, Wagmi, and Foundry for Polkad
 - Wagmi for Ethereum wallet integration and React hooks
 - [Reown AppKit](https://reown.com/appkit) (former WalletConnect) for seamless Polkadot wallet connectivity
 - [Foundry-Polkadot](https://github.com/paritytech/foundry-polkadot) for smart contract development, configured for `resolc` compiler
-- [BlockScout API](https://blockscout-passet-hub.parity-testnet.parity.io/api-docs) for indexer data quering 
+- [BlockScout API](https://blockscout-passet-hub.parity-testnet.parity.io/api-docs) for indexer data querying 
 - Built-in NFT collection viewing and minting functionality
 
 **Usage:**
@@ -50,7 +54,7 @@ npm create nft-app@latest my-app
 
 This template bridges Ethereum development experience with Polkadot's ecosystem, providing developers with familiar tools (Foundry, Wagmi) and built-in configuration and examples on NFT minting and querying both off-chain and on-chain.
 
-#### PAPI (NFTs pallet)
+#### PAPI (NFTs pallet) <a id="papi-nfts-pallet"></a>
 
 Coming soon.
 
@@ -58,10 +62,11 @@ Coming soon.
 
 General-purpose templates by Parity.
 
+Install:
 - [GitHub](https://github.com/paritytech/create-polkadot-dapp)
 - [npm](https://www.npmjs.com/package/create-polkadot-dapp)
 
-#### PVM (Solidity)
+#### PVM (Solidity) <a id="create-polkadot-dapp-pvm-solidity"></a>
 
 A monorepo template for developing Solidity smart contracts on Asset Hub with a React frontend. This template enables Ethereum-compatible smart contract development on Polkadot using PolkaVM.
 
@@ -78,7 +83,7 @@ npx create-polkadot-dapp
 
 This template provides a seamless development experience for Ethereum developers to build on Polkadot while maintaining familiar tooling and development patterns.
 
-#### PAPI (Substrate)
+#### PAPI (Substrate) <a id="create-polkadot-dapp-papi-substrate"></a>
 
 A React frontend template using PAPI with ReactiveDOT and dotconnect for chain and wallet interactions. This template is good for applications focused on Polkadot pallets, including the NFTs pallet.
 
