@@ -103,31 +103,8 @@ const config = {
       },
       footer: {
         style: 'dark',
-        links: [
-          {
-            title: 'Community',
-            items: [
-              {
-                label: 'X',
-                href: 'https://x.com/nftmozaic',
-              },
-            ],
-          },
-          {
-            title: 'More',
-            items: [
-              {
-                label: 'Blog',
-                href: 'https://nftmozaic.com/blog',
-              },
-              {
-                label: 'GitHub',
-                href: 'https://github.com/nftmozaic',
-              },
-            ],
-          },
-        ],
-        copyright: `Copyright © ${new Date().getFullYear()} NFTMozaic. Built with Docusaurus.`,
+        links: [],
+        copyright: ` `,
       },
       prism: {
         theme: prismThemes.github,
