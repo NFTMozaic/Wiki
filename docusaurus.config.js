@@ -90,9 +90,10 @@ const config = {
 
           {
             to: 'https://nftmozaic.com/',
-            label: 'Website ↗',
+            label: 'Website',
             position: 'left',
-          },
+            className: 'navbar-external-link',
+          }
           //{ to: '/blog', label: 'Blog', position: 'left' },
           // {
           //   href: 'https://github.com/facebook/docusaurus',
