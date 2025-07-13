@@ -92,7 +92,7 @@ const config = {
             to: 'https://nftmozaic.com/',
             label: 'Website',
             position: 'left',
-            className: 'navbar-external-link',
+            className: 'external-link',
           }
           //{ to: '/blog', label: 'Blog', position: 'left' },
           // {

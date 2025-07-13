@@ -315,14 +315,22 @@ html[data-theme='dark'] .rarible-h1 {
   margin-top: -80px;
 }
 
-.navbar-external-link::after {
+.external-link::after {
   content: '';
   display: inline-block;
   width: 12px;
   height: 12px;
   margin-left: 6px;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2'%3E%3Cpath d='M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3'/%3E%3C/svg%3E");
-  background-size: contain;
-  background-repeat: no-repeat;
+  background-color: currentColor;
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2'%3E%3Cpath d='M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3'/%3E%3C/svg%3E");
+  mask-size: contain;
+  mask-repeat: no-repeat;
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2'%3E%3Cpath d='M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3'/%3E%3C/svg%3E");
+  -webkit-mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
   opacity: 0.7;
+}
+
+.navbar-external-link:hover::after {
+  opacity: 1;
 }
