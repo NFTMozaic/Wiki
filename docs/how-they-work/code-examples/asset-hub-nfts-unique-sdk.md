@@ -1,8 +1,8 @@
 ---
 id: asset-hub-nfts-unique-sdk
-title: Create Asset Hub NFTs using Unique SDK
-sidebar_label: Asset Hub NFTs
-sidebar_position: 2 
+title: Building Polkadot NFT application with Unique SDK
+sidebar_label: Building Polkadot NFT application with Unique SDK
+sidebar_position: 4
 ---
 
 Doing it the Unique SDK way.
@@ -13,4 +13,4 @@ Here is an examople of how the Unique SDK can be used to accomplish this task.
 
 This example is provided as the workshop material for the Consensus 2025 Hong Kong EasyA Polkadot Hackathon.
 
-[Creating Asset Hub NFTs Using The Unique SDK](https://github.com/NFTMozaic/polkadot-nfts-template)
+[Creating Asset Hub NFTs Using The Unique SDK](https://github.com/NFTMozaic/create-nft-app/blob/unique-sdk-template/docs/lesson-0-intro.md)
