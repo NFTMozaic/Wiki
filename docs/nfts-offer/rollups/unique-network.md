@@ -2,7 +2,7 @@
 id: unique-network
 title: Unique Network
 sidebar_label: Unique Network
-sidebar_position: 3
+sidebar_position: 4
 ---
 
 <img src="/img/unique-l.png" className="unique-h1" />

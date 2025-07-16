@@ -2,7 +2,7 @@
 id: asset-hub
 title: Asset Hub Profile
 sidebar_label: Asset Hub
-sidebar_position: 1
+sidebar_position: 2
 ---
 
 # <img src="/img/polkadot.png" className="polkadot-h1" /> Asset Hub

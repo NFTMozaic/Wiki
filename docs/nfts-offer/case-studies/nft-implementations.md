@@ -1,7 +1,7 @@
 ---
 id: nft-implementations
-title: NFT implementations and use cases
-sidebar_label: "Use cases"
+title: Use cases
+sidebar_label: Use cases
 sidebar_position: 1
 ---
 

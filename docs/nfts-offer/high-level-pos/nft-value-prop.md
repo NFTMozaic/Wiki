@@ -1,6 +1,6 @@
 ---
 id: polkadot-nft-value
-title: Polkadot’s NFT value proposition
+title: Polkadot NFTs
 sidebar_label: NFT value proposition
 sidebar_position: 2 
 ---

@@ -2,7 +2,7 @@
 id: moonbeam
 title: Moonbeam Profile
 sidebar_label: Moonbeam
-sidebar_position: 2
+sidebar_position: 3
 ---
 
 # <img src="/img/moonbeam-l.png" className="moonbeam-h1" />

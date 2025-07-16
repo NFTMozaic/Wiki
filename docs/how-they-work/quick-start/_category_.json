@@ -1,6 +1,6 @@
 {
-  "label": "Tooling",
-  "position": 2,
+  "label": "Quick start",
+  "position": 1,
   "link": {
     "type": "generated-index"
   },
@@ -8,3 +8,4 @@
     "description": "Developer tools available in the ecosystem"
   }
 }
+
