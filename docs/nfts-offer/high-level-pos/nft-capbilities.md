@@ -42,7 +42,7 @@ Substrate-based pallets offer native NFT logic—mint, transfer, burn and metada
 - Built-in on-chain marketplace, flexible permissions.
 
 
-#### NFTs
+#### NFTs Pallet
 
 
 - Enhanced engine with collection permissioning, delegated metadata updates, marketplace logic.
