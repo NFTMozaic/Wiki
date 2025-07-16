@@ -1,11 +1,11 @@
 ---
 id: unique-network-sdk-react
-title: Create a Unique Network NFT dApp using Unique SDK, EVM contracts and React
-sidebar_label: An NFT dApp
-sidebar_position: 1 
+title: On-chain gaming with Unique Network EVM
+sidebar_label: On-chain gaming with Unique Network EVM
+sidebar_position: 3
 ---
 
-Build a simple game dApp.
+# Building on-chain gaming experiences with Unique Network EVM
 
 A step-by-step guide teaching you how to create Unique Network native NFTs and mutate their attributes using Solidity smart contracts, the Unique SDK, and the unique-contracts packages.
 

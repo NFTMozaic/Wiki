@@ -29,7 +29,7 @@ export default function Home() {
           </p>
 
         <div className={styles.cardGrid}>
-          <a href="/docs/category/polkadot-nfts/" className={styles.card}>
+          <a href="/docs/category/learn" className={styles.card}>
             <h3>NFTs on Polkadot</h3>
             <p>
              Understand NFT architecture and capabilities: NFT pallets, rollups, live data, and more.

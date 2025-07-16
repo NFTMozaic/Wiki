@@ -1,11 +1,13 @@
 ---
+title: An applied guide to NFTs Pallet
+sidebar_label: An applied guide to NFTs Pallet
 sidebar_position: 1
 ---
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-# An Applied Guide to NFTs Pallet
+# An applied guide to NFTs Pallet
 
 :::warning Work In Progress
 This guide is work in progress
