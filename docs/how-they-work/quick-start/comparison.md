@@ -15,12 +15,11 @@ Below are templates for both PVM (Solidity) and native Substrate implementations
 
 <div style={{ fontSize: "0.85rem" }}>
 
-| Template                                                            | Framework | Blockchain Integration | Indexer       | Wallet Support              | Best For                          |
-| ------------------------------------------------------------------- | --------- | ---------------------- | ------------- | --------------------------- | --------------------------------- |
-| [create-nft-app (PVM)](#pvm-solidity)                               | Next.js   | Wagmi + Foundry        | Blockscout    | Multiple (Reown AppKit)     | NFT-focused dApps (Solidity)      |
-| [create-nft-app (PAPI)](#papi-nfts-pallet)                          | Next.js   | PAPI + smoldot         | KodaDot stick | Multiple (Talisman connect) | NFT-focused dApps (NFTs pallet)   |
-| [create-polkadot-dapp (PVM)](#create-polkadot-dapp-pvm-solidity)    | React     | Wagmi + Hardhat        | -             | MetaMask                    | General dApps (Solidity)          |
-| [create-polkadot-dapp (PAPI)](#create-polkadot-dapp-papi-substrate) | React     | ReactiveDOT + PAPI     | -             | Multiple (DOTConnect)       | General dApps (Substrate pallets) |
+| Template                                                                        | Framework | Blockchain Integration | Indexer       | Wallet Support              | Best For                          |
+| ------------------------------------------------------------------------------- | --------- | ---------------------- | ------------- | --------------------------- | --------------------------------- |
+| [create-nft-app (PVM)](nft-dapp#pvm-solidity)                                   | Next.js   | Wagmi + Foundry        | Blockscout    | Multiple (Reown AppKit)     | NFT-focused dApps (Solidity)      |
+| [create-nft-app (PAPI)](nft-dapp#papi-nfts-pallet)                              | Next.js   | PAPI + smoldot         | KodaDot stick | Multiple (Talisman connect) | NFT-focused dApps (NFTs pallet)   |
+| [create-polkadot-dapp (PVM)](generic-dapp#create-polkadot-dapp-pvm-solidity)    | React     | Wagmi + Hardhat        | -             | MetaMask                    | General dApps (Solidity)          |
+| [create-polkadot-dapp (PAPI)](generic-dapp#create-polkadot-dapp-papi-substrate) | React     | ReactiveDOT + PAPI     | -             | Multiple (DOTConnect)       | General dApps (Substrate pallets) |
 
 </div>
-

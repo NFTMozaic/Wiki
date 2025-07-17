@@ -1,5 +1,5 @@
 ---
-id: NFT dApp
+id: nft-dapp
 title: NFT dApp
 sidebar_label: NFT dApp
 sidebar_position: 2
