@@ -1,5 +1,5 @@
 ---
-id: Generic dApp
+id: generic-dapp
 title: Generic dApp
 sidebar_label: Generic dApp
 sidebar_position: 3
