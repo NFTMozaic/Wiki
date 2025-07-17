@@ -16,7 +16,7 @@ This guide is work in progress
 :::info Prerequisites
 This guide assumes you have basic knowledge of Polkadot, understand the basic terminology such as pallets and extrinsics
 
-All coding examples are written with Polkadot-API (PAPI). However, this guide does not cover the basics such as how to initialize PAPI or create a signer. You can start by reading the official [PAPI documentation](https://papi.how/), or if you prefer to learn by doing, you can debug all the [provided code examples](https://github.com/NFTMozaic/papi-nfts) or start with one of the [available templates](../tooling/templates.md).
+All coding examples are written with Polkadot-API (PAPI). However, this guide does not cover the basics such as how to initialize PAPI or create a signer. You can start by reading the official [PAPI documentation](https://papi.how/), or if you prefer to learn by doing, you can debug all the [provided code examples](https://github.com/NFTMozaic/papi-nfts) or start with one of the [available templates](../quick-start/comparison.md).
 :::
 
 The NFTs pallet is the primary method for creating all types of NFTs on Polkadot. This guide explores it's capabilities in depth. Learn about other available options in the [overview section](../../nfts-offer/tech-overview/nft-pallets.md).
