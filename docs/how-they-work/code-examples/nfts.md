@@ -14,22 +14,22 @@ This guide is work in progress
 :::
 
 :::info Prerequisites
-This guide assumes you have basic knowledge of Polkadot, understand the basic terminology such as pallets and extrinsics
+This guide assumes you have basic knowledge of Polkadot and understand the basic terminology such as pallets and extrinsics.
 
-All coding examples are written with Polkadot-API (PAPI). However, this guide does not cover the basics such as how to initialize PAPI or create a signer. You can start by reading the official [PAPI documentation](https://papi.how/), or if you prefer to learn by doing, you can debug all the [provided code examples](https://github.com/NFTMozaic/papi-nfts) or start with one of the [available templates](../quick-start/comparison.md).
+All coding examples are written with Polkadot-API (PAPI). However, this guide does not cover the basics such as how to initialize PAPI or create a signer. You can start by reading the official [PAPI documentation](https://papi.how/), or if you prefer to learn by doing, you can explore all the [provided code examples](https://github.com/NFTMozaic/papi-nfts) or start with one of the [available templates](../quick-start/comparison.md).
 :::
 
-The NFTs pallet is the primary method for creating all types of NFTs on Polkadot. This guide explores it's capabilities in depth. Learn about other available options in the [overview section](../../nfts-offer/tech-overview/nft-pallets.md).
+The NFTs pallet is the primary method for creating all types of NFTs on Polkadot. This guide explores its capabilities in depth. Learn about other available options in the [overview section](../../nfts-offer/tech-overview/nft-pallets.md).
 
 ## 1. Collections
 
 On Polkadot, NFTs begin with a collection, which is a container for future tokens. Every collection has a unique numeric ID that increments each time a new collection is created.
 
-### Creating a Collection
+### Creating a collection
 
 When creating a collection, you need to specify:
 
-- **`admin`**: the collection's administrator who has rights to manage the collection. Read about [collection roles](#collection-roles).
+- **`admin`**: the collection's administrator who has the rights to manage the collection. Read about [collection roles](#collection-roles).
 - **collection `config`**: a set of rules and configurations for the collection.
 
 Creating a collection with PAPI looks like this:
@@ -48,20 +48,70 @@ const createCollectionTx = await api.tx.Nfts.create({
     },
     settings: 0n,
   },
-}).signAndSubmit(alice);
+}).signAndSubmit(collectionOwner);
 ```
 
-### Collection Configuration
+When the collection is created, you can get its ID from emitted events.
 
-A set of rules and configurations for a collection. This configuration is set during creation and can be modified later by the [collection team](#collection-roles).
+```ts
+...
 
-1. `max_supply`: the maximum number of tokens that can be minted. This can be omitted if the collection does not have a supply limit. This value can be overwritten if it is not locked by collection settings.
+const event = createCollectionTx.events.find(
+  (e) => e.type === "Nfts" && e.value.type === "Created"
+);
 
-2. collection `settings`: can be specified in bitflag format for a collection. They define the locked status of:
-   - NFT transfers: Controls whether items can be transferred between accounts. When set, items become non-transferable. You can still mint tokens though.
-   - Collection metadata: When set, metadata becomes permanently locked and cannot be set or changed. This setting applies only to collection metadata; token metadata mutability is defined differently.
-   - Collection attributes: When set, the collection attributes become permanently locked. This setting applies only to collection attributes; token attributes mutability is defined differently.
-   - Collection max supply: When set, the max supply becomes permanently fixed.
+const collectionId = event.collection as number;
+```
+
+Let's also consider what the `max_supply`, `mint_settings`, and `settings` fields mean.
+
+### Collection configuration
+
+During collection creation, you need to specify a set of rules and configurations for the collection. This configuration is set during creation and can be modified later by the [collection team](#collection-roles) if not [locked](#collection-settings-and-locks).
+
+#### Maximum collection supply
+
+`max_supply` is the maximum number of tokens that can be minted. This setting can be omitted if the collection does not have a supply limit.
+
+```ts title="Setting max supply during collection creation"
+const createCollectionTx = await api.tx.Nfts.create({
+  admin: MultiAddress.Id(alice.address),
+  config: {
+    // highlight-next-line
+    max_supply: 1000,
+    ...
+  },
+}).signAndSubmit(collectionOwner);
+```
+
+The [collection owner](#owner) can override the maximum collection supply if it is not locked by [collection settings](#collection-settings-and-locks).
+
+```ts
+const setMaxSupplyTx = await api.tx.Nfts.set_collection_max_supply({
+  max_supply: 500,
+  collection: collectionId,
+}).signAndSubmit(collectionOwner);
+```
+
+#### Collection settings and locks
+
+Collection `settings` can be specified in bitflag format for a collection. They define the locked status of:
+
+- NFT transfers: Controls whether items can be transferred between accounts. When set, items become non-transferable (soulbound). You can still mint tokens, however.
+- Collection metadata: When set, metadata becomes permanently locked and cannot be set or changed. This setting applies only to collection metadata; token metadata mutability is defined differently.
+- Collection attributes: When set, the collection attributes become permanently locked. This setting applies only to collection attributes; token attribute mutability is defined differently.
+- Collection max supply: When set, the max supply becomes permanently fixed.
+
+```ts title="Collection settings can be specified during collection creation"
+const createCollectionTx = await api.tx.Nfts.create({
+  admin: MultiAddress.Id(alice.address),
+  config: {
+    ...
+    // highlight-next-line
+    settings: 0n,
+  },
+}).signAndSubmit(collectionOwner);
+```
 
 Examples:
 
@@ -69,16 +119,65 @@ Examples:
 - `15` (1111): All settings locked
 - `9` (1001): Locked max supply and tokens are non-transferable
 
+:::warning
 Collection settings can be locked but never unlocked. You may want to leave them mutable (`0`) and lock them later, for example when all NFTs are minted.
+:::
 
-3. `mint_settings`: the rules related to token minting
-   1. `mint_type`: who can mint tokens.
-      - `Issuer`: Only the collection owner or issuer can mint
-      - `Public`: Everyone can mint
-      - `HolderOf`: Only holders of NFTs in the specified collection can mint
-   2. `price`: The price of token minting that will be paid to the collection owner. This can be useful for `Public` minting.
-   3. `start_block` and `end_block`: allows you to specify a timeframe when minting is allowed
-   4. `default_item_settings`: the default settings that define whether future items can be transferred and whether item attributes and metadata are mutable. Here are all possible bitflags for item settings:
+<details>
+  <summary>Click to see the full list for collection settings bitflags</summary>
+
+| Value | Binary | Transferable NFTs | Mutable Collection Metadata | Mutable Collection Attributes | Mutable Max Supply |
+| ----- | ------ | ----------------- | --------------------------- | ----------------------------- | ------------------ |
+| 0     | 0000   | ✅ Yes            | ✅ Yes                      | ✅ Yes                        | ✅ Yes             |
+| 1     | 0001   | 🔒 No             | ✅ Yes                      | ✅ Yes                        | ✅ Yes             |
+| 2     | 0010   | ✅ Yes            | 🔒 No                       | ✅ Yes                        | ✅ Yes             |
+| 3     | 0011   | 🔒 No             | 🔒 No                       | ✅ Yes                        | ✅ Yes             |
+| 4     | 0100   | ✅ Yes            | ✅ Yes                      | 🔒 No                         | ✅ Yes             |
+| 5     | 0101   | 🔒 No             | ✅ Yes                      | 🔒 No                         | ✅ Yes             |
+| 6     | 0110   | ✅ Yes            | 🔒 No                       | 🔒 No                         | ✅ Yes             |
+| 7     | 0111   | 🔒 No             | 🔒 No                       | 🔒 No                         | ✅ Yes             |
+| 8     | 1000   | ✅ Yes            | ✅ Yes                      | ✅ Yes                        | 🔒 No              |
+| 9     | 1001   | 🔒 No             | ✅ Yes                      | ✅ Yes                        | 🔒 No              |
+| 10    | 1010   | ✅ Yes            | 🔒 No                       | ✅ Yes                        | 🔒 No              |
+| 11    | 1011   | 🔒 No             | 🔒 No                       | ✅ Yes                        | 🔒 No              |
+| 12    | 1100   | ✅ Yes            | ✅ Yes                      | 🔒 No                         | 🔒 No              |
+| 13    | 1101   | 🔒 No             | ✅ Yes                      | 🔒 No                         | 🔒 No              |
+| 14    | 1110   | ✅ Yes            | 🔒 No                       | 🔒 No                         | 🔒 No              |
+| 15    | 1111   | 🔒 No             | 🔒 No                       | 🔒 No                         | 🔒 No              |
+
+</details>
+
+The [collection owner](#owner) can change these settings by locking them. Once again – this operation cannot be undone – a locked setting is locked forever.
+
+```ts title="Collection owner locks everything"
+await api.tx.Nfts.lock_collection({
+  collection: collectionId,
+  lock_settings: 15n,
+}).signAndSubmit(collectionOwner);
+```
+
+#### NFT minting settings
+
+The rules related to token minting include:
+
+<!-- TODO: the anchor to NFT minting -->
+
+1. `mint_type`: who can mint tokens.
+
+- `Issuer`: Only the collection owner or issuer can mint
+- `Public`: Everyone can mint
+- `HolderOf`: Only holders of NFTs in the specified collection can mint
+
+2. `price`: The price of token minting that will be paid to the collection owner. This can be useful for `Public` minting.
+3. `start_block` and `end_block`: allows you to specify a timeframe when minting is allowed
+4. `default_item_settings`: the default settings that define whether future items can be transferred and whether item attributes and metadata are mutable.
+
+:::warning
+Once metadata, attributes, or transfers are locked, it will not be possible to unlock them. By default, you may want to set `default_item_settings` to `0` and modify them later.
+:::
+
+<details>
+  <summary>Click to see the full list for item settings bitflags</summary>
 
 | Value | Binary | Mutable attributes | Mutable metadata | Transferable |
 | ----- | ------ | ------------------ | ---------------- | ------------ |
@@ -91,7 +190,50 @@ Collection settings can be locked but never unlocked. You may want to leave them
 | 6     | 110    | 🔒 No              | 🔒 No            | ✅ Yes       |
 | 7     | 111    | 🔒 No              | 🔒 No            | 🔒 No        |
 
-Once metadata or attributes are locked, it will not be possible to unlock them. By default, you may want to set `default_item_settings` to `0` and modify them later.
+</details>
+
+<!-- TODO: -->
+
+### Collection metadata
+
+Collection-level metadata can be added to or removed from a collection by the collection admin if it is not locked at the collection level. While there are no enforced formatting rules, you'll most likely want to use it similarly to how `contractURI` is used in Ethereum. You can set a link to IPFS or any other off-chain storage, or store this metadata on-chain.
+
+```json title="The possible collection metadata format"
+{
+  "name": "My collection name",
+  "description": "This is my cool collection",
+  "image": "https://some-external-storage.com/image.png"
+}
+```
+
+Collection metadata can be set after the collection is created.
+
+```ts title="The collection admin can set a collection metadata"
+await api.tx.Nfts.set_collection_metadata({
+  collection: collectionId,
+  data: Binary.fromText("https://some-external-storage.com/metadata.json"),
+}).signAndSubmit(collectionAdmin);
+```
+
+The collection admin can clear metadata:
+
+```ts
+await api.tx.Nfts.clear_collection_metadata({
+  collection: collectionId,
+}).signAndSubmit(collectionAdmin);
+```
+
+There is a separate method to query collection metadata:
+
+```ts
+collectionMetadata = await api.query.Nfts.CollectionMetadataOf.getValue(
+  collectionId
+);
+```
+
+### Collection attributes
+
+<!-- TODO: -->
 
 ### Collection Roles
 
@@ -128,7 +270,7 @@ const roles = await api.query.Nfts.CollectionRoleOf.getValue(
 // roles is a bitflag
 ```
 
-The following bit flags can be set:
+The following bitflags can be set:
 
 | Value | Binary | Admin  | Freezer | Issuer |
 | ----- | ------ | ------ | ------- | ------ |
@@ -164,7 +306,7 @@ const transferTx = await api.tx.Nfts.transfer_ownership({
 
 A collection `Admin` is the only role set during collection creation. Until other roles are set after collection creation, an `Admin` receives `Issuer` and `Freezer` roles as well.
 
-Admin can:
+The Admin can:
 
 - Set collection attributes and metadata
 - Clear collection metadata
@@ -173,21 +315,19 @@ Admin can:
 
 #### Freezer
 
-Freezer can:
+The Freezer can:
 
 - Lock item transfers
 - Unlock item transfers
 
 #### Issuer
 
-Issuer can:
+The Issuer can:
 
 - Mint, force mint, and mint pre-signed
 - Update mint settings
 
 ## 2. Items (NFTs)
-
-
 
 ## Deposits
 
