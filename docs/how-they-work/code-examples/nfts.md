@@ -10,7 +10,7 @@ import TabItem from '@theme/TabItem';
 # An applied guide to NFTs Pallet
 
 :::warning Work In Progress
-This guide is work in progress
+This guide is a work in progress
 :::
 
 :::info Prerequisites
@@ -26,6 +26,10 @@ The NFTs pallet is the primary method for creating all types of NFTs on Polkadot
 On Polkadot, NFTs begin with a collection, which is a container for future tokens. Every collection has a unique numeric ID that increments each time a new collection is created.
 
 ### Creating a collection
+
+:::info
+Creating a collection requires making a [deposit](#deposits)
+:::
 
 When creating a collection, you need to specify:
 
@@ -192,9 +196,11 @@ Once metadata, attributes, or transfers are locked, it will not be possible to u
 
 </details>
 
-<!-- TODO: -->
-
 ### Collection metadata
+
+:::info
+Setting collection metadata requires making a [deposit](#deposits)
+:::
 
 Collection-level metadata can be added to or removed from a collection by the collection admin if it is not locked at the collection level. While there are no enforced formatting rules, you'll most likely want to use it similarly to how `contractURI` is used in Ethereum. You can set a link to IPFS or any other off-chain storage, or store this metadata on-chain.
 
@@ -208,7 +214,7 @@ Collection-level metadata can be added to or removed from a collection by the co
 
 Collection metadata can be set after the collection is created.
 
-```ts title="The collection admin can set a collection metadata"
+```ts title="The collection admin can set collection metadata"
 await api.tx.Nfts.set_collection_metadata({
   collection: collectionId,
   data: Binary.fromText("https://some-external-storage.com/metadata.json"),
@@ -233,7 +239,53 @@ collectionMetadata = await api.query.Nfts.CollectionMetadataOf.getValue(
 
 ### Collection attributes
 
-<!-- TODO: -->
+:::info
+Setting collection attributes requires making a [deposit](#deposits)
+:::
+
+Collection attributes are on-chain key-value pairs of arbitrary data. The collection owner can set or remove attributes of a collection if the collection is not [locked](#collection-settings-and-locks).
+
+```ts
+await api.tx.Nfts.set_attribute({
+  collection: collectionId,
+  key: Binary.fromText("Key"),
+  value: Binary.fromText("Attribute value"),
+  namespace: { type: "CollectionOwner", value: undefined },
+  maybe_item: undefined,
+}).signAndSubmit(owner);
+```
+
+You can query a collection attribute:
+
+```ts
+let collectionAttribute = await api.query.Nfts.Attribute.getValue(
+  collectionId,
+  undefined,
+  { type: "CollectionOwner", value: undefined },
+  Binary.fromText("Key")
+);
+```
+
+### Destroying a collection
+
+The [collection owner](#owner) can destroy a collection if there are no items. If the collection has attributes or item metadata set, their amounts should be provided in the witness:
+
+```ts
+await api.tx.Nfts.destroy({
+  collection: collectionId,
+  witness: {
+    attributes: 2,
+    item_configs: 1,
+    item_metadatas: 1,
+  },
+}).signAndSubmit(owner);
+```
+
+You can query witness data before destroying a collection:
+
+```ts
+const witness = await api.query.Nfts.Collection.getValue(collectionId);
+```
 
 ### Collection Roles
 
@@ -302,6 +354,10 @@ const transferTx = await api.tx.Nfts.transfer_ownership({
 }).signAndSubmit(owner);
 ```
 
+:::info
+The [deposit](#deposits) associated with the collection will be transferred to the new owner.
+:::
+
 #### Admin
 
 A collection `Admin` is the only role set during collection creation. Until other roles are set after collection creation, an `Admin` receives `Issuer` and `Freezer` roles as well.
@@ -329,9 +385,13 @@ The Issuer can:
 
 ## 2. Items (NFTs)
 
+:::warning
+WIP
+:::
+
 ## Deposits
 
-To prevent spam, a deposit must be paid for certain actions. This deposit will be locked and refunded to the collection creator if the collection or related item is destroyed.
+To prevent blockchain bloat, a deposit must be paid for certain actions. This deposit will be reserved and can be recovered if the associated storage is cleared or ownership is transferred.
 
 The deposit amount for collection and item creation is fixed (but can be changed in the future). The deposit amounts can be queried as constants using PAPI:
 
