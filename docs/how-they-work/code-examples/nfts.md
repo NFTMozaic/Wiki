@@ -431,7 +431,59 @@ const event = mintTx.events.find(
 );
 ```
 
-<!-- TODO: mint presigned -->
+#### Presigned minting
+
+Presigned minting allows collection issuers to create off-chain mint authorizations that others can execute on-chain. This is particularly useful for:
+
+- Whitelisted NFT drops where specific users get guaranteed minting rights
+- Marketplace integrations where third parties mint on behalf of creators
+- Time-limited campaigns with automatic expiration
+- Decentralized claiming where users mint when convenient rather than receiving airdrops
+
+To create a presigned mint authorization, the issuer prepares mint data and signs it off-chain:
+
+```ts
+import { getTypedCodecs } from "polkadot-api";
+
+// Get codecs for encoding mint data
+const codecs = await getTypedCodecs(dot);
+const mintDataCodec = codecs.tx.Nfts.mint_pre_signed.inner.mint_data;
+
+// Prepare mint data
+const mintData = {
+  collection: collectionId,
+  item: 1,
+  attributes: [
+    [Binary.fromText("tier"), Binary.fromText("gold")],
+    [Binary.fromText("whitelist"), Binary.fromText("true")],
+  ] as FixedSizeArray<2, Binary>[],
+  metadata: Binary.fromText("Presigned NFT #1"),
+  only_account: bob.address, // Optional: restrict to specific account
+  deadline: 10_000_000, // Block number when authorization expires
+  mint_price: undefined, // Optional: set price requirements
+};
+
+// Encode and sign the data
+const encodedData = mintDataCodec.enc(mintData);
+const signature = await issuer.signBytes(encodedData);
+```
+
+The authorized user can then execute the mint:
+
+```ts
+const mintTx = await api.tx.Nfts.mint_pre_signed({
+  mint_data: mintData,
+  signature: MultiSignature.Sr25519(FixedSizeBinary.fromBytes(signature)),
+  signer: issuer.address,
+}).signAndSubmit(bob);
+```
+
+Key parameters for presigned minting:
+
+- `only_account`: Restricts who can use the authorization. If undefined, anyone can use it.
+- `deadline`: Block number after which the authorization expires
+- `mint_price`: Optional payment required from the minter
+- `attributes`: Attributes to set during minting
 
 ### NFT metadata
 
