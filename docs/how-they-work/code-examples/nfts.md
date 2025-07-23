@@ -88,7 +88,7 @@ const createCollectionTx = await api.tx.Nfts.create({
 }).signAndSubmit(collectionOwner);
 ```
 
-The [collection owner](#owner) can override the maximum collection supply if it is not locked by [collection settings](#collection-settings-and-locks).
+The [collection owner](#owner) can modify the maximum collection supply if it is not locked by [collection settings](#collection-settings-and-locks).
 
 ```ts
 const setMaxSupplyTx = await api.tx.Nfts.set_collection_max_supply({
@@ -162,13 +162,11 @@ await api.tx.Nfts.lock_collection({
 
 #### NFT minting settings
 
-The rules related to token minting include:
-
-<!-- TODO: the anchor to NFT minting -->
+The rules related to [token minting](#) include:
 
 1. `mint_type`: who can mint tokens.
 
-- `Issuer`: Only the collection owner or issuer can mint
+- `Issuer`: Only the collection issuer can mint
 - `Public`: Everyone can mint
 - `HolderOf`: Only holders of NFTs in the specified collection can mint
 
@@ -310,7 +308,7 @@ The collection creator becomes the owner of the collection. The owner can:
 - Destroy collection: only if there are no items in the collection.
 - Set collection max supply: set the maximum number of items for a collection.
 - Redeposit: re-evaluate the deposit on some items.
-- Change collection settings: make NFTs non-transferable, set collection max supply, and lock metadata and attributes.
+- Change collection settings: make NFTs non-transferable, lock metadata and attributes.
 
 The collection owner can set the other roles:
 
@@ -320,10 +318,10 @@ const setTeamTx = await api.tx.Nfts.set_team({
   admin: MultiAddress.Id(charlie.address),
   issuer: MultiAddress.Id(dave.address),
   freezer: MultiAddress.Id(eve.address),
-}).signAndSubmit(alice);
+}).signAndSubmit(collectionOwner);
 ```
 
-The roles are set as a bitflag and can be queried for an account:
+The roles are stored as a bitflag and can be queried for an account:
 
 ```ts
 const roles = await api.query.Nfts.CollectionRoleOf.getValue(
@@ -347,7 +345,7 @@ The following bitflags can be set:
 
 Ownership can be transferred in two steps:
 
-1. The future receiver should accept ownership:
+1. The future recipient should accept ownership:
 
 ```ts
 const receiveTx = await api.tx.Nfts.set_accept_ownership({
@@ -396,9 +394,87 @@ The Issuer can:
 
 ## 2. Items (NFTs)
 
-:::warning
-WIP
+### NFT minting
+
+:::info
+NFT minting requires making a [deposit](#deposits).
 :::
+
+Collection items (NFTs) can be created depending on [minting settings](#nft-minting-settings):
+
+- `Issuer`: Only the collection issuer can mint
+- `Public`: Everyone can mint
+- `HolderOf`: Only holders of NFTs in the specified collection can mint
+
+The account eligible for minting needs to provide a unique item ID. Additionally, witness data should be provided in the following cases:
+
+1. Mint types set to `HolderOf`, then item ID of specified collection should be provided
+2. Mint `price` is set – then the price of minting should be provided.
+
+```ts
+const mintTx = await api.tx.Nfts.mint({
+  collection: collectionId,
+  item: 1,
+  mint_to: MultiAddress.Id(bob.address),
+  witness_data: {
+    mint_price: 5n * 10n ** 10n, // If the mint price is 5 DOT
+    owned_item: 2,
+  },
+}).signAndSubmit(alice);
+```
+
+Check that the transaction has been successful or search for a special event to make sure the NFT has been minted successfully.
+
+```ts
+const event = mintTx.events.find(
+  (e) => e.type === "Nfts" && e.value.type === "Issued"
+);
+```
+
+<!-- TODO: mint presigned -->
+
+### NFT metadata
+
+<!-- TODO -->
+<!-- TODO: approve -->
+
+:::info
+Setting item metadata requires making a [deposit](#deposits).
+:::
+
+### NFT attributes
+
+<!-- TODO -->
+<!-- TODO: approve -->
+<!-- TODO: set presigned -->
+
+:::info
+Setting item attributes requires making a [deposit](#deposits).
+:::
+
+### NFT transfer
+
+<!-- TODO -->
+
+### NFT burn
+
+<!-- TODO: deposits will be released. But somehow magically, some of them will some won't -->
+The item owner can `burn` an NFT.
+
+```ts
+await api.tx.Nfts.burn({
+  collection: collectionId,
+  item: itemId,
+}).signAndSubmit(itemOwner);
+```
+
+## Trading
+
+### Settings price
+
+### Buy
+
+### Swap
 
 ## Deposits
 
@@ -418,3 +494,9 @@ Current deposits are:
 - Item creation: basic amount of `0.005041` DOT
 - Setting metadata for a collection/item: basic amount of `0.020129` DOT, plus an additional amount of `0.00001` DOT per byte
 - Setting attributes for a collection/item: basic amount of `0.02` DOT, plus an additional amount of `0.00001` DOT per byte
+
+## Batching
+
+:::info
+WIP
+:::
