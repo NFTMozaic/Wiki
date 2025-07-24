@@ -15,6 +15,7 @@ This guide is a work in progress.
 
 :::info Prerequisites
 This guide assumes you have basic knowledge of Polkadot and understand fundamental terminology such as pallets and extrinsics.
+This guide assumes you have basic knowledge of Polkadot and understand fundamental terminology such as pallets and extrinsics.
 
 All coding examples use Polkadot-API (PAPI). However, this guide doesn't cover the basics like initializing PAPI or creating a signer. You can start by reading the official [PAPI documentation](https://papi.how/), or if you prefer learning by doing, explore the [provided code examples](https://github.com/NFTMozaic/papi-nfts) or start with one of the [available templates](../quick-start/comparison.md).
 :::
