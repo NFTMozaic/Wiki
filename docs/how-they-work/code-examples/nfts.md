@@ -394,6 +394,8 @@ The Issuer can:
 
 ## 2. Items (NFTs)
 
+<!-- TODO: add some intro what will be covered -->
+
 ### NFT minting
 
 :::info
@@ -717,12 +719,100 @@ const cancelApprovalTx = await api.tx.Nfts.cancel_item_attributes_approval({
 
 ### NFT transfer
 
-<!-- TODO -->
+NFT owners can transfer their tokens to other accounts either directly or through an approval system that allows designated delegates to execute transfers on their behalf.
+
+#### Direct transfer
+
+The NFT owner can directly transfer their token to any account:
+
+```ts
+const transferTx = await api.tx.Nfts.transfer({
+  collection: collectionId,
+  item: 1,
+  dest: MultiAddress.Id(charlie.address),
+}).signAndSubmit(currentOwner);
+```
+
+After a successful transfer, you can verify the new ownership:
+
+```ts
+const itemData = await api.query.Nfts.Item.getValue(collectionId, 1);
+const newOwner = itemData?.owner; // charlie.address
+```
+
+#### Approved transfers
+
+NFT owners can approve multiple accounts to transfer their tokens on their behalf. This is useful for marketplaces, escrow services, or allowing trusted parties to manage transfers.
+
+Multiple accounts can be approved for the same NFT:
+
+```ts
+// Approve first delegate
+await api.tx.Nfts.approve_transfer({
+  collection: collectionId,
+  item: 1,
+  delegate: MultiAddress.Id(charlie.address),
+  maybe_deadline: undefined,
+}).signAndSubmit(nftOwner);
+
+// Approve second delegate
+await api.tx.Nfts.approve_transfer({
+  collection: collectionId,
+  item: 1,
+  delegate: MultiAddress.Id(dave.address),
+  maybe_deadline: undefined,
+}).signAndSubmit(nftOwner);
+```
+
+You can check the current approvals for an NFT:
+
+```ts
+const itemData = await api.query.Nfts.Item.getValue(collectionId, 1);
+const approvals = itemData?.approvals; // Array of approved delegates
+```
+
+Once approved, any delegate can execute the transfer using the same `transfer` method:
+
+```ts
+const delegatedTransferTx = await api.tx.Nfts.transfer({
+  collection: collectionId,
+  item: 1,
+  dest: MultiAddress.Id(newOwner.address),
+}).signAndSubmit(approvedDelegate);
+```
+
+:::info
+When a transfer is executed (either direct or approved), all existing transfer approvals for that NFT are automatically cleared.
+:::
+
+#### Managing transfer approvals
+
+NFT owners can cancel specific approvals:
+
+```ts
+const cancelApprovalTx = await api.tx.Nfts.cancel_approval({
+  collection: collectionId,
+  item: 1,
+  delegate: MultiAddress.Id(delegate.address),
+}).signAndSubmit(nftOwner);
+```
+
+Or clear all transfer approvals at once:
+
+```ts
+const clearAllApprovalsTx = await api.tx.Nfts.clear_all_transfer_approvals({
+  collection: collectionId,
+  item: 1,
+}).signAndSubmit(nftOwner);
+```
+
+#### Transfer restrictions
+
+NFT transfers can be restricted at the collection level through [collection settings](#collection-settings-and-locks) or [token level](#locking-nfts). When transfers are locked, NFTs become non-transferable (soulbound) and cannot be moved between accounts, though they can still be minted and burned.
 
 ### NFT burn
 
-<!-- TODO: deposits will be released. But somehow magically, some of them will some won't -->
-
+<!-- TODO, if not locked/soulbound? -->
 The item owner can `burn` an NFT:
 
 ```ts
@@ -734,7 +824,17 @@ await api.tx.Nfts.burn({
 
 ### Locking NFTs
 
+
+
 ## Trading
+
+<!-- TODO: tips? -->
+
+NFTs pallet comes with built-in trading capabilities.
+
+:::info
+Work in progress
+:::
 
 ### Setting price
 
