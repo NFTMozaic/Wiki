@@ -525,7 +525,10 @@ const setMetadataTx = await api.tx.Nfts.set_metadata({
 You can then query the item's metadata and the amount of deposit:
 
 ```ts
-const metadataTx = await api.query.Nfts.ItemMetadataOf.getValue(collectionId, 1);
+const metadataTx = await api.query.Nfts.ItemMetadataOf.getValue(
+  collectionId,
+  1
+);
 const metadata = metadata?.data.asText(); // "https://example.com"
 const deposit = metadata?.deposit; // {account: ..., amount: ...}
 ```
@@ -570,7 +573,25 @@ const itemOwnerAttributeTx = await api.tx.Nfts.set_attribute({
 }).signAndSubmit(itemOwner);
 ```
 
-To clear an unlocked attribute, the signer that conforms to the namespace ruleset can execute the dedicated method. The deposit related to the attribute will be released:
+You can then query item attributes and deposits:
+
+```ts
+// Get all attributes
+const attributes = await api.query.Nfts.Attribute.getEntries(
+  collectionId,
+  itemId
+);
+
+// Or just a single attribute
+const attribute = await api.query.Nfts.Attribute.getValue(
+  collectionId,
+  1,
+  { type: "CollectionOwner", value: undefined },
+  Binary.fromText("Experience")
+);
+```
+
+To clear an unlocked attribute, any signer that conforms to the namespace ruleset can execute the dedicated method. The deposit associated with the attribute will be released:
 
 ```ts
 const clearAttributeTx = await api.tx.Nfts.clear_attribute({
@@ -581,9 +602,9 @@ const clearAttributeTx = await api.tx.Nfts.clear_attribute({
 }).signAndSubmit(alice);
 ```
 
-#### Setting attributes presigned
+#### Setting presigned attributes
 
-Presigned attributes allow authorized parties to create off-chain attribute authorizations that item owners can apply on-chain. This is useful for some use cases, such as revealing.
+Presigned attributes enable authorized parties to create off-chain attribute authorizations that item owners can apply on-chain. This is particularly useful for scenarios like reveals and delayed attribute applications.
 
 To create a presigned attribute authorization, an authorized signer (collection admin for CollectionOwner namespace) prepares attribute data and signs it off-chain:
 
@@ -631,9 +652,68 @@ Key parameters for presigned attributes:
 
 The transaction will fail if the deadline has passed, the signer lacks proper authorization, or the maximum attribute limit is exceeded.
 
-#### Approve attributes
+#### Approving attribute modifications
 
-<!-- TODO -->
+Item owners can approve other accounts to set attributes in the `Account` namespace for their NFTs. This is particularly useful for scenarios where you want to allow trusted third parties to modify certain attributes on your behalf, such as in gaming applications where game servers need to update player stats.
+
+Multiple accounts can be approved for the same item:
+
+```ts
+// Approve first delegate
+await api.tx.Nfts.approve_item_attributes({
+  collection: collectionId,
+  item: 1,
+  delegate: MultiAddress.Id(charlie.address),
+}).signAndSubmit(itemOwner);
+
+// Approve second delegate
+await api.tx.Nfts.approve_item_attributes({
+  collection: collectionId,
+  item: 1,
+  delegate: MultiAddress.Id(dave.address),
+}).signAndSubmit(itemOwner);
+```
+
+You can check which accounts are approved to set attributes for an item:
+
+```ts
+const approvals = await api.query.Nfts.ItemAttributesApprovalsOf.getValue(
+  collectionId,
+  itemId
+);
+// Returns an array of approved account addresses
+```
+
+Once approved, the delegate can set attributes using the `Account` namespace:
+
+```ts
+const setAttributeTx = await api.tx.Nfts.set_attribute({
+  collection: collectionId,
+  maybe_item: 1,
+  namespace: { type: "Account", value: delegate.address },
+  key: Binary.fromText("GameScore"),
+  value: Binary.fromText("1500"),
+}).signAndSubmit(delegate);
+```
+
+:::info
+Only the `Account` namespace is supported. Attributes in different namespaces cannot be modified by approved accounts.
+:::
+
+Item owners can revoke approval at any time. The witness parameter should match or exceed the actual number of attributes set by the delegate to avoid transaction failure.
+
+:::warning
+When canceling approval, all attributes set by the delegate in the `Account` namespace will be permanently removed.
+:::
+
+```ts
+const cancelApprovalTx = await api.tx.Nfts.cancel_item_attributes_approval({
+  collection: collectionId,
+  item: 1,
+  delegate: MultiAddress.Id(delegate.address),
+  witness: 2, // Number of attributes set by this delegate
+}).signAndSubmit(itemOwner);
+```
 
 ### NFT transfer
 
@@ -652,7 +732,7 @@ await api.tx.Nfts.burn({
 }).signAndSubmit(itemOwner);
 ```
 
-### Locking NFT
+### Locking NFTs
 
 ## Trading
 
@@ -664,9 +744,9 @@ await api.tx.Nfts.burn({
 
 ## Deposits
 
-To prevent blockchain bloat, a deposit must be paid for certain actions. This deposit will be reserved and can be recovered if the associated storage is cleared or ownership is transferred.
+To prevent blockchain bloat, deposits must be paid for certain actions. These deposits are reserved and can be released when the associated storage is cleared or ownership is transferred.
 
-The deposit amount for collection and item creation is fixed (but can be changed in the future). The deposit amounts can be queried as constants using PAPI:
+Deposit amounts for collection and item creation are fixed (but may change in future updates). You can query deposit amounts as constants using PAPI:
 
 - `api.constants.Nfts.CollectionDeposit()`
 - `api.constants.Nfts.ItemDeposit()`
@@ -674,15 +754,15 @@ The deposit amount for collection and item creation is fixed (but can be changed
 - `api.constants.Nfts.AttributeDepositBase()`
 - `api.constants.Nfts.DepositPerByte()`
 
-Current deposits are:
+Current deposit amounts:
 
-- Collection creation: basic amount of `0.2013` DOT
-- Item creation: basic amount of `0.005041` DOT
-- Setting metadata for a collection/item: basic amount of `0.020129` DOT, plus an additional amount of `0.00001` DOT per byte
-- Setting attributes for a collection/item: basic amount of `0.02` DOT, plus an additional amount of `0.00001` DOT per byte
+- Collection creation: base amount of `0.2013` DOT
+- Item creation: base amount of `0.005041` DOT
+- Setting metadata for a collection/item: base amount of `0.020129` DOT, plus an additional `0.00001` DOT per byte
+- Setting attributes for a collection/item: base amount of `0.02` DOT, plus an additional `0.00001` DOT per byte
 
 ## Batching
 
 :::info
-WIP
+Work in progress
 :::
