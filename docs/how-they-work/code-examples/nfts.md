@@ -14,16 +14,16 @@ This guide is a work in progress.
 :::
 
 :::info Prerequisites
-This guide assumes you have basic knowledge of Polkadot and understand basic terminology such as pallets and extrinsics.
+This guide assumes you have basic knowledge of Polkadot and understand fundamental terminology such as pallets and extrinsics.
 
-All coding examples are written with Polkadot-API (PAPI). However, this guide does not cover the basics such as how to initialize PAPI or create a signer. You can start by reading the official [PAPI documentation](https://papi.how/), or if you prefer to learn by doing, you can explore all the [provided code examples](https://github.com/NFTMozaic/papi-nfts) or start with one of the [available templates](../quick-start/comparison.md).
+All coding examples use Polkadot-API (PAPI). However, this guide doesn't cover the basics like initializing PAPI or creating a signer. You can start by reading the official [PAPI documentation](https://papi.how/), or if you prefer learning by doing, explore the [provided code examples](https://github.com/NFTMozaic/papi-nfts) or start with one of the [available templates](../quick-start/comparison.md).
 :::
 
 The NFTs pallet is the primary method for creating all types of NFTs on Polkadot. This guide explores its capabilities in depth. Learn about other available options in the [overview section](../../nfts-offer/tech-overview/nft-pallets.md).
 
 ## 1. Collections
 
-On Polkadot, NFTs begin with a collection, which is a container for future tokens. Every collection has a unique numeric ID that increments each time a new collection is created.
+On Polkadot, NFTs begin with a collection, which serves as a container for future tokens. Every collection has a unique numeric ID that increments each time a new collection is created.
 
 ### Creating a collection
 
@@ -55,7 +55,7 @@ const createCollectionTx = await api.tx.Nfts.create({
 }).signAndSubmit(collectionOwner);
 ```
 
-When the collection is created, you can get its ID from the emitted events.
+When the collection is created, you can get its ID from the emitted events:
 
 ```ts
 ...
@@ -67,7 +67,7 @@ const event = createCollectionTx.events.find(
 const collectionId = event.collection as number;
 ```
 
-Let's also consider what the `max_supply`, `mint_settings`, and `settings` fields mean.
+Let's also examine what the `max_supply`, `mint_settings`, and `settings` fields mean.
 
 ### Collection configuration
 
@@ -75,7 +75,7 @@ During collection creation, you need to specify a set of rules and configuration
 
 #### Maximum collection supply
 
-`max_supply` is the maximum number of tokens that can be minted. This setting can be omitted if the collection does not have a supply limit.
+`max_supply` is the maximum number of tokens that can be minted. This setting can be omitted if the collection doesn't have a supply limit.
 
 ```ts title="Setting max supply during collection creation"
 const createCollectionTx = await api.tx.Nfts.create({
@@ -88,7 +88,7 @@ const createCollectionTx = await api.tx.Nfts.create({
 }).signAndSubmit(collectionOwner);
 ```
 
-The [collection owner](#owner) can modify the maximum collection supply if it is not locked by [collection settings](#collection-settings-and-locks).
+The [collection owner](#owner) can modify the maximum collection supply if it's not locked by [collection settings](#collection-settings-and-locks).
 
 ```ts
 const setMaxSupplyTx = await api.tx.Nfts.set_collection_max_supply({
@@ -103,7 +103,7 @@ Collection `settings` can be specified in bitflag format for a collection. They 
 
 - NFT transfers: Controls whether items can be transferred between accounts. When set, items become non-transferable (soulbound). You can still mint tokens, however.
 - Collection metadata: When set, metadata becomes permanently locked and cannot be set or changed. This setting applies only to collection metadata; token metadata mutability is defined separately.
-- Collection attributes: When set, the collection attributes become permanently locked. This setting applies only to collection attributes; token attribute mutability is defined separately.
+- Collection attributes: When set, collection attributes become permanently locked. This setting applies only to collection attributes; token attribute mutability is defined separately.
 - Collection max supply: When set, the max supply becomes permanently fixed.
 
 ```ts title="Collection settings can be specified during collection creation"
@@ -124,7 +124,7 @@ Examples:
 - `9` (1001): Locked max supply and tokens are non-transferable
 
 :::warning
-Collection settings can be locked but never unlocked. You may want to leave them mutable (`0`) and lock them later, for example, when all NFTs are minted.
+Collection settings can be locked but never unlocked. You may want to leave them mutable (`0`) and lock them later, for example, after all NFTs are minted.
 :::
 
 <details>
@@ -151,7 +151,7 @@ Collection settings can be locked but never unlocked. You may want to leave them
 
 </details>
 
-The [collection owner](#owner) can change these settings by locking them. Once again – this operation cannot be undone – a locked setting is locked forever.
+The [collection owner](#owner) can change these settings by locking them. Remember – this operation cannot be undone – a locked setting remains locked forever.
 
 ```ts title="Collection owner locks everything"
 await api.tx.Nfts.lock_collection({
@@ -175,7 +175,7 @@ The rules related to [token minting](#) include:
 4. `default_item_settings`: the default settings that define whether future items can be transferred and whether item attributes and metadata are mutable.
 
 :::warning
-Once metadata, attributes, or transfers are locked, it will not be possible to unlock them. By default, you may want to set `default_item_settings` to `0` and modify them later.
+Once metadata, attributes, or transfers are locked, it's not possible to unlock them. By default, you may want to set `default_item_settings` to `0` and modify them later.
 :::
 
 <details>
@@ -200,7 +200,7 @@ Once metadata, attributes, or transfers are locked, it will not be possible to u
 Setting collection metadata requires making a [deposit](#deposits).
 :::
 
-Collection-level metadata can be added to or removed from a collection by the collection admin if it is not locked at the collection level. While there are no enforced formatting rules, you'll most likely want to use it similarly to how `contractURI` is used in Ethereum. You can set a link to IPFS or any other off-chain storage, or store this metadata on-chain.
+Collection-level metadata can be added to or removed from a collection by the collection [admin](#admin) if it's not locked. While there are no enforced formatting rules, you'll most likely want to use it similarly to how `contractURI` is used in Ethereum NFT standards. You can set a link to IPFS or any other off-chain storage, or store this metadata on-chain.
 
 ```json title="The possible collection metadata format"
 {
@@ -210,7 +210,7 @@ Collection-level metadata can be added to or removed from a collection by the co
 }
 ```
 
-Collection metadata can be set after the collection is created.
+Collection metadata can be set after the collection is created:
 
 ```ts title="The collection admin can set collection metadata"
 await api.tx.Nfts.set_collection_metadata({
@@ -227,7 +227,7 @@ await api.tx.Nfts.clear_collection_metadata({
 }).signAndSubmit(collectionAdmin);
 ```
 
-There is a separate method to query collection metadata:
+There's a separate method to query collection metadata:
 
 ```ts
 collectionMetadata = await api.query.Nfts.CollectionMetadataOf.getValue(
@@ -264,7 +264,7 @@ let collectionAttribute = await api.query.Nfts.Attribute.getValue(
 );
 ```
 
-The collection admin can clear a collection attribute if attributes are not locked.
+The collection admin can clear a collection attribute if attributes are not locked:
 
 ```ts
 await api.tx.Nfts.clear_attribute({
@@ -423,7 +423,7 @@ const mintTx = await api.tx.Nfts.mint({
 }).signAndSubmit(alice);
 ```
 
-Check that the transaction has been successful or search for a special event to make sure the NFT has been minted successfully.
+Check that the transaction has been successful or search for a special event to make sure the NFT has been minted successfully:
 
 ```ts
 const event = mintTx.events.find(
@@ -443,6 +443,7 @@ Presigned minting allows collection issuers to create off-chain mint authorizati
 To create a presigned mint authorization, the issuer prepares mint data and signs it off-chain:
 
 ```ts
+import { MultiSignature, dot } from "@polkadot-api/descriptors";
 import { getTypedCodecs } from "polkadot-api";
 
 // Get codecs for encoding mint data
@@ -487,22 +488,152 @@ Key parameters for presigned minting:
 
 ### NFT metadata
 
-<!-- TODO -->
-<!-- TODO: approve -->
-
 :::info
 Setting item metadata requires making a [deposit](#deposits).
 :::
 
-### NFT attributes
+The collection [Admin](#admin) can set or remove an item's metadata if it's not [locked](#locking-nft). Most likely you'll want to use metadata the same way as `tokenURI` in the ERC-721 metadata extension. You can set a link to IPFS or any other off-chain storage.
 
-<!-- TODO -->
-<!-- TODO: approve -->
-<!-- TODO: set presigned -->
+```json title="The possible NFT metadata format"
+{
+  "name": "My NFT",
+  "description": "The description here",
+  "image": "https://some-external-storage.com/image.png",
+  "attributes": [
+    {
+      "trait_type": "Color",
+      "value": "Red"
+    },
+    {
+      "trait_type": "Size",
+      "value": "M"
+    }
+  ]
+}
+```
+
+Once your metadata is uploaded, the collection admin can attach the link to the item:
+
+```ts
+const setMetadataTx = await api.tx.Nfts.set_metadata({
+  collection: collectionId,
+  data: Binary.fromText("https://external-storage.com/metadata.json"),
+  item: 1,
+}).signAndSubmit(collectionAdmin);
+```
+
+You can then query the item's metadata and the amount of deposit:
+
+```ts
+const metadataTx = await api.query.Nfts.ItemMetadataOf.getValue(collectionId, 1);
+const metadata = metadata?.data.asText(); // "https://example.com"
+const deposit = metadata?.deposit; // {account: ..., amount: ...}
+```
+
+There's a dedicated method to clear item metadata. The [deposit](#deposits) associated with metadata will be released:
+
+```ts
+const clearMetadataTx = await api.tx.Nfts.clear_metadata({
+  collection: collectionId,
+  data: Binary.fromText("https://external-storage.com/metadata.json"),
+  item: 1,
+}).signAndSubmit(collectionAdmin);
+```
+
+### NFT attributes
 
 :::info
 Setting item attributes requires making a [deposit](#deposits).
 :::
+
+NFT attributes are on-chain key-value pairs of arbitrary data. This is particularly useful when some characteristics should be mutable, for example in gaming applications.
+
+The collection [admin](#admin) or item owner can set or remove attributes of an item if the item is not [locked](#locking-nft). To specify who can modify attributes, you need to set a namespace:
+
+```ts
+const collectionOwnerAttribute = await api.tx.Nfts.set_attribute({
+  collection: collectionId,
+  maybe_item: 1,
+  // highlight-next-line
+  namespace: { type: "CollectionOwner", value: undefined },
+  key: Binary.fromText("Experience"),
+  value: Binary.fromText("300"),
+}).signAndSubmit(collectionAdmin);
+
+const itemOwnerAttributeTx = await api.tx.Nfts.set_attribute({
+  collection: collectionId,
+  maybe_item: 1,
+  // highlight-next-line
+  namespace: { type: "ItemOwner", value: undefined },
+  key: Binary.fromText("Owner"),
+  value: Binary.fromText("Bob"),
+}).signAndSubmit(itemOwner);
+```
+
+To clear an unlocked attribute, the signer that conforms to the namespace ruleset can execute the dedicated method. The deposit related to the attribute will be released:
+
+```ts
+const clearAttributeTx = await api.tx.Nfts.clear_attribute({
+  collection: collectionId,
+  maybe_item: 1,
+  key: Binary.fromText("Experience"),
+  namespace: { type: "CollectionOwner", value: undefined },
+}).signAndSubmit(alice);
+```
+
+#### Setting attributes presigned
+
+Presigned attributes allow authorized parties to create off-chain attribute authorizations that item owners can apply on-chain. This is useful for some use cases, such as revealing.
+
+To create a presigned attribute authorization, an authorized signer (collection admin for CollectionOwner namespace) prepares attribute data and signs it off-chain:
+
+```ts
+import { MultiSignature, dot } from "@polkadot-api/descriptors";
+import { getTypedCodecs, FixedSizeArray, Binary } from "polkadot-api";
+
+// Get codecs for encoding attribute data
+const codecs = await getTypedCodecs(dot);
+const attributeDataCodec = codecs.tx.Nfts.set_attributes_pre_signed.inner.data;
+
+// Prepare attribute data
+const attributeData = {
+  collection: collectionId,
+  item: 1,
+  deadline: 10_000_000, // Block number when authorization expires
+  namespace: { type: "CollectionOwner", value: undefined },
+  attributes: [
+    [Binary.fromText("Experience"), Binary.fromText("300")],
+    [Binary.fromText("Power"), Binary.fromText("200")],
+  ] as FixedSizeArray<2, Binary>[],
+};
+
+// Encode and sign the data
+const encodedData = attributeDataCodec.enc(attributeData);
+const signature = await collectionAdmin.signBytes(encodedData);
+```
+
+The item owner can then apply the presigned attributes:
+
+```ts
+const setAttributesPresignedTx = await api.tx.Nfts.set_attributes_pre_signed({
+  data: attributeData,
+  signature: MultiSignature.Sr25519(FixedSizeBinary.fromBytes(signature)),
+  signer: collectionAdmin.address,
+}).signAndSubmit(itemOwner);
+```
+
+Key parameters for presigned attributes:
+
+- `deadline`: Block number after which the authorization expires
+- `namespace`: Only `CollectionOwner` and `Account` namespaces are supported
+- `attributes`: Up to 10 key-value pairs can be set in a single transaction
+- `signer`: Must be authorized for the specified namespace (collection admin for `CollectionOwner`)
+
+The transaction will fail if the deadline has passed, the signer lacks proper authorization, or the maximum attribute limit is exceeded.
+
+#### Approve attributes
+
+<!-- TODO -->
 
 ### NFT transfer
 
@@ -511,7 +642,8 @@ Setting item attributes requires making a [deposit](#deposits).
 ### NFT burn
 
 <!-- TODO: deposits will be released. But somehow magically, some of them will some won't -->
-The item owner can `burn` an NFT.
+
+The item owner can `burn` an NFT:
 
 ```ts
 await api.tx.Nfts.burn({
@@ -520,9 +652,11 @@ await api.tx.Nfts.burn({
 }).signAndSubmit(itemOwner);
 ```
 
+### Locking NFT
+
 ## Trading
 
-### Settings price
+### Setting price
 
 ### Buy
 
