@@ -894,25 +894,136 @@ await api.tx.Nfts.lock_item_properties({
 }).signAndSubmit(admin);
 ```
 
-## Trading
+### Trading
 
-<!-- TODO: tips? -->
+The NFTs pallet includes built-in trading capabilities that enable direct peer-to-peer transactions without requiring external marketplaces or intermediaries. The trading system supports both simple buy/sell operations and sophisticated item swaps with optional additional payments.
 
-NFTs pallet comes with built-in trading capabilities.
+#### Setting an NFT Price
 
-:::info
-Work in progress
-:::
+NFT owners can list their tokens for sale by setting a price. This creates an immediate purchase opportunity for any interested party:
 
-### Setting price
+```ts
+const setPriceTx = await api.tx.Nfts.set_price({
+  collection: collectionId,
+  item: itemId,
+  price: 1n * 10n ** 10n, // 1 DOT
+  whitelisted_buyer: undefined, // Optional: restrict to specific buyer
+}).signAndSubmit(nftOwner);
+```
 
-### Buy
+The `whitelisted_buyer` parameter allows sellers to restrict purchases to a specific account, enabling private sales or exclusive offers.
 
-### Swap
+You can query the current listing price:
+
+```ts
+const itemPrice = await api.query.Nfts.ItemPriceOf.getValue(collectionId, 1);
+const currentPrice = itemPrice?.[0]; // Returns price or undefined if not for sale
+```
+
+#### Buying an NFT
+
+Once an NFT is listed for sale, any account can purchase it by matching or exceeding the asking price:
+
+```ts
+const buyItemTx = await api.tx.Nfts.buy_item({
+  collection: collectionId,
+  item: itemId,
+  bid_price: ITEM_PRICE, // Must be >= the listed price
+}).signAndSubmit(buyer);
+```
+
+The transaction will:
+- Transfer ownership of the NFT to the buyer
+- Transfer the payment to the seller
+- Automatically remove the item from sale
+- Clear any existing transfer approvals
+
+#### Withdrawing from Sale
+
+NFT owners can remove their items from the marketplace at any time by setting the price to `undefined`:
+
+```ts
+const withdrawTx = await api.tx.Nfts.set_price({
+  collection: collectionId,
+  item: itemId,
+  price: undefined, // Removes from sale
+  whitelisted_buyer: undefined,
+}).signAndSubmit(nftOwner);
+```
+
+Once withdrawn, purchase attempts will fail with a `NotForSale` error.
+
+#### NFT Swapping
+
+The swapping system enables complex peer-to-peer trades where users can exchange NFTs from different collections, optionally with additional payments flowing in either direction.
+
+##### Creating a Swap Offer
+
+To initiate a swap, specify what you're offering and what you want in return:
+
+```ts
+const createSwapTx = await api.tx.Nfts.create_swap({
+  offered_collection: collectionIdA,
+  offered_item: itemIdA,
+  desired_collection: collectionIdB,
+  maybe_desired_item: undefined, // Any item from collection, or specify item ID
+  maybe_price: {
+    amount: 5n * 10n ** 10n, // 0.5 DOT additional payment
+    direction: { type: "Receive", value: undefined }, // "Send" or "Receive"
+  },
+  duration: 1000, // Swap expires after 1000 blocks
+}).signAndSubmit(swapCreator);
+```
+
+**Key Parameters:**
+
+- `maybe_desired_item`: Set to `undefined` to accept any item from the collection, or specify an exact item ID
+- `maybe_price`: Optional additional payment. Use `"Send"` if you'll pay extra, `"Receive"` if you want to receive payment
+- `duration`: Number of blocks until the swap offer expires
+
+You can query pending swaps:
+
+```ts
+const swap = await api.query.Nfts.PendingSwapOf.getValue(collectionId, itemId);
+// Returns swap details or undefined if no pending swap exists
+```
+
+##### Claiming a Swap
+
+Anyone holding a suitable NFT can claim an active swap:
+
+```ts
+const claimSwapTx = await api.tx.Nfts.claim_swap({
+  send_collection: collectionIdB,
+  send_item: itemIdB, // Claimer's item in collection B
+  receive_collection: collectionIdA,
+  receive_item: itemIdA,
+  witness_price: {
+    amount: 5n * 10n ** 10n,
+    direction: { type: "Receive", value: undefined },
+  },
+}).signAndSubmit(swapClaimer);
+```
+
+The `witness_price` must match the original swap terms exactly. After a successful claim:
+- Both NFTs change ownership
+- Any additional payment is transferred
+- The swap is automatically removed from pending swaps
+
+##### Canceling Swap Offers
+
+Cancel your own swap offers:
+
+```ts
+const cancelSwapTx = await api.tx.Nfts.cancel_swap({
+  offered_collection: collectionId,
+  offered_item: itemId,
+}).signAndSubmit(swapCreator);
+```
 
 ## Deposits
 
-To prevent blockchain bloat, deposits must be paid for certain actions. These deposits are reserved and can be released when the associated storage is cleared or ownership is transferred.
+To prevent blockchain bloat, deposits must be reserved for certain actions. These deposits can be released when the associated storage is cleared or ownership is transferred.
 
 Deposit amounts for collection and item creation are fixed (but may change in future updates). You can query deposit amounts as constants using PAPI:
 
@@ -934,3 +1045,5 @@ Current deposit amounts:
 :::info
 Work in progress
 :::
+
+<!-- TODO: tips -->
