@@ -9,10 +9,6 @@ import TabItem from '@theme/TabItem';
 
 # An applied guide to NFTs Pallet
 
-:::warning Work In Progress
-This guide is a work in progress.
-:::
-
 :::info Prerequisites
 This guide assumes you have basic knowledge of Polkadot and understand fundamental terminology such as pallets and extrinsics.
 
@@ -230,7 +226,7 @@ await api.tx.Nfts.clear_collection_metadata({
 There's a separate method to query collection metadata:
 
 ```ts
-collectionMetadata = await api.query.Nfts.CollectionMetadataOf.getValue(
+const collectionMetadata = await api.query.Nfts.CollectionMetadataOf.getValue(
   collectionId
 );
 ```
@@ -256,7 +252,7 @@ await api.tx.Nfts.set_attribute({
 You can query a collection attribute:
 
 ```ts
-let collectionAttribute = await api.query.Nfts.Attribute.getValue(
+const collectionAttribute = await api.query.Nfts.Attribute.getValue(
   collectionId,
   undefined,
   { type: "CollectionOwner", value: undefined },
@@ -394,7 +390,7 @@ The Issuer can:
 
 ## 2. Items (NFTs)
 
-<!-- TODO: add some intro what will be covered -->
+Now that you understand collections, let's explore NFTs themselves - the individual items within collections. This section covers the complete lifecycle of NFTs: minting tokens with various authorization methods, managing metadata and attributes for rich token properties, transferring ownership through direct and approved mechanisms, implementing access controls through locking mechanisms, and facilitating peer-to-peer trading without external marketplaces.
 
 ### NFT minting
 
@@ -410,7 +406,7 @@ Collection items (NFTs) can be created depending on [minting settings](#nft-mint
 
 The account eligible for minting needs to provide a unique item ID. Additionally, witness data should be provided in the following cases:
 
-1. Mint types set to `HolderOf`, then item ID of specified collection should be provided
+1. Mint types set to `HolderOf`, then the item ID of the specified collection should be provided
 2. Mint `price` is set – then the price of minting should be provided.
 
 ```ts
@@ -527,7 +523,7 @@ const setMetadataTx = await api.tx.Nfts.set_metadata({
 You can then query the item's metadata and the amount of deposit:
 
 ```ts
-const metadataTx = await api.query.Nfts.ItemMetadataOf.getValue(
+const metadata = await api.query.Nfts.ItemMetadataOf.getValue(
   collectionId,
   1
 );
@@ -812,7 +808,7 @@ NFT transfers can be restricted at the collection level through [collection sett
 
 ### NFT burn
 
-<!-- TODO, there is a bug, non transferrable NFTs should be unburnable, but they don't -->
+<!-- NOTE, there is a bug, non transferrable NFTs should be unburnable, but they don't -->
 The item owner can `burn` an NFT:
 
 ```ts
@@ -1042,8 +1038,51 @@ Current deposit amounts:
 
 ## Batching
 
-:::info
-Work in progress
-:::
+The NFTs pallet supports transaction batching through Polkadot's `Utility` pallet, allowing you to execute multiple NFT operations atomically in a single transaction. This is particularly useful for complex workflows like collection setup with metadata and attributes.
 
-<!-- TODO: tips -->
+### Atomic Batch Execution
+
+Use `batch_all` to ensure all operations succeed together or fail together. If any transaction in the batch fails, the entire batch is reverted:
+
+```ts title="Creating a collection with metadata and attributes atomically"
+// Get the next collection ID before batching
+const nextCollectionId = await api.query.Nfts.NextCollectionId.getValue();
+
+// Prepare individual transactions as decoded calls
+const createCollectionTx = api.tx.Nfts.create({
+  admin: MultiAddress.Id(alice.address),
+  config: {
+    max_supply: 1000,
+    mint_settings: {
+      default_item_settings: 0n,
+      mint_type: { type: "Issuer", value: undefined },
+      price: undefined,
+      start_block: undefined,
+      end_block: undefined,
+    },
+    settings: 0n,
+  },
+}).decodedCall;
+
+const setCollectionMetadataTx = api.tx.Nfts.set_collection_metadata({
+  collection: nextCollectionId,
+  data: Binary.fromText("https://example.com/collection.json"),
+}).decodedCall;
+
+const setCollectionAttributeTx = api.tx.Nfts.set_attribute({
+  collection: nextCollectionId,
+  key: Binary.fromText("category"),
+  value: Binary.fromText("gaming"),
+  namespace: { type: "CollectionOwner", value: undefined },
+  maybe_item: undefined,
+}).decodedCall;
+
+// Execute all operations atomically
+const batchTx = await api.tx.Utility.batch_all({
+  calls: [
+    createCollectionTx,
+    setCollectionMetadataTx,
+    setCollectionAttributeTx,
+  ],
+}).signAndSubmit(alice);
+```
