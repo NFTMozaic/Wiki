@@ -812,7 +812,7 @@ NFT transfers can be restricted at the collection level through [collection sett
 
 ### NFT burn
 
-<!-- TODO, if not locked/soulbound? -->
+<!-- TODO, there is a bug, non transferrable NFTs should be unburnable, but they don't -->
 The item owner can `burn` an NFT:
 
 ```ts
@@ -824,27 +824,206 @@ await api.tx.Nfts.burn({
 
 ### Locking NFTs
 
+NFTs can be locked to restrict certain behaviors and ensure immutability. The following properties can be locked:
 
+- **Transferability**: Prevents NFTs from being transferred between accounts (making them soulbound)
+- **Metadata mutability**: Permanently prevents changes to NFT metadata
+- **Attributes mutability**: Permanently prevents changes to NFT attributes
 
-## Trading
+When minting NFTs, the `default_item_settings` from the collection's [mint settings](#nft-minting-settings) will be applied to each newly created item. 
 
-<!-- TODO: tips? -->
+You can check an item's current lock status:
 
-NFTs pallet comes with built-in trading capabilities.
+```ts
+const itemSettings = await api.query.Nfts.ItemConfigOf.getValue(collectionId, 1);
+// itemSettings is a bitflag representing the lock status
+```
 
-:::info
-Work in progress
+<details>
+  <summary>Click to see the full list of item settings bitflags</summary>
+
+| Value | Binary | Mutable attributes | Mutable metadata | Transferable |
+| ----- | ------ | ------------------ | ---------------- | ------------ |
+| 0     | 000    | ✅ Yes             | ✅ Yes           | ✅ Yes       |
+| 1     | 001    | ✅ Yes             | ✅ Yes           | 🔒 No        |
+| 2     | 010    | ✅ Yes             | 🔒 No            | ✅ Yes       |
+| 3     | 011    | ✅ Yes             | 🔒 No            | 🔒 No        |
+| 4     | 100    | 🔒 No              | ✅ Yes           | ✅ Yes       |
+| 5     | 101    | 🔒 No              | ✅ Yes           | 🔒 No        |
+| 6     | 110    | 🔒 No              | 🔒 No            | ✅ Yes       |
+| 7     | 111    | 🔒 No              | 🔒 No            | 🔒 No        |
+
+</details>
+
+#### Locking transfers
+
+Transfer restrictions can be applied at both collection and item levels:
+
+**Collection-level transfer locks** can be set by the [collection owner](#owner). This affects all items in the collection and is permanent—it cannot be undone.
+
+**Item-level transfer locks** can be managed by the [collection freezer](#freezer) and can be both locked and unlocked as needed.
+
+```ts title="Freezer can lock and unlock transfers for specific NFTs"
+// Lock transfers for a specific NFT
+await api.tx.Nfts.lock_item_transfer({
+  collection: collectionId,
+  item: itemId,
+}).signAndSubmit(freezer);
+
+// Unlock transfers for a specific NFT
+await api.tx.Nfts.unlock_item_transfer({
+  collection: collectionId,
+  item: itemId,
+}).signAndSubmit(freezer);
+```
+
+#### Locking metadata and attributes
+
+Item metadata and attributes can be permanently locked by the [collection admin](#admin). Once locked, these properties become immutable and cannot be changed.
+
+:::warning
+This operation is irreversible. Once metadata or attributes are locked, they cannot be unlocked or modified.
 :::
 
-### Setting price
+```ts title="Collection admin permanently locks metadata and attributes"
+await api.tx.Nfts.lock_item_properties({
+  collection: collectionId,
+  item: itemId,
+  lock_metadata: true,
+  lock_attributes: true,
+}).signAndSubmit(admin);
+```
 
-### Buy
+### Trading
 
-### Swap
+The NFTs pallet includes built-in trading capabilities that enable direct peer-to-peer transactions without requiring external marketplaces or intermediaries. The trading system supports both simple buy/sell operations and sophisticated item swaps with optional additional payments.
+
+#### Setting an NFT Price
+
+NFT owners can list their tokens for sale by setting a price. This creates an immediate purchase opportunity for any interested party:
+
+```ts
+const setPriceTx = await api.tx.Nfts.set_price({
+  collection: collectionId,
+  item: itemId,
+  price: 1n * 10n ** 10n, // 1 DOT
+  whitelisted_buyer: undefined, // Optional: restrict to specific buyer
+}).signAndSubmit(nftOwner);
+```
+
+The `whitelisted_buyer` parameter allows sellers to restrict purchases to a specific account, enabling private sales or exclusive offers.
+
+You can query the current listing price:
+
+```ts
+const itemPrice = await api.query.Nfts.ItemPriceOf.getValue(collectionId, 1);
+const currentPrice = itemPrice?.[0]; // Returns price or undefined if not for sale
+```
+
+#### Buying an NFT
+
+Once an NFT is listed for sale, any account can purchase it by matching or exceeding the asking price:
+
+```ts
+const buyItemTx = await api.tx.Nfts.buy_item({
+  collection: collectionId,
+  item: itemId,
+  bid_price: ITEM_PRICE, // Must be >= the listed price
+}).signAndSubmit(buyer);
+```
+
+The transaction will:
+- Transfer ownership of the NFT to the buyer
+- Transfer the payment to the seller
+- Automatically remove the item from sale
+- Clear any existing transfer approvals
+
+#### Withdrawing from Sale
+
+NFT owners can remove their items from the marketplace at any time by setting the price to `undefined`:
+
+```ts
+const withdrawTx = await api.tx.Nfts.set_price({
+  collection: collectionId,
+  item: itemId,
+  price: undefined, // Removes from sale
+  whitelisted_buyer: undefined,
+}).signAndSubmit(nftOwner);
+```
+
+Once withdrawn, purchase attempts will fail with a `NotForSale` error.
+
+#### NFT Swapping
+
+The swapping system enables complex peer-to-peer trades where users can exchange NFTs from different collections, optionally with additional payments flowing in either direction.
+
+##### Creating a Swap Offer
+
+To initiate a swap, specify what you're offering and what you want in return:
+
+```ts
+const createSwapTx = await api.tx.Nfts.create_swap({
+  offered_collection: collectionIdA,
+  offered_item: itemIdA,
+  desired_collection: collectionIdB,
+  maybe_desired_item: undefined, // Any item from collection, or specify item ID
+  maybe_price: {
+    amount: 5n * 10n ** 10n, // 0.5 DOT additional payment
+    direction: { type: "Receive", value: undefined }, // "Send" or "Receive"
+  },
+  duration: 1000, // Swap expires after 1000 blocks
+}).signAndSubmit(swapCreator);
+```
+
+**Key Parameters:**
+
+- `maybe_desired_item`: Set to `undefined` to accept any item from the collection, or specify an exact item ID
+- `maybe_price`: Optional additional payment. Use `"Send"` if you'll pay extra, `"Receive"` if you want to receive payment
+- `duration`: Number of blocks until the swap offer expires
+
+You can query pending swaps:
+
+```ts
+const swap = await api.query.Nfts.PendingSwapOf.getValue(collectionId, itemId);
+// Returns swap details or undefined if no pending swap exists
+```
+
+##### Claiming a Swap
+
+Anyone holding a suitable NFT can claim an active swap:
+
+```ts
+const claimSwapTx = await api.tx.Nfts.claim_swap({
+  send_collection: collectionIdB,
+  send_item: itemIdB, // Claimer's item in collection B
+  receive_collection: collectionIdA,
+  receive_item: itemIdA,
+  witness_price: {
+    amount: 5n * 10n ** 10n,
+    direction: { type: "Receive", value: undefined },
+  },
+}).signAndSubmit(swapClaimer);
+```
+
+The `witness_price` must match the original swap terms exactly. After a successful claim:
+- Both NFTs change ownership
+- Any additional payment is transferred
+- The swap is automatically removed from pending swaps
+
+##### Canceling Swap Offers
+
+Cancel your own swap offers:
+
+```ts
+const cancelSwapTx = await api.tx.Nfts.cancel_swap({
+  offered_collection: collectionId,
+  offered_item: itemId,
+}).signAndSubmit(swapCreator);
+```
 
 ## Deposits
 
-To prevent blockchain bloat, deposits must be paid for certain actions. These deposits are reserved and can be released when the associated storage is cleared or ownership is transferred.
+To prevent blockchain bloat, deposits must be reserved for certain actions. These deposits can be released when the associated storage is cleared or ownership is transferred.
 
 Deposit amounts for collection and item creation are fixed (but may change in future updates). You can query deposit amounts as constants using PAPI:
 
@@ -866,3 +1045,5 @@ Current deposit amounts:
 :::info
 Work in progress
 :::
+
+<!-- TODO: tips -->
