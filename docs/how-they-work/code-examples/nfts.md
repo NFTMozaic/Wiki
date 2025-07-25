@@ -812,7 +812,7 @@ NFT transfers can be restricted at the collection level through [collection sett
 
 ### NFT burn
 
-<!-- TODO, if not locked/soulbound? -->
+<!-- TODO, there is a bug, non transferrable NFTs should be unburnable, but they don't -->
 The item owner can `burn` an NFT:
 
 ```ts
@@ -824,7 +824,75 @@ await api.tx.Nfts.burn({
 
 ### Locking NFTs
 
+NFTs can be locked to restrict certain behaviors and ensure immutability. The following properties can be locked:
 
+- **Transferability**: Prevents NFTs from being transferred between accounts (making them soulbound)
+- **Metadata mutability**: Permanently prevents changes to NFT metadata
+- **Attributes mutability**: Permanently prevents changes to NFT attributes
+
+When minting NFTs, the `default_item_settings` from the collection's [mint settings](#nft-minting-settings) will be applied to each newly created item. 
+
+You can check an item's current lock status:
+
+```ts
+const itemSettings = await api.query.Nfts.ItemConfigOf.getValue(collectionId, 1);
+// itemSettings is a bitflag representing the lock status
+```
+
+<details>
+  <summary>Click to see the full list of item settings bitflags</summary>
+
+| Value | Binary | Mutable attributes | Mutable metadata | Transferable |
+| ----- | ------ | ------------------ | ---------------- | ------------ |
+| 0     | 000    | ✅ Yes             | ✅ Yes           | ✅ Yes       |
+| 1     | 001    | ✅ Yes             | ✅ Yes           | 🔒 No        |
+| 2     | 010    | ✅ Yes             | 🔒 No            | ✅ Yes       |
+| 3     | 011    | ✅ Yes             | 🔒 No            | 🔒 No        |
+| 4     | 100    | 🔒 No              | ✅ Yes           | ✅ Yes       |
+| 5     | 101    | 🔒 No              | ✅ Yes           | 🔒 No        |
+| 6     | 110    | 🔒 No              | 🔒 No            | ✅ Yes       |
+| 7     | 111    | 🔒 No              | 🔒 No            | 🔒 No        |
+
+</details>
+
+#### Locking transfers
+
+Transfer restrictions can be applied at both collection and item levels:
+
+**Collection-level transfer locks** can be set by the [collection owner](#owner). This affects all items in the collection and is permanent—it cannot be undone.
+
+**Item-level transfer locks** can be managed by the [collection freezer](#freezer) and can be both locked and unlocked as needed.
+
+```ts title="Freezer can lock and unlock transfers for specific NFTs"
+// Lock transfers for a specific NFT
+await api.tx.Nfts.lock_item_transfer({
+  collection: collectionId,
+  item: itemId,
+}).signAndSubmit(freezer);
+
+// Unlock transfers for a specific NFT
+await api.tx.Nfts.unlock_item_transfer({
+  collection: collectionId,
+  item: itemId,
+}).signAndSubmit(freezer);
+```
+
+#### Locking metadata and attributes
+
+Item metadata and attributes can be permanently locked by the [collection admin](#admin). Once locked, these properties become immutable and cannot be changed.
+
+:::warning
+This operation is irreversible. Once metadata or attributes are locked, they cannot be unlocked or modified.
+:::
+
+```ts title="Collection admin permanently locks metadata and attributes"
+await api.tx.Nfts.lock_item_properties({
+  collection: collectionId,
+  item: itemId,
+  lock_metadata: true,
+  lock_attributes: true,
+}).signAndSubmit(admin);
+```
 
 ## Trading
 
