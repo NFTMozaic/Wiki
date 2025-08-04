@@ -4,9 +4,6 @@ sidebar_label: An applied guide to NFTs Pallet
 sidebar_position: 1
 ---
 
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
-
 # An applied guide to NFTs Pallet
 
 :::info Prerequisites
@@ -17,7 +14,7 @@ All coding examples use Polkadot-API (PAPI). However, this guide doesn't cover t
 
 The NFTs pallet is the primary method for creating all types of NFTs on Polkadot. This guide explores its capabilities in depth. Learn about other available options in the [overview section](../../nfts-offer/tech-overview/nft-pallets.md).
 
-## 1. Collections
+## Collections
 
 On Polkadot, NFTs begin with a collection, which serves as a container for future tokens. Every collection has a unique numeric ID that increments each time a new collection is created.
 
@@ -41,7 +38,7 @@ const createCollectionTx = await api.tx.Nfts.create({
     max_supply: 1000,
     mint_settings: {
       default_item_settings: 0n,
-      mint_type: { type: "Issuer", value: undefined },
+      mint_type: Enum("Issuer"),
       price: undefined,
       start_block: undefined,
       end_block: undefined,
@@ -56,14 +53,12 @@ When the collection is created, you can get its ID from the emitted events:
 ```ts
 ...
 
-const event = createCollectionTx.events.find(
-  (e) => e.type === "Nfts" && e.value.type === "Created"
-);
-
-const collectionId = event.collection as number;
+const [createdEvent] = api.event.Nfts.Created.filter(createCollectionTx.events);
+const collectionId = createdEvent.collection;
 ```
 
 Let's also examine what the `max_supply`, `mint_settings`, and `settings` fields mean.
+
 
 ### Collection configuration
 
@@ -244,7 +239,7 @@ await api.tx.Nfts.set_attribute({
   collection: collectionId,
   key: Binary.fromText("Key"),
   value: Binary.fromText("Attribute value"),
-  namespace: { type: "CollectionOwner", value: undefined },
+  namespace: Enum("CollectionOwner"),
   maybe_item: undefined,
 }).signAndSubmit(owner);
 ```
@@ -255,7 +250,7 @@ You can query a collection attribute:
 const collectionAttribute = await api.query.Nfts.Attribute.getValue(
   collectionId,
   undefined,
-  { type: "CollectionOwner", value: undefined },
+  Enum("CollectionOwner"),
   Binary.fromText("Key")
 );
 ```
@@ -266,7 +261,7 @@ The collection admin can clear a collection attribute if attributes are not lock
 await api.tx.Nfts.clear_attribute({
   collection: collectionId,
   key: Binary.fromText("test"),
-  namespace: { type: "Key", value: undefined },
+  namespace: Enum("CollectionOwner"),
   maybe_item: undefined,
 }).signAndSubmit(collectionAdmin);
 ```
@@ -292,7 +287,7 @@ You can query witness data before destroying a collection:
 const witness = await api.query.Nfts.Collection.getValue(collectionId);
 ```
 
-### Collection Roles
+### Collection roles
 
 There are four roles that exist for a collection.
 
@@ -388,7 +383,7 @@ The Issuer can:
 - Mint, force mint, and mint pre-signed
 - Update mint settings
 
-## 2. Items (NFTs)
+## Items (NFTs)
 
 Now that you understand collections, let's explore NFTs themselves - the individual items within collections. This section covers the complete lifecycle of NFTs: minting tokens with various authorization methods, managing metadata and attributes for rich token properties, transferring ownership through direct and approved mechanisms, implementing access controls through locking mechanisms, and facilitating peer-to-peer trading without external marketplaces.
 
@@ -424,9 +419,7 @@ const mintTx = await api.tx.Nfts.mint({
 Check that the transaction has been successful or search for a special event to make sure the NFT has been minted successfully:
 
 ```ts
-const event = mintTx.events.find(
-  (e) => e.type === "Nfts" && e.value.type === "Issued"
-);
+const [issuedEvent] = api.event.Nfts.Issued.filter(createItemTx.events);
 ```
 
 #### Presigned minting
@@ -556,7 +549,7 @@ const collectionOwnerAttribute = await api.tx.Nfts.set_attribute({
   collection: collectionId,
   maybe_item: 1,
   // highlight-next-line
-  namespace: { type: "CollectionOwner", value: undefined },
+  namespace: Enum("CollectionOwner"),
   key: Binary.fromText("Experience"),
   value: Binary.fromText("300"),
 }).signAndSubmit(collectionAdmin);
@@ -565,7 +558,7 @@ const itemOwnerAttributeTx = await api.tx.Nfts.set_attribute({
   collection: collectionId,
   maybe_item: 1,
   // highlight-next-line
-  namespace: { type: "ItemOwner", value: undefined },
+  namespace: Enum("ItemOwner"),
   key: Binary.fromText("Owner"),
   value: Binary.fromText("Bob"),
 }).signAndSubmit(itemOwner);
@@ -584,7 +577,7 @@ const attributes = await api.query.Nfts.Attribute.getEntries(
 const attribute = await api.query.Nfts.Attribute.getValue(
   collectionId,
   1,
-  { type: "CollectionOwner", value: undefined },
+  Enum("CollectionOwner"),
   Binary.fromText("Experience")
 );
 ```
@@ -596,7 +589,7 @@ const clearAttributeTx = await api.tx.Nfts.clear_attribute({
   collection: collectionId,
   maybe_item: 1,
   key: Binary.fromText("Experience"),
-  namespace: { type: "CollectionOwner", value: undefined },
+  namespace: Enum("CollectionOwner"),
 }).signAndSubmit(alice);
 ```
 
@@ -619,7 +612,7 @@ const attributeData = {
   collection: collectionId,
   item: 1,
   deadline: 10_000_000, // Block number when authorization expires
-  namespace: { type: "CollectionOwner", value: undefined },
+  namespace: Enum("CollectionOwner"),
   attributes: [
     [Binary.fromText("Experience"), Binary.fromText("300")],
     [Binary.fromText("Power"), Binary.fromText("200")],
@@ -688,7 +681,7 @@ Once approved, the delegate can set attributes using the `Account` namespace:
 const setAttributeTx = await api.tx.Nfts.set_attribute({
   collection: collectionId,
   maybe_item: 1,
-  namespace: { type: "Account", value: delegate.address },
+  namespace: Enum("Account", delegate.address),
   key: Binary.fromText("GameScore"),
   value: Binary.fromText("1500"),
 }).signAndSubmit(delegate);
@@ -965,7 +958,7 @@ const createSwapTx = await api.tx.Nfts.create_swap({
   maybe_desired_item: undefined, // Any item from collection, or specify item ID
   maybe_price: {
     amount: 5n * 10n ** 10n, // 0.5 DOT additional payment
-    direction: { type: "Receive", value: undefined }, // "Send" or "Receive"
+    direction: Enum("Receive"), // "Send" or "Receive"
   },
   duration: 1000, // Swap expires after 1000 blocks
 }).signAndSubmit(swapCreator);
@@ -996,7 +989,7 @@ const claimSwapTx = await api.tx.Nfts.claim_swap({
   receive_item: itemIdA,
   witness_price: {
     amount: 5n * 10n ** 10n,
-    direction: { type: "Receive", value: undefined },
+    direction: Enum("Receive"),
   },
 }).signAndSubmit(swapClaimer);
 ```
@@ -1040,7 +1033,7 @@ Current deposit amounts:
 
 The NFTs pallet supports transaction batching through Polkadot's `Utility` pallet, allowing you to execute multiple NFT operations atomically in a single transaction. This is particularly useful for complex workflows like collection setup with metadata and attributes.
 
-### Atomic Batch Execution
+#### Atomic Batch Execution
 
 Use `batch_all` to ensure all operations succeed together or fail together. If any transaction in the batch fails, the entire batch is reverted:
 
@@ -1055,7 +1048,7 @@ const createCollectionTx = api.tx.Nfts.create({
     max_supply: 1000,
     mint_settings: {
       default_item_settings: 0n,
-      mint_type: { type: "Issuer", value: undefined },
+      mint_type: Enum("Issuer"),
       price: undefined,
       start_block: undefined,
       end_block: undefined,
@@ -1073,7 +1066,7 @@ const setCollectionAttributeTx = api.tx.Nfts.set_attribute({
   collection: nextCollectionId,
   key: Binary.fromText("category"),
   value: Binary.fromText("gaming"),
-  namespace: { type: "CollectionOwner", value: undefined },
+  namespace: Enum("CollectionOwner"),
   maybe_item: undefined,
 }).decodedCall;
 
