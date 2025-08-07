@@ -5,7 +5,7 @@ sidebar_label: Moonbeam
 sidebar_position: 3
 ---
 
-# <img src="/img/moonbeam-l.png" className="moonbeam-h1" />
+# Moonbeam <img src="/img/moonbeam-l.png" width="70" height="70" style={{ verticalAlign: 'bottom' }} />
 
 
 ## 1. Overview & mission

@@ -5,7 +5,7 @@ sidebar_label: Asset Hub
 sidebar_position: 2
 ---
 
-# <img src="/img/polkadot.png" className="polkadot-h1" /> Asset Hub
+# Asset Hub <img src="/img/polkadot.png" width="70" height="70" style={{ verticalAlign: 'bottom' }} /> 
 
 
 ## 1. Introduction & positioning
