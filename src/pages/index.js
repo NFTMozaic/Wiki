@@ -30,18 +30,18 @@ export default function Home() {
 
         <div className={styles.cardGrid}>
           <a href="/docs/category/learn" className={styles.card}>
-            <h3>NFTs on Polkadot</h3>
+            <h3>Learn</h3>
             <p>
              Understand NFT architecture and capabilities: NFT pallets, rollups, live data, and more.
             </p>
             <p className={styles.cardLink}>Explore →</p>
           </a>
           <a href="/docs/category/how-they-work" className={styles.card}>
-            <h3>Implementation Details</h3>
+            <h3>Developers</h3>
             <p>
               Deep dives into technical structure. Explore tooling, tutorials and code examples.
             </p>
-            <p className={styles.cardLink}>View Articles →</p>
+            <p className={styles.cardLink}>Explore →</p>
           </a>
         </div>
 

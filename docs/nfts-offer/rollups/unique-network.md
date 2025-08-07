@@ -5,9 +5,7 @@ sidebar_label: Unique Network
 sidebar_position: 4
 ---
 
-<img src="/img/unique-l.png" className="unique-h1" />
-
-# Unique Network
+ # Unique Network <img src="/img/unique-l.png" width="70" height="70" style={{ verticalAlign: 'bottom' }} />
 
 ## 1. Introduction & positioning
 

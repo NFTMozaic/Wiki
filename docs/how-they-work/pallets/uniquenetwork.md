@@ -6,7 +6,8 @@ toc_max_heading_level: 4
 ---
 
 # Unique Network 
-# pallet and chain
+
+## Pallet and chain
 
 [Unique Network](https://unique.network) is a Substrate-based parachain in the Polkadot ecosystem that provides advanced NFT functionality and developer tooling. It does **not use** the standard `pallet_uniques` or `pallet_nfts`. Instead, it has its own custom-built NFT logic on-chain, designed to support **advanced NFT features**.
 
