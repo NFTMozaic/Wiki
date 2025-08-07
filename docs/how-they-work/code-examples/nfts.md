@@ -57,8 +57,16 @@ const [createdEvent] = api.event.Nfts.Created.filter(createCollectionTx.events);
 const collectionId = createdEvent.collection;
 ```
 
-Let's also examine what the `max_supply`, `mint_settings`, and `settings` fields mean.
+You can also query the list of collections owned by account:
 
+```ts
+const ownedCollections = await api.query.Nfts.CollectionAccount.getEntries(
+  alice.address
+);
+const collectionIds = ownedCollections.map((c) => c.keyArgs[1]);
+```
+
+Let's also examine what the `max_supply`, `mint_settings`, and `settings` fields mean.
 
 ### Collection configuration
 
@@ -516,10 +524,7 @@ const setMetadataTx = await api.tx.Nfts.set_metadata({
 You can then query the item's metadata and the amount of deposit:
 
 ```ts
-const metadata = await api.query.Nfts.ItemMetadataOf.getValue(
-  collectionId,
-  1
-);
+const metadata = await api.query.Nfts.ItemMetadataOf.getValue(collectionId, 1);
 const metadata = metadata?.data.asText(); // "https://example.com"
 const deposit = metadata?.deposit; // {account: ..., amount: ...}
 ```
@@ -802,6 +807,7 @@ NFT transfers can be restricted at the collection level through [collection sett
 ### NFT burn
 
 <!-- NOTE, there is a bug, non transferrable NFTs should be unburnable, but they don't -->
+
 The item owner can `burn` an NFT:
 
 ```ts
@@ -819,12 +825,15 @@ NFTs can be locked to restrict certain behaviors and ensure immutability. The fo
 - **Metadata mutability**: Permanently prevents changes to NFT metadata
 - **Attributes mutability**: Permanently prevents changes to NFT attributes
 
-When minting NFTs, the `default_item_settings` from the collection's [mint settings](#nft-minting-settings) will be applied to each newly created item. 
+When minting NFTs, the `default_item_settings` from the collection's [mint settings](#nft-minting-settings) will be applied to each newly created item.
 
 You can check an item's current lock status:
 
 ```ts
-const itemSettings = await api.query.Nfts.ItemConfigOf.getValue(collectionId, 1);
+const itemSettings = await api.query.Nfts.ItemConfigOf.getValue(
+  collectionId,
+  1
+);
 // itemSettings is a bitflag representing the lock status
 ```
 
@@ -922,6 +931,7 @@ const buyItemTx = await api.tx.Nfts.buy_item({
 ```
 
 The transaction will:
+
 - Transfer ownership of the NFT to the buyer
 - Transfer the payment to the seller
 - Automatically remove the item from sale
@@ -995,6 +1005,7 @@ const claimSwapTx = await api.tx.Nfts.claim_swap({
 ```
 
 The `witness_price` must match the original swap terms exactly. After a successful claim:
+
 - Both NFTs change ownership
 - Any additional payment is transferred
 - The swap is automatically removed from pending swaps
@@ -1008,6 +1019,56 @@ const cancelSwapTx = await api.tx.Nfts.cancel_swap({
   offered_collection: collectionId,
   offered_item: itemId,
 }).signAndSubmit(swapCreator);
+```
+
+### Queries
+
+#### Getting account NFTs
+
+You can get the list of all NFTs owned by an account. The following query returns collection and item IDs.
+
+```ts
+const items = await api.query.Nfts.Account.getEntries(bob.address);
+const itemList = items.map((item) => ({
+  collectionId: item.keyArgs[1],
+  itemId: item.keyArgs[2],
+}));
+```
+
+#### Getting a specific NFT
+
+You can also get information about a specific item. The following query returns data about the NFT owner, approvals, and deposits:
+
+```ts
+// Get info about item 1
+const singleItem = await api.query.Nfts.Item.getValue(collectionId, 1);
+
+// Or you can query multiple items:
+const manyItems = await api.query.Nfts.Item.getValues([
+  [collectionId, 1],
+  [collectionId, 2],
+]);
+```
+
+#### Getting NFT attributes
+
+```ts
+// Query all attributes
+const attributes = await api.query.Nfts.Attribute.getEntries(collectionId, 1);
+
+// Query a specific attribute with "Experience" key
+const attribute = await api.query.Nfts.Attribute.getValue(
+  collectionId,
+  1,
+  Enum("CollectionOwner"),
+  Binary.fromText("Experience")
+);
+```
+
+#### Getting NFT metadata
+
+```ts
+const metadata = await api.query.Nfts.ItemMetadataOf.getValue(collectionId, 1);
 ```
 
 ## Deposits
