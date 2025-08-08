@@ -27,14 +27,17 @@ Here are the core concepts you'll work with:
 
 ### Setting Up Your Project
 
-The NFT template comes pre-configured with everything you need:
+The NFT template comes pre-configured with everything you need.
 
-<!-- TODO: check commands -->
-
-```bash
+```bash title="Choose Next.js + PAPI (Pallet NFTs)"
 npm create nft-app@latest my-nft-app
-cd my-nft-app
-npm run dev
+```
+
+Install your project's dependencies:
+
+```sh
+pnpm install
+npx papi add dot -n paseo_asset_hub
 ```
 
 The template includes wallet connection, Polkadot API setup, and ready‑to‑use hooks for all NFT operations. It's built with Next.js, so you get file‑based routing, hot reloading and server‑side rendering out of the box. This tutorial assumes you have some familiarity with React/Next.js; we'll focus on the Polkadot‑specific pieces rather than explaining basic JSX or state management.
@@ -184,8 +187,6 @@ The `useCollectionManagement` hook wraps the low‑level `api.tx.Nfts.create` ex
 3. Applies your configuration – flags like transferable and publicMinting map to the collection settings and minting rules described earlier.
 
 The `maxSupply` parameter limits how many NFTs can be minted in your collection. Leaving it undefined creates an unlimited collection. In a real dApp you would also allow users to specify a URL pointing to their collection metadata (a JSON file hosted on IPFS or a similar service). Setting or updating metadata involves a separate extrinsic and deposit.
-
-<!-- TODO add a link -->
 
 :::tip Your challenge
 Extend the form with a metadata URL input so that users can store a JSON description of their collection. Use `set_collection_metadata` after the collection is created.
@@ -565,10 +566,6 @@ export const ViewCollections = () => {
 
 </TabItem>
 </Tabs>
-
-<!-- TODO wow wow -->
-
-### Why this viewer matters
 
 The viewer illustrates two important queries:
 
