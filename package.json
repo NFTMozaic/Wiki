@@ -13,7 +13,7 @@
     "write-translations": "docusaurus write-translations",
     "write-heading-ids": "docusaurus write-heading-ids",
     "extract_titles": "node scripts/extract-doc-titles.js",
-    "prebuild": "npm run extract_titles"
+    "prebuild": "npm run extract_titles"   
   },
   "dependencies": {
     "@docusaurus/core": "3.7.0",
