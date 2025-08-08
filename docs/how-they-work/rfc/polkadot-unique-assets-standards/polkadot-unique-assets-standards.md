@@ -1,13 +1,11 @@
 ---
-id: polkadot-unique-assets-standards
-title: Polkadot Unique Assets Standards
-sidebar_label: Polkadot Unique Assets Standards
-sidebar_position: 2
+sidebar_position: 1
+hide_table_of_contents: false
+toc_min_heading_level: 2
+toc_max_heading_level: 4
 ---
 
 # Polkadot Unique Assets Standards
-
-![DRAFT](https://img.shields.io/badge/status-DRAFT-blue?style=flat-square)
 
 ## Abstract
 
@@ -30,19 +28,21 @@ The described standards are designed after analyzing the existing NFT solutions 
 A Unique Asset is any unique object existing on-chain. The nature of such an asset should be defined purely by what it can do.
 
 For instance, Unique Assets can be represented by:
+
 - regular NFTs
 - NFT collections
 - fungible collections
 - CoreTime regions
 - exchange pools
 
-All the objects above can be uniquely identified and have some data attached. These properties are attributed to all Unique Assets. 
+All the objects above can be uniquely identified and have some data attached. These properties are attributed to all Unique Assets.
 
 All Unique Assets have a privileged set of operations that can only be done by a special user. This user is considered an asset owner. The owner can be a user account or a chain's system account (like Treasury).
 
 The common properties of Unique Assets form the main parts of the standards, which are mandatory for all compliant parachains.
 
-- The Unique Assets must have a standard identification. See the [Identification Standard](./src/identification.md).
-- The Unique Assets' attached data must be inspectable by a client. See the [Inspection Standard](./src/inspection.md).
-- The Unique Assets can be modified. The modification operations are subject to authorization and may be rejected by the given chain according to its internal rules. See the [Modification Standard](./src/modification/README.md).
-The Modification Standard describes the mandatory operations like changing the asset's owner or data. Also, it esteblishes the way of adding standard extensions that can be optionally supported by parachains. 
+- The Unique Assets must have a standard identification. See the [Identification Standard](./identification.md).
+- The Unique Assets' attached data must be inspectable by a client. See the [Inspection Standard](./inspection.md).
+- The Unique Assets can be modified. The modification operations are subject to authorization and may be rejected by the given chain according to its internal rules. See the [Modification Standard](./modification/modification.md).
+
+The Modification Standard describes the mandatory operations like changing the asset's owner or data. Also, it esteblishes the way of adding standard extensions that can be optionally supported by parachains.
