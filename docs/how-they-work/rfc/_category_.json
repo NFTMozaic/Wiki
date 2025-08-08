@@ -1,0 +1,10 @@
+{
+  "label": "RFC",
+  "position": 10,
+  "link": {
+    "type": "generated-index"
+  },
+  "customProps": {
+    "description": "NFT related RFCs"
+  }
+}
