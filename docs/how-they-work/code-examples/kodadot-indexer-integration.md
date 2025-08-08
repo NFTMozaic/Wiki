@@ -2,7 +2,7 @@
 id: kodadot-indexer-integration
 title: Kodadot Indexer Integration Guide
 sidebar_label: Kodadot Indexer Integration Guide
-sidebar_position: 2
+sidebar_position: 3
 ---
 
 # KodaDot Indexer Usage Examples

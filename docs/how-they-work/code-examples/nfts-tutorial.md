@@ -1,7 +1,7 @@
 ---
-title: Building NFT App on Polkadot
-sidebar_label: Building NFT App on Polkadot
-sidebar_position: 1
+title: Building NFT application on Polkadot with PAPI
+sidebar_label: Building NFT application on Polkadot with PAPI
+sidebar_position: 2
 ---
 
 import Tabs from '@theme/Tabs';
