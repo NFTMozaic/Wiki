@@ -51,8 +51,10 @@ With that in mind, let's create your first collection. We'll use a component tha
 <TabItem value="component" label="CreateCollection.tsx">
 
 ```tsx
+"use client";
+
 import React, { useState } from "react";
-import { useCollectionManagement } from "../hooks/nft/collections";
+import { useCollectionManagement } from "../hooks/collections";
 import styles from "./CreateCollection.module.css";
 
 export const CreateCollection = () => {
@@ -105,11 +107,18 @@ export const CreateCollection = () => {
 ```css
 .container {
   max-width: 500px;
-  margin: 2rem auto;
-  padding: 2rem;
+  margin: 1rem auto;
+  padding: 1.5rem;
   background: white;
   border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.container h1 {
+  margin: 0 0 1.5rem 0;
+  color: #1e293b;
+  font-size: 1.5rem;
+  font-weight: 600;
 }
 
 .form {
@@ -123,27 +132,42 @@ export const CreateCollection = () => {
   flex-direction: column;
   gap: 0.5rem;
   font-weight: 500;
+  color: #374151;
 }
 
 .form input {
   padding: 0.75rem;
-  border: 1px solid #ddd;
-  border-radius: 4px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
   font-size: 1rem;
+  background: white;
+  color: #1f2937;
+}
+
+.form input:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
 }
 
 .form button {
   padding: 0.75rem 1.5rem;
-  background: #0066cc;
+  background: #3b82f6;
   color: white;
   border: none;
-  border-radius: 4px;
+  border-radius: 6px;
   font-size: 1rem;
+  font-weight: 500;
   cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.form button:hover:not(:disabled) {
+  background: #2563eb;
 }
 
 .form button:disabled {
-  background: #ccc;
+  background: #9ca3af;
   cursor: not-allowed;
 }
 ```
@@ -177,8 +201,10 @@ Before diving into the code, think about what makes your NFT special: what metad
 <TabItem value="component" label="MintNFT.tsx">
 
 ```tsx
+"use client";
+
 import React, { useState } from "react";
-import { useNFTMinting } from "../hooks/nft/items";
+import { useNFTMinting } from "../hooks/items";
 import { useWallet } from "../contexts/WalletContext";
 import styles from "./MintNFT.module.css";
 
@@ -248,11 +274,18 @@ export const MintNFT = () => {
 ```css
 .container {
   max-width: 500px;
-  margin: 2rem auto;
-  padding: 2rem;
+  margin: 1rem auto;
+  padding: 1.5rem;
   background: white;
   border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.container h1 {
+  margin: 0 0 1.5rem 0;
+  color: #1e293b;
+  font-size: 1.5rem;
+  font-weight: 600;
 }
 
 .form {
@@ -266,27 +299,43 @@ export const MintNFT = () => {
   flex-direction: column;
   gap: 0.5rem;
   font-weight: 500;
+  color: #374151;
 }
 
 .form input {
   padding: 0.75rem;
-  border: 1px solid #ddd;
-  border-radius: 4px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
   font-size: 1rem;
+  background: white;
+  color: #1f2937;
+}
+
+.form input:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
 }
 
 .form button {
   padding: 0.75rem 1.5rem;
-  background: #0066cc;
+  background: #3b82f6;
   color: white;
   border: none;
-  border-radius: 4px;
+  border-radius: 6px;
   font-size: 1rem;
+  font-weight: 500;
   cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.form button:hover:not(:disabled) {
+  background: #2563eb;
 }
 
 .form button:disabled {
-  background: #ccc;
+  background: #9ca3af;
+  cursor: not-allowed;
 }
 ```
 
@@ -317,17 +366,19 @@ Once you've minted a few tokens you need a way to explore them. In Polkadot you 
 <TabItem value="component" label="ViewCollections.tsx">
 
 ```tsx
+"use client";
+
 import React, { useState } from "react";
-import { useCollectionManagement } from "../hooks/nft/collections";
-import { useNFTLifecycle } from "../hooks/nft/items";
+import { useCollectionManagement } from "../hooks/collections";
+import { useNFTLifecycle } from "../hooks/items";
 import styles from "./ViewCollections.module.css";
 
 export const ViewCollections = () => {
   const { getCollection } = useCollectionManagement();
   const { getCollectionItems } = useNFTLifecycle();
   const [collectionId, setCollectionId] = useState("");
-  const [collectionInfo, setCollectionInfo] = useState(null);
-  const [items, setItems] = useState([]);
+  const [collectionInfo, setCollectionInfo] = useState<any>(null);
+  const [items, setItems] = useState<any[]>([]);
   const [loading, setLoading] = useState(false);
 
   const loadCollection = async () => {
@@ -341,7 +392,7 @@ export const ViewCollections = () => {
       ]);
 
       setCollectionInfo(collection);
-      setItems(itemsList.items);
+      setItems(itemsList.items || []);
     } catch (error) {
       alert("Collection not found");
       setCollectionInfo(null);
@@ -401,51 +452,86 @@ export const ViewCollections = () => {
 ```css
 .container {
   max-width: 800px;
-  margin: 2rem auto;
-  padding: 2rem;
+  margin: 1rem auto;
+  padding: 1rem;
+}
+
+.container h1 {
+  margin: 0 0 1.5rem 0;
+  color: #1e293b;
+  font-size: 1.5rem;
+  font-weight: 600;
 }
 
 .search {
   display: flex;
-  gap: 1rem;
-  margin-bottom: 2rem;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
 }
 
 .search input {
   flex: 1;
   padding: 0.75rem;
-  border: 1px solid #ddd;
-  border-radius: 4px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
   font-size: 1rem;
+  background: white;
+  color: #1f2937;
+}
+
+.search input:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
 }
 
 .search button {
   padding: 0.75rem 1.5rem;
-  background: #0066cc;
+  background: #3b82f6;
   color: white;
   border: none;
-  border-radius: 4px;
+  border-radius: 6px;
   cursor: pointer;
+  font-weight: 500;
+  transition: background-color 0.2s;
+}
+
+.search button:hover:not(:disabled) {
+  background: #2563eb;
 }
 
 .collectionInfo {
   background: white;
-  padding: 2rem;
+  padding: 1.5rem;
   border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  margin-bottom: 2rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  margin-bottom: 1.5rem;
 }
 
 .collectionInfo h2 {
-  margin-top: 0;
-  color: #333;
+  margin: 0 0 1rem 0;
+  color: #1e293b;
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.collectionInfo p {
+  margin: 0.5rem 0;
+  color: #374151;
 }
 
 .items {
   background: white;
-  padding: 2rem;
+  padding: 1.5rem;
   border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.items h3 {
+  margin: 0 0 1rem 0;
+  color: #1e293b;
+  font-size: 1.125rem;
+  font-weight: 600;
 }
 
 .itemGrid {
@@ -456,21 +542,24 @@ export const ViewCollections = () => {
 }
 
 .item {
-  background: #f5f5f5;
+  background: #f8fafc;
   padding: 1rem;
-  border-radius: 4px;
+  border-radius: 6px;
   text-align: center;
+  border: 1px solid #e2e8f0;
 }
 
 .item h4 {
   margin: 0 0 0.5rem 0;
-  color: #0066cc;
+  color: #3b82f6;
+  font-size: 1.125rem;
+  font-weight: 600;
 }
 
 .item p {
   margin: 0;
-  font-size: 0.9rem;
-  color: #666;
+  font-size: 0.875rem;
+  color: #64748b;
 }
 ```
 
@@ -500,8 +589,10 @@ Ownership is a fundamental property of NFTs. Only the current owner can transfer
 <TabItem value="component" label="TransferNFT.tsx">
 
 ```tsx
+"use client";
+
 import React, { useState } from "react";
-import { useNFTTransfers, useNFTLifecycle } from "../hooks/nft/items";
+import { useNFTTransfers, useNFTLifecycle } from "../hooks/items";
 import styles from "./TransferNFT.module.css";
 
 export const TransferNFT = () => {
@@ -510,7 +601,7 @@ export const TransferNFT = () => {
   const [collectionId, setCollectionId] = useState("");
   const [itemId, setItemId] = useState("");
   const [recipient, setRecipient] = useState("");
-  const [nftInfo, setNftInfo] = useState(null);
+  const [nftInfo, setNftInfo] = useState<any>(null);
 
   const checkNFT = async () => {
     if (!collectionId || !itemId) return;
@@ -600,11 +691,18 @@ export const TransferNFT = () => {
 ```css
 .container {
   max-width: 500px;
-  margin: 2rem auto;
-  padding: 2rem;
+  margin: 1rem auto;
+  padding: 1.5rem;
   background: white;
   border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.container h1 {
+  margin: 0 0 1.5rem 0;
+  color: #1e293b;
+  font-size: 1.5rem;
+  font-weight: 600;
 }
 
 .form {
@@ -621,34 +719,51 @@ export const TransferNFT = () => {
 .nftCheck input {
   flex: 1;
   padding: 0.75rem;
-  border: 1px solid #ddd;
-  border-radius: 4px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  background: white;
+  color: #1f2937;
+}
+
+.nftCheck input:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
 }
 
 .nftCheck button {
   padding: 0.75rem 1rem;
-  background: #28a745;
+  background: #10b981;
   color: white;
   border: none;
-  border-radius: 4px;
+  border-radius: 6px;
   cursor: pointer;
+  font-weight: 500;
+  transition: background-color 0.2s;
+}
+
+.nftCheck button:hover {
+  background: #059669;
 }
 
 .nftInfo {
-  background: #e3f2fd;
+  background: #dbeafe;
   padding: 1rem;
-  border-radius: 4px;
-  border: 1px solid #2196f3;
+  border-radius: 6px;
+  border: 1px solid #3b82f6;
 }
 
 .nftInfo h3 {
   margin: 0 0 0.5rem 0;
-  color: #1976d2;
+  color: #1e40af;
+  font-size: 1.125rem;
+  font-weight: 600;
 }
 
 .nftInfo p {
   margin: 0;
-  font-size: 0.9rem;
+  font-size: 0.875rem;
+  color: #1e40af;
 }
 
 .transferSection {
@@ -659,22 +774,37 @@ export const TransferNFT = () => {
 
 .transferSection input {
   padding: 0.75rem;
-  border: 1px solid #ddd;
-  border-radius: 4px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
   font-size: 1rem;
+  background: white;
+  color: #1f2937;
+}
+
+.transferSection input:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
 }
 
 .transferSection button {
   padding: 0.75rem 1.5rem;
-  background: #0066cc;
+  background: #3b82f6;
   color: white;
   border: none;
-  border-radius: 4px;
+  border-radius: 6px;
   cursor: pointer;
+  font-weight: 500;
+  transition: background-color 0.2s;
+}
+
+.transferSection button:hover:not(:disabled) {
+  background: #2563eb;
 }
 
 .transferSection button:disabled {
-  background: #ccc;
+  background: #9ca3af;
+  cursor: not-allowed;
 }
 ```
 
@@ -704,24 +834,26 @@ In this lesson you'll build a component that lists an NFT for sale, checks its s
 <TabItem value="component" label="SimpleMarketplace.tsx">
 
 ```tsx
+'use client';
+
 import React, { useState } from "react";
-import { useNFTTrading } from "../hooks/nft/trading";
+import { useNFTTrading } from "../hooks/trading";
 import styles from "./SimpleMarketplace.module.css";
 
 export const SimpleMarketplace = () => {
   const { setPrice, buyItem, getPrice, isLoading } = useNFTTrading();
   const [collectionId, setCollectionId] = useState("");
   const [itemId, setItemId] = useState("");
-  const [price, setPrice] = useState("");
-  const [saleInfo, setSaleInfo] = useState(null);
+  const [price, setPriceValue] = useState("");
+  const [saleInfo, setSaleInfo] = useState<any>(null);
 
   const DOT_DECIMALS = 10n ** 10n;
 
-  const parseDOT = (amount) => {
+  const parseDOT = (amount: string) => {
     return BigInt(Math.floor(parseFloat(amount) * Number(DOT_DECIMALS)));
   };
 
-  const formatDOT = (amount) => {
+  const formatDOT = (amount: bigint) => {
     return (Number(amount) / Number(DOT_DECIMALS)).toFixed(4);
   };
 
@@ -734,7 +866,7 @@ export const SimpleMarketplace = () => {
     try {
       await setPrice(parseInt(collectionId), parseInt(itemId), parseDOT(price));
       alert("NFT listed for sale!");
-      setPrice("");
+      setPriceValue("");
     } catch (error) {
       alert("Failed to list NFT");
     }
@@ -789,7 +921,7 @@ export const SimpleMarketplace = () => {
             type="number"
             step="0.01"
             value={price}
-            onChange={(e) => setPrice(e.target.value)}
+            onChange={(e) => setPriceValue(e.target.value)}
             placeholder="Price in DOT"
           />
           <button onClick={handleListForSale} disabled={isLoading}>
@@ -829,23 +961,32 @@ export const SimpleMarketplace = () => {
 ```css
 .container {
   max-width: 600px;
-  margin: 2rem auto;
-  padding: 2rem;
+  margin: 1rem auto;
+  padding: 1rem;
+}
+
+.container h1 {
+  margin: 0 0 1.5rem 0;
+  color: #1e293b;
+  font-size: 1.5rem;
+  font-weight: 600;
 }
 
 .section {
   background: white;
-  padding: 2rem;
-  margin-bottom: 2rem;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
   border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 .section h2 {
-  margin-top: 0;
-  color: #333;
-  border-bottom: 1px solid #eee;
-  padding-bottom: 1rem;
+  margin: 0 0 1rem 0;
+  color: #1e293b;
+  font-size: 1.25rem;
+  font-weight: 600;
+  border-bottom: 1px solid #e5e7eb;
+  padding-bottom: 0.75rem;
 }
 
 .form {
@@ -856,44 +997,68 @@ export const SimpleMarketplace = () => {
 
 .form input {
   padding: 0.75rem;
-  border: 1px solid #ddd;
-  border-radius: 4px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
   font-size: 1rem;
+  background: white;
+  color: #1f2937;
+}
+
+.form input:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
 }
 
 .form button {
   padding: 0.75rem 1.5rem;
-  background: #0066cc;
+  background: #3b82f6;
   color: white;
   border: none;
-  border-radius: 4px;
+  border-radius: 6px;
   cursor: pointer;
+  font-weight: 500;
+  transition: background-color 0.2s;
+}
+
+.form button:hover:not(:disabled) {
+  background: #2563eb;
 }
 
 .form button:disabled {
-  background: #ccc;
+  background: #9ca3af;
+  cursor: not-allowed;
 }
 
 .saleInfo {
-  background: #e8f5e8;
+  background: #dcfce7;
   padding: 1rem;
-  border-radius: 4px;
-  border: 1px solid #4caf50;
+  border-radius: 6px;
+  border: 1px solid #22c55e;
+  margin-top: 1rem;
 }
 
 .saleInfo h3 {
   margin: 0 0 0.5rem 0;
-  color: #2e7d32;
+  color: #166534;
+  font-size: 1.125rem;
+  font-weight: 600;
 }
 
 .saleInfo p {
   margin: 0.5rem 0;
-  font-weight: bold;
+  font-weight: 600;
+  color: #166534;
 }
 
 .saleInfo button {
-  background: #4caf50;
+  background: #22c55e;
   margin-top: 1rem;
+  transition: background-color 0.2s;
+}
+
+.saleInfo button:hover:not(:disabled) {
+  background: #16a34a;
 }
 ```
 
@@ -921,19 +1086,20 @@ Extend this marketplace by allowing owners to withdraw their NFTs from sale and 
 You've built several standalone components: collection creation, minting, browsing, transferring and trading. Let's tie them together into a single Next.js app. We'll create a basic navigation bar that lets users switch between these views. Feel free to enhance this layout with your own styling or routing.
 
 <Tabs>
-<TabItem value="component" label="App.tsx">
+<TabItem value="component" label="page.tsx">
 
 ```tsx
+'use client';
+
 import React, { useState } from "react";
-import { Header } from "./components/Header";
 import { CreateCollection } from "./components/CreateCollection";
 import { MintNFT } from "./components/MintNFT";
 import { ViewCollections } from "./components/ViewCollections";
 import { TransferNFT } from "./components/TransferNFT";
 import { SimpleMarketplace } from "./components/SimpleMarketplace";
-import styles from "./App.module.css";
+import styles from "./page.module.css";
 
-export const App = () => {
+export default function Home() {
   const [currentPage, setCurrentPage] = useState("view");
 
   const pages = {
@@ -946,8 +1112,6 @@ export const App = () => {
 
   return (
     <div className={styles.app}>
-      <Header />
-
       <nav className={styles.nav}>
         <button
           className={currentPage === "view" ? styles.active : ""}
@@ -981,52 +1145,85 @@ export const App = () => {
         </button>
       </nav>
 
-      <main className={styles.main}>{pages[currentPage]}</main>
+      <main className={styles.main}>{pages[currentPage as keyof typeof pages]}</main>
     </div>
   );
-};
+}
 ```
 
 </TabItem>
-<TabItem value="styles" label="App.module.css">
+<TabItem value="styles" label="page.module.css">
 
 ```css
+.page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  padding: 1rem;
+  font-family: var(--font-geist-sans);
+}
+
 .app {
   min-height: 100vh;
-  background: #f0f2f5;
+  background: #f8fafc;
 }
 
 .nav {
   background: white;
   padding: 1rem;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
   display: flex;
   justify-content: center;
-  gap: 1rem;
+  gap: 0.5rem;
   flex-wrap: wrap;
+  margin-bottom: 1rem;
 }
 
 .nav button {
-  padding: 0.75rem 1.5rem;
-  background: #f5f5f5;
-  border: 1px solid #ddd;
-  border-radius: 4px;
+  padding: 0.5rem 1rem;
+  background: #f1f5f9;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
   cursor: pointer;
-  font-size: 1rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #475569;
+  transition: all 0.2s;
 }
 
 .nav button:hover {
-  background: #e9ecef;
+  background: #e2e8f0;
+  color: #1e293b;
 }
 
 .nav button.active {
-  background: #0066cc;
+  background: #3b82f6;
   color: white;
-  border-color: #0066cc;
+  border-color: #3b82f6;
 }
 
 .main {
-  padding: 2rem 1rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 0 1rem;
+}
+
+@media (max-width: 600px) {
+  .page {
+    padding: 0.5rem;
+  }
+  
+  .nav {
+    padding: 0.75rem;
+    gap: 0.25rem;
+  }
+  
+  .nav button {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.8rem;
+  }
 }
 ```
 
