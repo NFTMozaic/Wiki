@@ -7,9 +7,11 @@ toc_max_heading_level: 4
 
 # Polkadot Unique Assets Standards
 
+![DRAFT](https://img.shields.io/badge/status-DRAFT-blue?style=flat-square)
+
 ## Abstract
 
-This repository establishes standards for Unique Assets in the Polkadot ecosystem, representing NFT-like objects of any meaning and purpose. The standards define a Unique Asset, how it can be identified throughout the ecosystem, how it can be inspected on any chain, and how it can be modified in a standard way.
+[This repository](https://github.com/NFTMozaic/polkadot-unique-assets-standards) establishes standards for Unique Assets in the Polkadot ecosystem, representing NFT-like objects of any meaning and purpose. The standards define a Unique Asset, how it can be identified throughout the ecosystem, how it can be inspected on any chain, and how it can be modified in a standard way.
 
 ## Motivation
 

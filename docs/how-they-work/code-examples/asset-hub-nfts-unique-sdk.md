@@ -2,7 +2,7 @@
 id: asset-hub-nfts-unique-sdk
 title: Building Polkadot NFT application with Unique SDK
 sidebar_label: Building Polkadot NFT application with Unique SDK
-sidebar_position: 4
+sidebar_position: 10
 ---
 
 Doing it the Unique SDK way.
