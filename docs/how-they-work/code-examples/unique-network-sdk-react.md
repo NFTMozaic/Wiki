@@ -2,7 +2,7 @@
 id: unique-network-sdk-react
 title: On-chain gaming with Unique Network EVM
 sidebar_label: On-chain gaming with Unique Network EVM
-sidebar_position: 3
+sidebar_position: 11
 ---
 
 # Building on-chain gaming experiences with Unique Network EVM
