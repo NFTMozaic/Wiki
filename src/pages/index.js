@@ -36,7 +36,7 @@ export default function Home() {
             </p>
             <p className={styles.cardLink}>Explore →</p>
           </a>
-          <a href="/docs/category/how-they-work" className={styles.card}>
+          <a href="/docs/category/developers" className={styles.card}>
             <h3>Developers</h3>
             <p>
               Deep dives into technical structure. Explore tooling, tutorials and code examples.
