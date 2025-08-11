@@ -1,4 +1,5 @@
 ---
+id: pvm-tutorial
 title: Building NFT Application on Polkadot Virtual Machine with Smart Contracts
 sidebar_label: Building NFT Application on Polkadot Virtual Machine with Smart Contracts
 sidebar_position: 2

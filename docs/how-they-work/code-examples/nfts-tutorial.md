@@ -1,13 +1,14 @@
 ---
-title: Building NFT Application on Polkadot NFTs Pallet with PAPI
-sidebar_label: Building NFT Application on Polkadot NFTs Pallet with PAPI
+id: nfts-tutorial
+title: Building NFT Application on Polkadot with NFTs Pallet and PAPI
+sidebar_label: Building NFT Application on Polkadot with NFTs Pallet and PAPI
 sidebar_position: 2
 ---
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-# Building NFT Application on Polkadot NFTs Pallet with PAPI
+# Building NFT Application on Polkadot with NFTs Pallet and PAPI
 
 In this tutorial, you'll learn how to build a real NFT application using Polkadot's NFTs pallet. We'll start simple and gradually add more features as you understand the concepts.
 

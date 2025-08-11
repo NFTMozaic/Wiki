@@ -1,4 +1,5 @@
 ---
+id: nfts
 title: An applied guide to NFTs Pallet
 sidebar_label: An applied guide to NFTs Pallet
 sidebar_position: 1
