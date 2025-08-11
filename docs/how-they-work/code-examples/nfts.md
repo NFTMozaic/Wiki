@@ -491,7 +491,7 @@ Key parameters for presigned minting:
 Setting item metadata requires making a [deposit](#deposits).
 :::
 
-The collection [Admin](#admin) can set or remove an item's metadata if it's not [locked](#locking-nft). Most likely you'll want to use metadata the same way as `tokenURI` in the ERC-721 metadata extension. You can set a link to IPFS or any other off-chain storage.
+The collection [Admin](#admin) can set or remove an item's metadata if it's not [locked](#locking-nfts). Most likely you'll want to use metadata the same way as `tokenURI` in the ERC-721 metadata extension. You can set a link to IPFS or any other off-chain storage.
 
 ```json title="The possible NFT metadata format"
 {
@@ -547,7 +547,7 @@ Setting item attributes requires making a [deposit](#deposits).
 
 NFT attributes are on-chain key-value pairs of arbitrary data. This is particularly useful when some characteristics should be mutable, for example in gaming applications.
 
-The collection [admin](#admin) or item owner can set or remove attributes of an item if the item is not [locked](#locking-nft). To specify who can modify attributes, you need to set a namespace:
+The collection [admin](#admin) or item owner can set or remove attributes of an item if the item is not [locked](#locking-nfts). To specify who can modify attributes, you need to set a namespace:
 
 ```ts
 const collectionOwnerAttribute = await api.tx.Nfts.set_attribute({
