@@ -1,13 +1,14 @@
 ---
-title: Building NFT Application on Polkadot Virtual Machine with Smart Contracts
-sidebar_label: Building NFT Application on Polkadot Virtual Machine with Smart Contracts
+id: pvm-tutorial
+title: Building NFT Applications on Polkadot Virtual Machine with Smart Contracts
+sidebar_label: Building NFT Applications on Polkadot Virtual Machine with Smart Contracts
 sidebar_position: 2
 ---
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-# Building NFT Application on Polkadot Virtual Machine with Smart Contracts
+# Building NFT Applications on Polkadot Virtual Machine with Smart Contracts
 
 Polkadot is steadily evolving from a purely substrate-based ecosystem into a platform that supports both native pallets and smart contracts. The original NFT tutorial used the NFTs pallet and the Polkadot API (PAPI) to mint and manage tokens. With Polkadot Virtual Machine (PVM), NFTs can be implemented as smart contracts. This tutorial teaches you how to build an NFT application on Polkadot's PVM using the `create-nft-app` template. You will learn how to deploy an `ERC-721` contract, mint tokens with metadata, query collections via Blockscout, and transfer NFTs. The course mirrors the PAPI version but uses `Solidity`, `Foundry`, and `Reown AppKit` instead of `nfts-pallet`.
 
