@@ -1,7 +1,7 @@
 ---
 id: perfomance
-title: NFT minting benchmarks
-sidebar_label: NFT minting benchmarks
+title: Performance & Prices
+sidebar_label: Performance & Prices
 sidebar_position: 20
 ---
 
