@@ -62,7 +62,7 @@ const config = {
     ],
   ],
   themeConfig:
-    /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
+    /** @type {import('@docusaurus/types').ThemeConfig} */
     ({
       // Replace with your project's social card
       image: 'img/nftmozaic-social-card.jpg',
@@ -110,6 +110,7 @@ const config = {
       prism: {
         theme: prismThemes.github,
         darkTheme: prismThemes.dracula,
+        additionalLanguages: ['solidity', 'typescript'],
       },
       scrollOffset: 70,
     }),
