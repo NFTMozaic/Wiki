@@ -1,12 +1,10 @@
 ---
-sidebar_position: 2 
+sidebar_position: 2
 ---
 
 # Functionality comparison
 
-
 This page provides a side-by-side comparison of the available NFT pallets in the Polkadot ecosystem.
-
 
 <h2 style={{ color: '#6a0dad' }}>Live data</h2>
 
@@ -18,34 +16,38 @@ The table linked below shows how assets are currently distributed, how they're b
 
 ## Asset Metadata
 
-|  | Uniques | NFTs | Unique Network |
-| --- | --- | --- | --- |
-| Collection metadata | 🟥 | 🟢 | 🟢 |
-| Collection key-value attributes | 🟢 | 🟢 | 🟢 |
-| Collection modifiable metadata | 🟥 | 🟥 | 🟢 |
-| Collection modifiable key-value attributes | 🟢 | 🟢 | 🟢 |
-| Token modifiable key-value attributes | 🟢 | 🟢 | 🟢 |
-| Token attributes modification approvals | 🟥 | 🟢 | 🟥 |
-| Token data modification updatable permissions | 🟥 | 🟥 | 🟢 |
-| Token pre-signed attributes | 🟥 | 🟢 | 🟥 |
+|                                               | Uniques | NFTs                               | Unique Network         |
+| --------------------------------------------- | ------- | ---------------------------------- | ---------------------- |
+| Collection metadata                           | 🟢      | 🟢                                 | 🟢                     |
+| Collection key-value attributes               | 🟢      | 🟢                                 | 🟢                     |
+| Collection modifiable metadata                | 🟢      | 🟢                                 | 🟢                     |
+| Collection modifiable key-value attributes    | 🟢      | 🟢                                 | 🟢                     |
+| Token modifiable key-value attributes         | 🟢      | 🟢                                 | 🟢                     |
+| Token attributes modification approvals       | 🟥      | 🟢                                 | 🟥 (🟢 with contracts) |
+| Token data modification updatable permissions | 🟥      | 🟢                                 | 🟢                     |
+| Token pre-signed attributes                   | 🟥      | 🟢                                 | 🟥 (🟢 with contracts) |
+| Sponsoring                                    | 🟥      | 🟥                                 | 🟢                     |
+| Fractionalization                             | 🟥      | 🟥 (🟢 with nft-fractionalization) | 🟢                     |
+| Nesting                                       | 🟥      | 🟥                                 | 🟢                     |
 
 <!-- Slide number: 7 -->
+
 ## Marketplace
 
 The ability to create an on-chain NFT marketplace, integrated into the pallets
 Also:
 NFT Manager has native onchain marketplace support
 
-|  | Uniques | NFTs | Unique Network |
-| --- | --- | --- | --- |
-| Embedded market functions | 🟢 | 🟢 | 🟥 |
-| Custom Smart Contract market(s) | 🟥 | 🟢  | 🟢 |
+|                                 | Uniques | NFTs | Unique Network |
+| ------------------------------- | ------- | ---- | -------------- |
+| Embedded market functions       | 🟢      | 🟢   | 🟥             |
+| Custom Smart Contract market(s) | 🟥      | 🟥   | 🟢             |
 
 ## EVM support
 
 Native support for EVM and Ethereum by pallets
 
-|  | Uniques | NFTs | Unique Network |
-| --- | --- | --- | --- |
-| EVM support (ERC721 interface) | 🟥 | 🟥 | 🟢 |
-| EVM support (custom pallet features) | 🟥 | 🟥 | 🟢 |
+|                                      | Uniques | NFTs | Unique Network |
+| ------------------------------------ | ------- | ---- | -------------- |
+| EVM support (ERC721 interface)       | 🟥      | 🟥   | 🟢             |
+| EVM support (custom pallet features) | 🟥      | 🟥   | 🟢             |

@@ -7,6 +7,23 @@ sidebar_position: 20
 
 # NFT minting benchmarks (As of 2025-08-08)
 
+### Results
+
+During the benchmarking, the batch minting method was used:
+64 tokens per transaction for Smart Contracts (since Revive did not accept transactions with a higher amount, although Frontier allowed minting up to 128 tokens at a time. To ensure equal conditions, Frontier was also limited to 64 tokens per transaction).
+100 tokens per transaction for Substrate.
+
+The total number of tokens was limited to 100,000 in both cases. Coinbase and Hydration data was used to determine the price in USD.
+
+| Network      | Variant               | Price (Per 100k tokens) | Price per token          | Tokens per block          | Tokens per minute           |
+| ------------ | --------------------- | ----------------------- | ------------------------ | ------------------------- | --------------------------- |
+| **AssetHub** | Pallet uniques        | 512.9 DOT (\$1,990)     | \~0.00513 DOT (\$0.0199) | 8,000                     | 80,000                      |
+|              | Pallet NFTs           | 587.7 DOT (\$2,280)     | \~0.00588 DOT (\$0.0228) | 6,000                     | 60,000                      |
+|              | PVM Revive (Solidity) | 8,618.3 DOT (\$33,439)  | \~0.0862 DOT (\$0.335)   | 3,000 (max) / 1,600 (avg) | 30,000 (max) / 16,000 (avg) |
+| **Unique**   | Substrate             | 4,179 UNQ (\$39.45)     | \~0.042 UNQ (\$0.00037)  | 7,000                     | 70,000                      |
+|              | Frontier (Solidity)   | 4,873 UNQ (\$46.01)     | \~0.049 UNQ (\$0.00046)  | 4,800                     | 48,000                      |
+| **Moonbeam** | Frontier (Solidity)   | 976 GLMR (\$70.38)      | \~0.097 GLMR (\$0.007)   | 1,400                     | 14,000                      |
+
 ### Requirements
 
 AssetHub version (For Revive, pallet nfts, pallet uniques): https://github.com/paritytech/polkadot-sdk/tree/03e07b69039c399ddc6f5e32f9477e186d0f9779
@@ -138,26 +155,3 @@ console.log(blocks);
 const balanceAfter = await provider.getBalance(wallet.address);
 console.log("Price", balanceBefore - balanceAfter);
 ```
-
-### Results
-
-During the benchmarking, the batch minting method was used:
-64 tokens per transaction for Smart Contracts (since Revive did not accept transactions with a higher amount, although Frontier allowed minting up to 128 tokens at a time. To ensure equal conditions, Frontier was also limited to 64 tokens per transaction).
-100 tokens per transaction for Substrate.
-
-The total number of tokens was limited to 100,000 in both cases. Coinbase and Hydration data was used to determine the price in USD.
-
-| AssetHub       | Price (Per 100k tokens) | Price per token        | tokens per block          | tokens per minute           |
-| -------------- | ----------------------- | ---------------------- | ------------------------- | --------------------------- |
-| Pallet uniques | 512.9 DOT ($1990)       | ~0.00513 DOT ($0.0199) | 8,000                     | 80,000                      |
-| Pallet Nfts    | 587.7 DOT ($2280)       | ~0.00588 DOT ($0.0228) | 6,000                     | 60,000                      |
-| Revive         | 8618.3 DOT ($33439)     | ~0.0862 DOT ($0.335)   | 3,000 (max) / 1,600 (avg) | 30,000 (max) / 16,000 (avg) |
-
-| Moonbeam | Price             | Price per token      | tokens per block | tokens per minute |
-| -------- | ----------------- | -------------------- | ---------------- | ----------------- |
-| Frontier | 976 GLMR ($70.38) | ~0.097 GLMR ($0.007) | 1,400            | 14,000            |
-
-| Unique    | Price             | Price per token       | tokens per block | tokens per minute |
-| --------- | ----------------- | --------------------- | ---------------- | ----------------- |
-| Substrate | 4179 UNQ ($39.45) | ~0.042 UNQ ($0.00037) | 7,000            | 70,000            |
-| Frontier  | 4873 UNQ ($46.01) | ~0.049 UNQ ($0.00046) | 4,800            | 48,000            |
